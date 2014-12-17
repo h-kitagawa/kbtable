@@ -12,7 +12,6 @@
 \setmainfont{TeX Gyre Heros}
 \setsansfont[Ligatures=TeX]{DejaVu Sans}
 \setmathfont{XITS Math}
-\newfontfamily\SYM{fontawesome-webfont.ttf}
 
 \ifdefined\BACKCOLOR
   \def\FORECOLOR{white}
@@ -118,11 +117,11 @@
 \null
 \W2{Fn}
 \W2{Ctrl}
-\W2{\raisebox{-.1em}{\includegraphics[width=1em]{kbd_win_gr.pdf}}}
+\W2{\Large\raisebox{-.2ex}{\fontspec{wingding.ttf}\char"02C7}}%"
 \W2{Alt}
 \W{10}{}
 \W2{\textcolor{cyan}{\kern-.1emAltGr}}
-\W2{\raisebox{-.2em}{\includegraphics[width=1em]{kbd_menu_gr.pdf}}}
+\W2{App.}
 \W2{Ctrl}
 \hskip1.55\dimexpr\DX+\fboxsep+\fboxrule\relax
 \smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.56}{↑}}}
