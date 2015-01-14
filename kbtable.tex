@@ -11,6 +11,7 @@
 \usepackage{menukeys}
 \setmainfont{TeX Gyre Heros}
 \setsansfont[Ligatures=TeX]{DejaVu Sans}
+\setmonofont{lmmonoltcond10-regular}
 \setmathfont{XITS Math}
 
 \ifdefined\BACKCOLOR
@@ -121,7 +122,9 @@
 \W2{Alt}
 \W{10}{}
 \W2{\textcolor{cyan}{\kern-.1emAltGr}}
-\W2{App.}
+\W2{\textcolor{\FORECOLOR}{\raisebox{.2ex}{\parbox[c]{2\DX}{%
+   \ttfamily\fontseries{mc}\fontsize{10}{11}\selectfont%
+   \centering\textbackslash expand\\after}}}}
 \W2{Ctrl}
 \hskip1.55\dimexpr\DX+\fboxsep+\fboxrule\relax
 \smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.56}{↑}}}
