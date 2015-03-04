@@ -1,5 +1,5 @@
 #!/bin/sh
-emacsclient -n $1 `winepath $2`
+emacs $1 `winepath $2`
 exit 0
 
 

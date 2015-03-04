@@ -9,6 +9,6 @@ ARGS=("$@")
 "${ARGS[@]}"
 
 
-rm "${MAINFILE}.synctex.orig.gz"
 mv "${MAINFILE}.synctex.gz" "${MAINFILE}.synctex.orig.gz"
 gzip -c -d "${MAINFILE}.synctex.orig.gz" | sed -e '/^Input/s_/_\\_g' -e '/^Input/s_:\\_:Z:\\_' | gzip > "${MAINFILE}.synctex.gz"
+rm "${MAINFILE}.synctex.orig.gz"
