@@ -1,0 +1,3 @@
+#!/bin/bash
+conv_synctex_wine `which ptex`2pdf  "$@"
+
