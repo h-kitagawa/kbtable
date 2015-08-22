@@ -4,12 +4,17 @@
 ]
 % 完全に個人的なもの。記号の取捨選択も独断と偏見による
 
-\RequirePackage{amsmath,amssymb,bm,stmaryrd}
-\RequirePackage{ifluatex}
-
+\RequirePackage{ifluatex,lualatex-math}
 \ifluatex\else
   \PackageError{hk-math-abbrev}{This  package  requires LuaTeX.}
 \fi
+
+\@ifpackageloaded{amssymb}{}{%
+  \@ifpackageloaded{newtxmath}{}{%
+    \usepackage{amssymb,stmaryrd}
+  }
+}
+\RequirePackage{amsmath,bm}
 
 \directlua{tex.enableprimitives('', {'Umathcode', 'Udelcode'})}
 \makeatletter
