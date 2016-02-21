@@ -5,7 +5,7 @@
  private define setup_dfa_callback(name)
  {
 -    dfa_enable_highlight_cache("latex.dfa", name);
-+    %dfa_enable_highlight_cache("latex.dfa", name);
++    dfa_enable_highlight_cache("latex.dfa", name);
  
      % comments:
      dfa_define_highlight_rule("%(.*[^ \t])?", "comment", name);
