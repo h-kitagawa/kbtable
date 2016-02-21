@@ -1,0 +1,116 @@
+--- latex.sl.orig	2016-02-21 14:57:43.193910200 +0900
++++ latex.sl	2016-02-21 15:54:10.103853895 +0900
+@@ -4981,14 +4981,16 @@
+ #ifdef HAS_DFA_SYNTAX
+ private define setup_dfa_callback(name)
+ {
+-    dfa_enable_highlight_cache("latex.dfa", name);
++    %dfa_enable_highlight_cache("latex.dfa", name);
+ 
+     % comments:
+     dfa_define_highlight_rule("%(.*[^ \t])?", "comment", name);
+ 
++    % document structures
+     dfa_define_highlight_rule("\\documentclass.*}"R, "Qpreprocess", name);
+-    dfa_define_highlight_rule("\\begin{.*}({.*})*"R, "preprocess", name);
++    dfa_define_highlight_rule("\\begin{.*}"R, "preprocess", name);
+     dfa_define_highlight_rule("\\end{.*}"R, "Qpreprocess", name);
++    dfa_define_highlight_rule("\\section", "preprocess", name);
+ 
+     % % known keywords in curly braces
+     % dfa_define_highlight_rule("{article}", "Qstring", name);
+@@ -5051,12 +5053,12 @@
+     % dfa_define_highlight_rule("^.*\\\\[\\)\\]]", "Qstring", name);
+     % dfa_define_highlight_rule("\\\\[\\(\\[].*", "string", name);
+ 
+-    % dfa_define_highlight_rule("\\$.*\\$", "Qnumber", name);
++    dfa_define_highlight_rule("\\$.*\\$", "Qnumber", name);
+     % dfa_define_highlight_rule("\\$.*[^ ]", "number", name);
+     % %   dfa_define_highlight_rule("^[^\\$]*\\$", "number", name);
+ 
+     % % Fundamental delimiters in the TeX language: {}[]
+-    % dfa_define_highlight_rule("[{}\\[\\]]", "delimiter", name);
++    dfa_define_highlight_rule("[{}]", "delimiter", name);
+ 
+     % % \leftX \rightY constructions where X and Y are
+     % % one of \| \{ \} [ ]( ) / | .
+@@ -5110,11 +5112,21 @@
+     dfa_define_highlight_rule("\\[\-,:;!%\$#&_ \|\\/{}~\^'`\.=>]"R,
+     			      "keyword1", name);
+ 
++    % type 3 keywords: definition
++    dfa_define_highlight_rule("\\protected"R, "Qkeyword3", name);
++    dfa_define_highlight_rule("\\def"R, "Qkeyword3", name);
++    dfa_define_highlight_rule("\\gdef"R, "Qkeyword3", name);
++    dfa_define_highlight_rule("\\xdef"R, "Qkeyword3", name);
++    dfa_define_highlight_rule("\\edef"R, "Qkeyword3", name);
++    dfa_define_highlight_rule("\\newcommand"R, "Qkeyword3", name);
++    dfa_define_highlight_rule("\\renewcommand"R, "Qkeyword3", name);
++    dfa_define_highlight_rule("\\DeclareRobustCommand"R, "Qkeyword3", name);
++
+     % type 0 keywords: a backslash followed by alpha characters
+     dfa_define_highlight_rule("\\["R +
+                               str_quote_string(TeX_Command_Chars, "*", '\\')
+-                              + "]+", "keyword", name);
+-
++                              + "]+", "keyword", name);    
++   
+     % % a backslash followed by a single char not covered by one of the
+     % % previous rules is probably an error
+     % dfa_define_highlight_rule("\\.", "error", name);
+@@ -5123,11 +5135,11 @@
+     dfa_define_highlight_rule("[~\\^_]", "operator", name);
+ 
+     % numbers
+-    dfa_define_highlight_rule("[0-9]([\.,0-9]*[0-9])?"R, "number", name);
++    %dfa_define_highlight_rule("[0-9]([\.,0-9]*[0-9])?"R, "number", name);
+     dfa_define_highlight_rule("\$"R, "number", name);
+ 
+     % % macro parameters(#1 #2 etc)
+-    % dfa_define_highlight_rule("#[1-9]", "operator", name);
++    dfa_define_highlight_rule("#[1-9]", "number", name);
+ 
+     % quoted strings
+     dfa_define_highlight_rule("\"`.*\"'", "Qstring", name); % german
+@@ -5142,13 +5154,12 @@
+     dfa_define_highlight_rule(".?.?.?\"'", "string", name);
+     dfa_define_highlight_rule(".?.?.?''", "string", name);
+ 
+-    dfa_define_highlight_rule("[ \t]+$", "trailing_whitespace", name);
+-
+     % Workaround to make UTF-8 characters are display correctly, not as
+     % <C3><nn> or <E2><nn><nn>
+     dfa_define_highlight_rule("\xC2.", "normal", name);
+     dfa_define_highlight_rule("\xC3.", "normal", name);
+     dfa_define_highlight_rule("\xE2..", "normal", name);
++    dfa_define_highlight_rule("\xE3\x80\x80", "Qkeyword2", name);
+     dfa_define_highlight_rule("\xE3..", "normal", name);
+     dfa_define_highlight_rule("\xE4..", "normal", name);
+     dfa_define_highlight_rule("\xE5..", "normal", name);
+@@ -5156,9 +5167,25 @@
+     dfa_define_highlight_rule("\xE7..", "normal", name);
+     dfa_define_highlight_rule("\xE8..", "normal", name);
+     dfa_define_highlight_rule("\xE9..", "normal", name);
++    dfa_define_highlight_rule("\xEA..", "normal", name);
++    dfa_define_highlight_rule("\xEB..", "normal", name);
++    dfa_define_highlight_rule("\xEC..", "normal", name);
++    dfa_define_highlight_rule("\xED..", "normal", name);
++    dfa_define_highlight_rule("\xEE..", "normal", name);
++    dfa_define_highlight_rule("\xEF..", "normal", name);
++    dfa_define_highlight_rule("\xF0...", "normal", name);
++    dfa_define_highlight_rule("\xF1...", "normal", name);
++    dfa_define_highlight_rule("\xF2...", "normal", name);
++    dfa_define_highlight_rule("\xF3...", "normal", name);
++    dfa_define_highlight_rule("\xF4...", "normal", name);
++    dfa_define_highlight_rule("\xF5...", "normal", name);
++    dfa_define_highlight_rule("\xF6...", "normal", name);
++    dfa_define_highlight_rule("\xF7...", "normal", name);
+ 
++    % whitespaces
++    dfa_define_highlight_rule("[ \t]+$", "trailing_whitespace", name);
++   
+     % all the rest
+-    % Fixme: Why we need this rule?
+     dfa_define_highlight_rule(".", "normal", name);
+ 
+     dfa_build_highlight_table(name);
