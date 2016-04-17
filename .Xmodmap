@@ -1,11 +1,18 @@
 keycode 234 = F19
 keycode 233 = F20
 
-! Alt_R -> AltGr
+clear mod2
+clear mod3
+clear mod5
+remove mod1 = Mode_switch
+! Alt_R -> mode_switch
 keycode 108 = Mode_switch
+! PrtSC -> (AltGr, Menu)
+keycode 107 = ISO_Level3_Shift
+keycode 92 = 
+add mod3 = Mode_switch
+add mod5 = ISO_Level3_Shift
 
-! PrtSC -> Menu Key
-keycode 107 = Menu NoSymbol Menu
 
 ! Fn+F11 -> StandBy
 keycode 128 = XF86Standby
@@ -82,7 +89,7 @@ keysym f = f F 0x10003c6 Greek_PHI
 ! bold C
 keysym c = c C Greek_chi 0x1002102
 keysym v = v V Greek_psi Greek_PSI
-keysym w = w W Greek_omega Greek_OMEGA
+keysym w = w W Greek_omega Greek_OMEGA Greek_chi 0x1002102 Greek_psi Greek_PSI
 
 ! \subset, bold Q
 keysym q = q Q 0x1002282 0x100211A
