@@ -1,4 +1,5 @@
 %#!luajitlatex -shell-escape kbtable
+\RequirePackage{luatex85}
 \documentclass[landscape]{article}
 \usepackage{fontspec,unicode-math,xcolor,graphicx}
 \newdimen\DX
@@ -8,6 +9,7 @@
 \paperheight=20\baselineskip
 \advance\paperheight20pt
 \usepackage[margin=10pt]{geometry}
+\def\pgfsysdriver{pgfsys-pdftex.def}
 \usepackage{menukeys}
 \setmainfont{TeX Gyre Heros}
 \setsansfont[Ligatures=TeX]{DejaVu Sans}
@@ -52,14 +54,14 @@
 \color{\LINECOLOR}
 
 \K{\char`\`}{\char`\~}{≠}{≒}
-\K{1}{!}{¬}{}
+\K{1}{!}{¬}{△}
 \K{2}{@}{∅}{⊆}
 \K{3}{\#}{§}{¶}
 \K{4}{\$}{¤}{£}
-\K{5}{\%}{€}{}%"
+\K{5}{\%}{€}{∞}%"
 \K{6}{\char`\^}{∨}{∪}
 \K{7}{\&}{∧}{∩}
-\K{8}{$*$}{ℵ}{}
+\K{8}{$*$}{ℵ}{×}
 \K{9}{(}{⌈}{⌊}
 \K{0}{)}{⌉}{⌋}
 \K{-}{\_}{≅}{≃}
@@ -81,7 +83,7 @@
 \K{}{P}{π}{Π}
 \K{[}{\{}{$〈$}{⟦}
 \K{]}{\}}{$〉$}{⟧}
-\K{\char`\\}{|}{‖}{}
+\K{\char`\\}{|}{‖}{ϕ}
 
 \kern-5.5pt
 \null
@@ -96,7 +98,7 @@
 \K{}{K}{κ}{Κ}
 \K{}{L}{λ}{Λ}
 \K{;}{:}{∴}{∵}
-\K{'}{"}{}{}%"
+\K{'}{"}{±}{∓}%"
 \W{3.33}{\returnwin\,Enter}
 
 \kern-5.5pt
@@ -118,13 +120,11 @@
 \null
 \W2{Fn}
 \W2{Ctrl}
-\W2{\Large\raisebox{-.2ex}{\fontspec{wingding.ttf}\char"02C7}}%"
+\W2{Win}%"
 \W2{Alt}
 \W{10}{}
 \W2{\textcolor{cyan}{\kern-.1emAltGr}}
-\W2{\textcolor{\FORECOLOR}{\raisebox{.2ex}{\parbox[c]{2\DX}{%
-   \ttfamily\fontseries{mc}\fontsize{10}{11}\selectfont%
-   \centering\textbackslash expand\\after}}}}
+\W2{Menu}
 \W2{Ctrl}
 \hskip1.55\dimexpr\DX+\fboxsep+\fboxrule\relax
 \smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.56}{↑}}}
@@ -138,10 +138,10 @@
 \def\TEMP{white}
 \catcode`\&=12
 \ifx\BACKCOLOR\TEMP
-\write18{%
+\directlua{ os.execute("\luaescapestring{%
   luajitlatex -jobname=kbtable-blk %
   '\string\def\string\BACKCOLOR{black}\string\input\space kbtable.tex' &>/dev/null
   && convert -bordercolor black -geometry 1280x800 -resize 1280 -density 300  -border 0x104 kbtable-blk.pdf kbd.png
-}
+}")}
 \fi
 \end{document}
