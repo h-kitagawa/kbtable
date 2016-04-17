@@ -1,5 +1,6 @@
 *fontList:	-*-gothic-medium-r-normal-*-12-*-*-*-p-*-*-1
 
+URxvt.print-pipe: "cat > /dev/null"
 URxvt.foreground:         white
 URxvt.background:         black
 URxvt.font: xft:DjvsmHW+VL-11
