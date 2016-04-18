@@ -20,6 +20,7 @@
   \def\FORECOLOR{white}
   \def\LINECOLOR{black!33!white}
   \definecolor{cyan}{rgb}{0,1,1}
+  \definecolor{red}{rgb}{0.25,1,0.25}
 \else
   \def\FORECOLOR{black}
   \def\BACKCOLOR{white}
@@ -43,7 +44,7 @@
 \fbox{\vbox{\hsize=#1\dimexpr\DX+\fboxsep+\fboxrule\relax
 \advance\hsize-2\fboxrule\advance\hsize-2\fboxsep{%
   \noindent\large\strut\smash{%
-    \raisebox{-.7\DX}{\normalsize\rm\textcolor{\LINECOLOR}{#2}}}\\\ \strut
+    \raisebox{-.5\DX}{\normalsize\rm\textcolor{\LINECOLOR}{#2}}}\\\ \strut
 }}}%
 \ignorespaces}
 
@@ -143,7 +144,7 @@
 \directlua{ os.execute("\luaescapestring{%
   luajitlatex -jobname=kbtable-blk %
   '\string\def\string\BACKCOLOR{black}\string\input\space kbtable.tex' &>/dev/null
-  && convert -bordercolor black -geometry 1280x800 -resize 1280 -density 300  -border 0x104 kbtable-blk.pdf kbd.png
+  && convert -bordercolor black -geometry 1600x900 -resize 1600 -density 300  -border 0x104 kbtable-blk.pdf kbd.png
 }")}
 \fi
 \end{document}
