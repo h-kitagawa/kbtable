@@ -20,19 +20,18 @@ keycode 49 = 0x60 0x7e 0x1002260 0x1002252
 keycode 10 = 0x31 0x21 0xAC 0x10025b3 exclamdown onesuperior
 ! \emptyset \subseteq
 keycode 11 = 0x32 0x40 0x1002205 0x1002286 twosuperior twosuperior
-
-! \S, \P
-keycode 12 = 0x33 0x23 0xa7 0xb6 threesuperior threesuperior
-! 国際通貨記号, pound
-keycode 13 = 0x34 0x24 0xA4 0xA3 currency sterling
-! euro, \infty
-keycode 14 = 0x35 0x25 0x10020ac 0x100221e 0x10020ac 0x1002030
+! 相似記号
+keycode 12 = 0x33 0x23 0x100223d 0x100223d threesuperior threesuperior
+! \infty
+keycode 13 = 0x34 0x24 0x100221e 0x221e currency sterling
+! パーミル
+keycode 14 = 0x35 0x25 0x1002030 0x1002030 0x10020ac 0x1002030
 ! \vee, \cup
 keycode 15 = 0x36 0x5E 0x1002228 0x100222a onequarter onequarter
 ! \wedge, \cap
 keycode 16 = 0x37 0x26 0x1002227 0x1002229 onehalf onehalf
-! \aleph, \times
-keycode 17 = 0x38 0x2a 0x1002135 0x10000d7 threequarters threequarters
+! \aleph
+keycode 17 = 0x38 0x2a 0x1002135 0x1002135 threequarters threequarters
 
 ! \lceil, \lfloor
 keycode 18 = 0x39 0x28 0x1002308 0x100230A 0x1002018 0x1002018
@@ -47,7 +46,7 @@ keycode 21 = 0x3d 0x2b 0x1002261 0x100223c 0x10000d7 0x10000f7
 keycode 34 = 0x5b 0x7b 0x10027e8 0x10027e6 guillemotleft leftdoublequotemark
 ! \rangle ]]
 keycode 35 = 0x5d 0x7d 0x10027e9 0x10027e7 guillemotright rightdoublequotemark
-! \ | \| \|
+! \ | \|
 keycode 51 = 0x5c 0x7c 0x1002016 0x1002016 notsign brokenbar
 
 ! \forall
@@ -82,7 +81,7 @@ keysym t = t T Greek_tau 0x10022a4 thorn THORN
 keysym u = u U Greek_upsilon Greek_UPSILON uacute Uacute
 
 ! \varphi, \Phi
-keysym f = f F 0x10003c6 Greek_PHI 0x10003d5 
+keysym f = f F 0x10003c6 Greek_PHI 0x10003d5 Greek_PHI
 ! bold C
 keysym c = c C Greek_chi 0x1002102 copyright cent
 keysym v = v V Greek_psi Greek_PSI
