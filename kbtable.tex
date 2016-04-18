@@ -6,39 +6,38 @@
 \DX=1.5\baselineskip
 \paperwidth=28.666\dimexpr\DX+\fboxsep+\fboxrule\relax
 \advance\paperwidth20pt
-\paperheight=20\baselineskip
+\paperheight=17\baselineskip
 \advance\paperheight20pt
 \usepackage[margin=10pt]{geometry}
 \def\pgfsysdriver{pgfsys-pdftex.def}
 \usepackage{menukeys}
-\setmainfont{TeX Gyre Heros}
-\setsansfont[Ligatures=TeX]{DejaVu Sans}
+\setmainfont[RawFeature=-tlig]{TeX Gyre Heros}
+\setsansfont[RawFeature=-tlig]{DejaVu Sans}
 \setmonofont{lmmonoltcond10-regular}
 \setmathfont{XITS Math}
-
+\newfontfamily\JP{ipag.ttf}
 \ifdefined\BACKCOLOR
   \def\FORECOLOR{white}
   \def\LINECOLOR{black!33!white}
-  \definecolor{cyan}{rgb}{0,1,1}
-  \definecolor{red}{rgb}{0.25,1,0.25}
+  \definecolor{cyan}{rgb}{0,0.75,0.75}
+  \definecolor{red}{rgb}{0,0.75,0}
 \else
   \def\FORECOLOR{black}
   \def\BACKCOLOR{white}
   \def\LINECOLOR{black!66!white}
-  \definecolor{cyan}{rgb}{0,0.25,1}
+  \definecolor{cyan}{rgb}{0.25,0.25,1}
+  \definecolor{red}{rgb}{1,0.25,0.25}
 \fi
 
-\def\DXV#1#2{\textcolor{#1}{\large\hbox to1em{\strut\hss\smash{#2}}}}
+\def\DXV#1#2{\textcolor{#1}{\normalsize\hbox to1em{\strut\hss\smash{\normalsize#2}\hss}}}
 \pagecolor{\BACKCOLOR}
 \begin{document}
 \sf\parindent0pt
 
 \def\K#1#2#3#4#5#6{%
 \fbox{\vbox{\hsize=2\DX{%
-  \noindent\smash{\textcolor{\FORECOLOR}{\rm\large\strut#2}}%
-    \hfill \DXV{cyan}{#6}\DXV{red}{#4}\\
-  \textcolor{\FORECOLOR}{\null\rm\large\strut#1}
-	\hfill\DXV{cyan}{#5}\DXV{red}{#3}%
+  \noindent{\large\strut}\DXV{\FORECOLOR}{\rm\Large\strut#2}\hfill \DXV{cyan}{#6}\DXV{red}{#4}\\
+  {\large\strut}\DXV{\FORECOLOR}{\rm\Large#1}\hfill\DXV{cyan}{#5}\DXV{red}{#3}%
 }}}\ignorespaces}
 \def\W#1#2{%
 \fbox{\vbox{\hsize=#1\dimexpr\DX+\fboxsep+\fboxrule\relax
@@ -54,20 +53,25 @@
   \noindent\null\hfill\Large\strut\rm\textcolor{\LINECOLOR}{#2}\hfill\null}}}%
 \ignorespaces}
 
+\def\AC#1{%
+  {\fboxsep=0pt\fbox{\setbox0=\hbox{Äp}\vrule height\ht0 depth\dp0width0pt%
+     \smash{\hbox to .6em{\hss\char"#1\hss}}}}%
+}
+
 \color{\LINECOLOR}
 
-\K{\char`\`}{\char`\~}{≠}{≒}{}{}
+\K{\char`\`}{\char`\~}{≠}{≒}{\AC{02CB}}{\AC{02DC}}
 \K{1}{!}{¬}{△}{¡}{¹}
-\K{2}{@}{∅}{⊆}{²}{}
-\K{3}{\#}{∽}{}{³}{}
+\K{2}{@}{∅}{⊆}{²}{\AC{02D8}}
+\K{3}{\#}{\JP ∽}{}{³}{\AC{02DD}}
 \K{4}{\$}{∞}{}{¤}{£}
-\K{5}{\%}{\scalebox{0.7}[1]{‰}}{}{€}{}
-\K{6}{\char`\^}{∨}{∪}{¼}{}
-\K{7}{\&}{∧}{∩}{½}{}
-\K{8}{$*$}{ℵ}{}{¾}{}
-\K{9}{(}{⌈}{⌊}{‘}{}
-\K{0}{)}{⌉}{⌋}{’}{}
-\K{-}{\_}{≅}{≃}{¥}{}
+\K{5}{\%}{\scalebox{0.7}[1]{‰}}{}{€}{\AC{02DA}}
+\K{6}{\char`\^}{∨}{∪}{¼}{\AC{02C6}}
+\K{7}{\&}{∧}{∩}{½}{\AC{02C7}}
+\K{8}{$*$}{ℵ}{}{¾}{\AC{02DB}}
+\K{9}{(}{⌈}{⌊}{‘}{\AC{02D9}}
+\K{0}{)}{⌉}{⌋}{’}{\AC{002E}}
+\K{-}{\_}{≅}{≃}{¥}{\AC{00AF}}
 \K{=}{+}{≡}{∼}{×}{÷}
 \W{2.66}{\backspace\,BS}
 
@@ -101,7 +105,7 @@
 \K{}{K}{κ}{Κ}{}{Œ}
 \K{}{L}{λ}{Λ}{}{Ø}
 \K{;}{:}{∴}{∵}{¶}{°}
-\K{'}{"}{±}{∓}{}{}
+\K{'}{"}{±}{∓}{\AC{02CA}}{\AC{00A8}}
 \W{3.33}{\returnwin\,Enter}
 
 \kern-5.5pt
@@ -115,8 +119,8 @@
 \K{}{N}{ν}{ℕ}{}{Ñ}
 \K{}{M}{μ}{⊧}{µ}{}
 \K{,}{<}{≤}{≦}{}{Ç}
-\K{.}{>}{≥}{≧}{}{}
-\K{/}{?}{↔}{⇔}{¿}{}
+\K{.}{>}{≥}{≧}{}{\AC{00B8}}
+\K{/}{?}{↔}{⇔}{¿}{\AC{002F}}
 \W{4.66}{\shift\,Shift}
 
 \kern-5.5pt

@@ -15,31 +15,31 @@ add mod5 = ISO_Level3_Shift
 
 
 ! ` ~ \emptyset \fallingdotseq
-keycode 49 = 0x60 0x7e 0x1002260 0x1002252
+keycode 49 = 0x60 0x7e 0x1002260 0x1002252 dead_grave dead_tilde
 ! \neg \triangle
 keycode 10 = 0x31 0x21 0xAC 0x10025b3 exclamdown onesuperior
 ! \emptyset \subseteq
-keycode 11 = 0x32 0x40 0x1002205 0x1002286 twosuperior twosuperior
+keycode 11 = 0x32 0x40 0x1002205 0x1002286 twosuperior dead_breve
 ! 相似記号
-keycode 12 = 0x33 0x23 0x100223d 0x100223d threesuperior threesuperior
+keycode 12 = 0x33 0x23 0x100223d 0x100223d threesuperior dead_doubleacute
 ! \infty
 keycode 13 = 0x34 0x24 0x100221e 0x221e currency sterling
 ! パーミル
-keycode 14 = 0x35 0x25 0x1002030 0x1002030 0x10020ac 0x1002030
+keycode 14 = 0x35 0x25 0x1002030 0x1002030 0x10020ac dead_abovering
 ! \vee, \cup
-keycode 15 = 0x36 0x5E 0x1002228 0x100222a onequarter onequarter
+keycode 15 = 0x36 0x5E 0x1002228 0x100222a onequarter dead_circumflex
 ! \wedge, \cap
-keycode 16 = 0x37 0x26 0x1002227 0x1002229 onehalf onehalf
+keycode 16 = 0x37 0x26 0x1002227 0x1002229 onehalf dead_caron
 ! \aleph
-keycode 17 = 0x38 0x2a 0x1002135 0x1002135 threequarters threequarters
+keycode 17 = 0x38 0x2a 0x1002135 0x1002135 threequarters dead_ogonek
 
 ! \lceil, \lfloor
-keycode 18 = 0x39 0x28 0x1002308 0x100230A 0x1002018 0x1002018
+keycode 18 = 0x39 0x28 0x1002308 0x100230A 0x1002018 dead_abovedot
 ! \rceil, \rfloor
-keycode 19 = 0x30 0x29 0x1002309 0x100230B 0x1002019 0x1002019
+keycode 19 = 0x30 0x29 0x1002309 0x100230B 0x1002019 dead_belowdot
 
 ! \cong, \simeq
-keycode 20 = 0x2d 0x5f 0x1002245 0x1002243 yen yen
+keycode 20 = 0x2d 0x5f 0x1002245 0x1002243 yen dead_macron
 ! \equiv, \sim
 keycode 21 = 0x3d 0x2b 0x1002261 0x100223c 0x10000d7 0x10000f7
 ! \langle [[
@@ -52,15 +52,15 @@ keycode 51 = 0x5c 0x7c 0x1002016 0x1002016 notsign brokenbar
 ! \forall
 keysym a = a A Greek_alpha 0x1002200 aacute Aacute
 ! \bot
-keysym b = b B Greek_beta 0x10022a5 
-keysym g = g G Greek_gamma Greek_GAMMA
+keysym b = b B Greek_beta 0x10022a5 b B
+keysym g = g G Greek_gamma Greek_GAMMA g G
 keysym d = d D Greek_delta Greek_DELTA eth ETH
 
 ! \exists
 keysym e = e E Greek_epsilon 0x1002203 eacute Eacute
 keysym z = z Z Greek_zeta 0x1002124 ae AE
 keysym y = y Y Greek_eta Greek_ETA udiaeresis Udiaeresis
-keysym h = h H Greek_theta Greek_THETA 
+keysym h = h H Greek_theta Greek_THETA h H
 
 ! \in
 keysym i = i I Greek_iota 0x1002208 iacute Iacute
@@ -69,7 +69,7 @@ keysym l = l L Greek_lambda Greek_LAMBDA oslash Oslash
 keysym m = m M Greek_mu 0x10022a7 mu mu
 ! bold N
 keysym n = n N Greek_nu 0x1002115 ntilde Ntilde
-keysym x = x X Greek_xi Greek_XI
+keysym x = x X Greek_xi Greek_XI x X
 ! \notin
 keysym o = o O Greek_omicron 0x1002209 oacute Oacute
 keysym p = p P Greek_pi Greek_PI odiaeresis Odiaeresis
@@ -84,13 +84,13 @@ keysym u = u U Greek_upsilon Greek_UPSILON uacute Uacute
 keysym f = f F 0x10003c6 Greek_PHI 0x10003d5 Greek_PHI
 ! bold C
 keysym c = c C Greek_chi 0x1002102 copyright cent
-keysym v = v V Greek_psi Greek_PSI
+keysym v = v V Greek_psi Greek_PSI v V
 keysym w = w W Greek_omega Greek_OMEGA aring Aring
 
 ! \subset, bold Q
 keysym q = q Q 0x1002282 0x100211A adiaeresis Adiaeresis
 ! proves, forces
-keysym j = j J 0x10022a6 0x10022a9
+keysym j = j J 0x10022a6 0x10022a9 j J
 
 ! arrows
 keycode 113 = 0xff51 0xff51 0x1002190 0x10021d0 
@@ -103,8 +103,8 @@ keycode 47 = 0x3b 0x3a 0x1002234 0x1002235 paragraph degree
 ! <=
 keycode 59 = 0x2c 0x3c 0x1002264 0x1002266 ccedilla Ccedilla
 ! >=
-keycode 60 = 0x2e 0x3e 0x1002265 0x1002267
+keycode 60 = 0x2e 0x3e 0x1002265 0x1002267 0x2e dead_cedilla
 ! <->, <=>
-keycode 61 = 0x2f 0x3f 0x1002194 0x10021d4 questiondown questiondown
+keycode 61 = 0x2f 0x3f 0x1002194 0x10021d4 questiondown dead_stroke
 ! \pm, \mp
-keycode 48 = 0x27 0x22 0x10000b1 0x1002213
+keycode 48 = 0x27 0x22 0x10000b1 0x1002213 dead_acute dead_diaeresis
