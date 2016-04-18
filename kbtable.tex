@@ -3,7 +3,7 @@
 \documentclass[landscape]{article}
 \usepackage{fontspec,unicode-math,xcolor,graphicx}
 \newdimen\DX
-\DX=1.25\baselineskip
+\DX=1.5\baselineskip
 \paperwidth=28.666\dimexpr\DX+\fboxsep+\fboxrule\relax
 \advance\paperwidth20pt
 \paperheight=20\baselineskip
@@ -27,16 +27,18 @@
   \definecolor{cyan}{rgb}{0,0.25,1}
 \fi
 
+\def\DXV#1#2{\textcolor{#1}{\large\hbox to0.9em{\strut\hss#2}}}
 \pagecolor{\BACKCOLOR}
 \begin{document}
 \sf\parindent0pt
 
-\def\K#1#2#3#4{%
+\def\K#1#2#3#4#5#6{%
 \fbox{\vbox{\hsize=2\DX{%
   \noindent\smash{\textcolor{\FORECOLOR}{\rm\large\strut#2}}%
-    \hfill \textcolor{cyan}{\large\strut#4}\\
-  \textcolor{\FORECOLOR}{\null\rm\large\strut#1}\hfill\textcolor{cyan}{\large#3}}}}%
-\ignorespaces}
+    \hfill \DXV{cyan}{#6}\DXV{red}{#4}\\
+  \textcolor{\FORECOLOR}{\null\rm\large\strut#1}
+	\hfill\DXV{cyan}{#5}\DXV{red}{#3}%
+}}}\ignorespaces}
 \def\W#1#2{%
 \fbox{\vbox{\hsize=#1\dimexpr\DX+\fboxsep+\fboxrule\relax
 \advance\hsize-2\fboxrule\advance\hsize-2\fboxsep{%
@@ -53,67 +55,67 @@
 
 \color{\LINECOLOR}
 
-\K{\char`\`}{\char`\~}{≠}{≒}
-\K{1}{!}{¬}{△}
-\K{2}{@}{∅}{⊆}
-\K{3}{\#}{§}{¶}
-\K{4}{\$}{¤}{£}
-\K{5}{\%}{€}{∞}%"
-\K{6}{\char`\^}{∨}{∪}
-\K{7}{\&}{∧}{∩}
-\K{8}{$*$}{ℵ}{×}
-\K{9}{(}{⌈}{⌊}
-\K{0}{)}{⌉}{⌋}
-\K{-}{\_}{≅}{≃}
-\K{=}{+}{≡}{∼}
+\K{\char`\`}{\char`\~}{≠}{≒}{}{}
+\K{1}{!}{¬}{△}{¡}{¹}
+\K{2}{@}{∅}{⊆}{²}{}
+\K{3}{\#}{§}{¶}{³}{}
+\K{4}{\$}{¤}{£}{¤}{£}
+\K{5}{\%}{€}{∞}{€}{‰}
+\K{6}{\char`\^}{∨}{∪}{¼}{}
+\K{7}{\&}{∧}{∩}{½}{}
+\K{8}{$*$}{ℵ}{×}{¾}{}
+\K{9}{(}{⌈}{⌊}{‘}{}
+\K{0}{)}{⌉}{⌋}{’}{}
+\K{-}{\_}{≅}{≃}{¥}{}
+\K{=}{+}{≡}{∼}{×}{÷}
 \W{2.66}{\backspace\,BS}
 
 \kern-5.5pt
 \null
 \W{2.66}{Tab\,\tabwin}
-\K{}{Q}{⊂}{ℚ}
-\K{}{W}{ω}{Ω}
-\K{}{E}{ε}{∃}
-\K{}{R}{ρ}{ℝ}
-\K{}{T}{τ}{⊤}
-\K{}{Y}{η}{Η}
-\K{}{U}{υ}{Υ}
-\K{}{I}{ι}{∈}
-\K{}{O}{ο}{∉}
-\K{}{P}{π}{Π}
-\K{[}{\{}{$〈$}{⟦}
-\K{]}{\}}{$〉$}{⟧}
-\K{\char`\\}{|}{‖}{ϕ}
+\K{}{Q}{⊂}{ℚ}{}{Ä}
+\K{}{W}{ω}{Ω}{}{Å}
+\K{}{E}{ε}{∃}{}{É}
+\K{}{R}{ρ}{ℝ}{®}{}
+\K{}{T}{τ}{⊤}{}{Þ}
+\K{}{Y}{η}{Η}{}{Ü}
+\K{}{U}{υ}{Υ}{}{Ú}
+\K{}{I}{ι}{∈}{}{Í}
+\K{}{O}{ο}{∉}{}{Ó}
+\K{}{P}{π}{Π}{}{Ö}
+\K{[}{\{}{$〈$}{⟦}{«}{“}
+\K{]}{\}}{$〉$}{⟧}{»}{”}
+\K{\char`\\}{|}{‖}{ϕ}{¬}{¦}
 
 \kern-5.5pt
 \null
 \W{3.33}{CapsLk\,\capslockmac}
-\K{}{A}{α}{∀}
-\K{}{S}{σ}{Σ}
-\K{}{D}{δ}{Δ}
-\K{}{F}{φ}{Φ}
-\K{}{G}{γ}{Γ}
-\K{}{H}{θ}{Θ}
-\K{}{J}{⊦}{⊩}
-\K{}{K}{κ}{Κ}
-\K{}{L}{λ}{Λ}
-\K{;}{:}{∴}{∵}
-\K{'}{"}{±}{∓}%"
+\K{}{A}{α}{∀}{}{Á}
+\K{}{S}{σ}{Σ}{ß}{§}
+\K{}{D}{δ}{Δ}{}{Ð}
+\K{}{F}{φ}{Φ}{ϕ}{}
+\K{}{G}{γ}{Γ}{}{}
+\K{}{H}{θ}{Θ}{}{}
+\K{}{J}{⊦}{⊩}{}{}
+\K{}{K}{κ}{Κ}{}{Œ}
+\K{}{L}{λ}{Λ}{}{Ø}
+\K{;}{:}{∴}{∵}{¶}{°}
+\K{'}{"}{±}{∓}{}{}
 \W{3.33}{\returnwin\,Enter}
 
 \kern-5.5pt
 \null
 \W4{\shift Shift}
-\K{}{Z}{ζ}{ℤ}
-\K{}{X}{ξ}{Ξ}
-\K{}{C}{χ}{ℂ}
-\K{}{V}{ψ}{Ψ}
-\K{}{B}{β}{⊥}
-\K{}{N}{ν}{ℕ}
-\K{}{M}{μ}{⊧}
-\K{,}{<}{≤}{≦}
-\K{.}{>}{≥}{≧}
-\K{/}{?}{↔}{⇔}
+\K{}{Z}{ζ}{ℤ}{}{Æ}
+\K{}{X}{ξ}{Ξ}{}{}
+\K{}{C}{χ}{ℂ}{©}{¢}
+\K{}{V}{ψ}{Ψ}{}{}
+\K{}{B}{β}{⊥}{}{}
+\K{}{N}{ν}{ℕ}{}{Ñ}
+\K{}{M}{μ}{⊧}{µ}{}
+\K{,}{<}{≤}{≦}{}{Ç}
+\K{.}{>}{≥}{≧}{}{}
+\K{/}{?}{↔}{⇔}{¿}{}
 \W{4.66}{\shift\,Shift}
 
 \kern-5.5pt
@@ -123,8 +125,8 @@
 \W2{Win}%"
 \W2{Alt}
 \W{10}{}
+\W2{\textcolor{red}{\kern-.1emSwitch}}
 \W2{\textcolor{cyan}{\kern-.1emAltGr}}
-\W2{Menu}
 \W2{Ctrl}
 \hskip1.55\dimexpr\DX+\fboxsep+\fboxrule\relax
 \smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.56}{↑}}}
