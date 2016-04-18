@@ -4,12 +4,11 @@ keycode 233 = F20
 clear mod2
 clear mod3
 clear mod5
-remove mod1 = Mode_switch
+remove mod1 = Mode_switch Mode_switch
 ! Alt_R -> mode_switch
 keycode 108 = Mode_switch
 ! PrtSC -> (AltGr, Menu)
-keycode 107 = ISO_Level3_Shift
-keycode 92 = 
+keycode 107 = ISO_Level3_Shift ISO_Level3_Shift Menu Menu
 add mod3 = Mode_switch
 add mod5 = ISO_Level3_Shift
 
@@ -108,3 +107,6 @@ keycode 60 = 0x2e 0x3e 0x1002265 0x1002267 0x2e dead_cedilla
 keycode 61 = 0x2f 0x3f 0x1002194 0x10021d4 questiondown dead_stroke
 ! \pm, \mp
 keycode 48 = 0x27 0x22 0x10000b1 0x1002213 dead_acute dead_diaeresis
+
+! Space
+keycode 65 = space space 0x1002423 0x1002423 space space
