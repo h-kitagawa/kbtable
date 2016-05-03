@@ -109,4 +109,14 @@ keycode 61 = 0x2f 0x3f 0x1002194 0x10021d4 questiondown dead_stroke
 keycode 48 = 0x27 0x22 0x10000b1 0x1002213 dead_acute dead_diaeresis
 
 ! Space
-keycode 65 = space space 0x1002423 0x1002423 space space
+keycode 65 = space space space space
+
+!
+! Change Caps_Lock to Ctrl
+!
+remove Lock = 66
+!remove Control = Control_L
+!keysym Control_L = Caps_Lock
+keysym 66 = Control_L
+!add Lock = Caps_Lock
+

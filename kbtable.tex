@@ -10,12 +10,12 @@
 \advance\paperheight20pt
 \usepackage[margin=10pt]{geometry}
 \def\pgfsysdriver{pgfsys-pdftex.def}
-\usepackage{menukeys}
 \setmainfont[RawFeature=-tlig]{TeX Gyre Heros}
 \setsansfont[RawFeature=-tlig]{DejaVu Sans}
 \setmonofont{lmmonoltcond10-regular}
 \setmathfont{XITS Math}
 \newfontfamily\JP{ipag.ttf}
+\newfontfamily\COND{texgyreheroscn-regular.otf}
 \ifdefined\BACKCOLOR
   \def\FORECOLOR{white}
   \def\LINECOLOR{black!33!white}
@@ -27,6 +27,7 @@
   \def\LINECOLOR{black!66!white}
   \definecolor{cyan}{rgb}{0.25,0.25,1}
   \definecolor{red}{rgb}{1,0.25,0.25}
+  \advance\paperheight3\DX
 \fi
 
 \def\DXV#1#2{\textcolor{#1}{\normalsize\hbox to1em{\strut\hss\smash{\normalsize#2}\hss}}}
@@ -43,7 +44,7 @@
 \fbox{\vbox{\hsize=#1\dimexpr\DX+\fboxsep+\fboxrule\relax
 \advance\hsize-2\fboxrule\advance\hsize-2\fboxsep{%
   \noindent\large\strut\smash{%
-    \raisebox{-.5\DX}{\normalsize\rm\textcolor{\LINECOLOR}{#2}}}\\\ \strut
+    \raisebox{-.5\DX}{\hbox to\hsize{\normalsize\rm\textcolor{\LINECOLOR}{#2}\hfil}}}\\\ \strut
 }}}%
 \ignorespaces}
 
@@ -73,12 +74,12 @@
 \K{0}{)}{⌉}{⌋}{’}{\AC{002E}}
 \K{-}{\_}{≅}{≃}{¥}{\AC{00AF}}
 \K{=}{+}{≡}{∼}{×}{÷}
-\W{2.66}{\backspace\,BS}
+\W{2.66}{\hfill\small Backspace}
 
 \kern-5.5pt
 \null
-\W{2.66}{Tab\,\tabwin}
-\K{}{Q}{⊂}{ℚ}{}{Ä}
+\W{2.66}{Tab}
+\K{\COND\normalsize\fboxsep=.1em\fbox{JA}}{Q}{⊂}{ℚ}{}{Ä}
 \K{}{W}{ω}{Ω}{}{Å}
 \K{}{E}{ε}{∃}{}{É}
 \K{}{R}{ρ}{ℝ}{®}{}
@@ -94,8 +95,8 @@
 
 \kern-5.5pt
 \null
-\W{3.33}{CapsLk\,\capslockmac}
-\K{}{A}{α}{∀}{}{Á}
+\W{3.33}{\textcolor{\FORECOLOR}{\bfseries Ctrl}}
+\K{\COND\normalsize\fboxsep=.1em\fbox{US}}{A}{α}{∀}{}{Á}
 \K{}{S}{σ}{Σ}{ß}{§}
 \K{}{D}{δ}{Δ}{}{Ð}
 \K{}{F}{φ}{Φ}{ϕ}{Φ}
@@ -106,11 +107,11 @@
 \K{}{L}{λ}{Λ}{}{Ø}
 \K{;}{:}{∴}{∵}{¶}{°}
 \K{'}{"}{±}{∓}{\AC{02CA}}{\AC{00A8}}
-\W{3.33}{\returnwin\,Enter}
+\W{3.33}{\hfill Enter}
 
 \kern-5.5pt
 \null
-\W4{\shift Shift}
+\W4{Shift}
 \K{}{Z}{ζ}{ℤ}{}{Æ}
 \K{}{X}{ξ}{Ξ}{}{}
 \K{}{C}{χ}{ℂ}{©}{¢}
@@ -121,21 +122,21 @@
 \K{,}{<}{≤}{≦}{}{Ç}
 \K{.}{>}{≥}{≧}{}{\AC{00B8}}
 \K{/}{?}{↔}{⇔}{¿}{\AC{002F}}
-\W{4.66}{\shift\,Shift}
+\W{4.66}{\hfill Shift}
 
 \kern-5.5pt
 \null
-\W2{Fn}
-\W2{Ctrl}
+\W{1.67}{Fn}
+\W{2.33}{Ctrl}
 \W2{Win}%"
 \W2{Alt}
 \W{10}{}
-\W2{\textcolor{red}{\kern-.1emSwitch}}
-\W2{\textcolor{cyan}{\kern-.1emAltGr}}
+\W2{\textcolor{red}{\bfseries Switch}}
+\W2{\textcolor{cyan}{\bfseries AltGr}}
 \W2{Ctrl}
-\hskip1.55\dimexpr\DX+\fboxsep+\fboxrule\relax
-\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.56}{↑}}}
-\hskip1.55\dimexpr\DX+\fboxsep+\fboxrule\relax
+\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.55}{\small PgUp}}}%
+\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.56}{↑}}}%
+\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.55}{\small PgDn}}}
 
 \kern-17pt
 \null
