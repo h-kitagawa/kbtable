@@ -1,6 +1,14 @@
 keycode 234 = F19
 keycode 233 = F20
 
+!
+! Change Caps_Lock to Ctrl
+!
+clear lock
+keycode 66 = Control_L
+add Control = Control_L
+
+
 clear mod2
 clear mod3
 clear mod5
@@ -111,12 +119,4 @@ keycode 48 = 0x27 0x22 0x10000b1 0x1002213 dead_acute dead_diaeresis
 ! Space
 keycode 65 = space space space space
 
-!
-! Change Caps_Lock to Ctrl
-!
-remove Lock = 66
-!remove Control = Control_L
-!keysym Control_L = Caps_Lock
-keysym 66 = Control_L
-!add Lock = Caps_Lock
 
