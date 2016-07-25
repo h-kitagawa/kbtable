@@ -1,5 +1,5 @@
 keycode 234 = F19
-keycode 233 = F20
+keycode 233 = XF86MonBrightnessUp
 
 !
 ! Change Caps_Lock to Ctrl
