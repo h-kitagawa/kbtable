@@ -2,6 +2,7 @@
 \RequirePackage{luatex85}
 \documentclass[landscape]{article}
 \usepackage{fontspec,unicode-math,xcolor,graphicx}
+\pagestyle{empty}
 \newdimen\DX
 \DX=1.35\baselineskip
 \paperwidth=28.666\dimexpr\DX+\fboxsep+\fboxrule\relax
@@ -20,13 +21,13 @@
   \def\FORECOLOR{white}
   \def\LINECOLOR{black!33!white}
   \definecolor{cyan}{rgb}{0,0.75,0.75}
-  \definecolor{red}{rgb}{0,0.75,0}
+  \definecolor{green}{rgb}{0,0.75,0}
 \else
   \def\FORECOLOR{black}
   \def\BACKCOLOR{white}
   \def\LINECOLOR{black!66!white}
   \definecolor{cyan}{rgb}{0.25,0.25,1}
-  \definecolor{red}{rgb}{1,0.25,0.25}
+  \definecolor{green}{rgb}{0.25,0.75,0.25}
   \advance\paperheight3\DX
 \fi
 
@@ -37,8 +38,8 @@
 
 \def\K#1#2#3#4#5#6{%
 \fbox{\vbox{\hsize=2\DX{%
-  \noindent{\large\strut}\DXV{\FORECOLOR}{\rm\Large\strut#2}\hfill \DXV{cyan}{#6}\DXV{red}{#4}\\
-  {\large\strut}\DXV{\FORECOLOR}{\rm\Large#1}\hfill\DXV{cyan}{#5}\DXV{red}{#3}%
+  \noindent{\large\strut}\DXV{\FORECOLOR}{\rm\Large\strut#2}\hfill \DXV{cyan}{#6}\DXV{green}{#4}\\
+  {\large\strut}\DXV{\FORECOLOR}{\rm\Large#1}\hfill\DXV{cyan}{#5}\DXV{green}{#3}%
 }}}\ignorespaces}
 \def\W#1#2{%
 \fbox{\vbox{\hsize=#1\dimexpr\DX+\fboxsep+\fboxrule\relax
@@ -78,7 +79,7 @@
 
 \kern-5.5pt
 \null
-\W{2.66}{Tab}
+\W{2.50}{Tab}
 \K{\COND\normalsize\fboxsep=.1em\fbox{JA}}{Q}{⊂}{ℚ}{}{Ä}
 \K{}{W}{ω}{Ω}{}{Å}
 \K{}{E}{ε}{∃}{}{É}
@@ -91,11 +92,11 @@
 \K{}{P}{π}{Π}{}{Ö}
 \K{[}{\{}{$〈$}{⟦}{«}{“}
 \K{]}{\}}{$〉$}{⟧}{»}{”}
-\K{\char`\\}{|}{‖}{}{¬}{¦}
+{\DX=1.1\DX\K{\char`\\}{|}{‖}{}{¬}{¦}}
 
 \kern-5.5pt
 \null
-\W{3.33}{\textcolor{\FORECOLOR}{\bfseries Ctrl}}
+\W{3}{\textcolor{\FORECOLOR}{\bfseries Ctrl}}
 \K{\COND\normalsize\fboxsep=.1em\fbox{US}}{A}{α}{∀}{}{Á}
 \K{}{S}{σ}{Σ}{ß}{§}
 \K{}{D}{δ}{Δ}{}{Ð}
@@ -107,7 +108,7 @@
 \K{}{L}{λ}{Λ}{}{Ø}
 \K{;}{:}{∴}{∵}{¶}{°}
 \K{'}{"}{±}{∓}{\AC{02CA}}{\AC{00A8}}
-\W{3.33}{\hfill Enter}
+\W{3.66}{\hfill Enter}
 
 \kern-5.5pt
 \null
@@ -115,8 +116,16 @@
 \K{}{Z}{ζ}{ℤ}{}{Æ}
 \K{}{X}{ξ}{Ξ}{}{}
 \K{}{C}{χ}{ℂ}{©}{¢}
-\K{}{V}{ψ}{Ψ}{}{}
+\K{}{V}{ψ}{Ψ}{}{}%
 \K{}{B}{β}{⊥}{}{}
+\kern-\dimexpr\DX+\fboxsep+\fboxrule
+\smash{\raise2.1\baselineskip\hbox to0pt{%
+  \hss\JP\textcolor{\BACKCOLOR}{\LARGE$\vcenter{\hbox{●}}$}\hss}}%
+\smash{\raise2.1\baselineskip\hbox to0pt{%
+  \hss\JP\textcolor{\LINECOLOR}{\LARGE$\vcenter{\hbox{○}}$}\hss}}%
+\smash{\raise2.2\baselineskip\hbox to0pt{%
+  \hss\JP\textcolor{red}{\large$\vcenter{\hbox{●}}$}\hss}}%
+\kern\dimexpr\DX+\fboxsep+\fboxrule
 \K{}{N}{ν}{ℕ}{}{Ñ}
 \K{}{M}{μ}{⊧}{µ}{}
 \K{,}{<}{≤}{≦}{}{Ç}
@@ -131,7 +140,7 @@
 \W2{Win}%"
 \W2{Alt}
 \W{10}{}
-\W2{\textcolor{red}{\bfseries Switch}}
+\W2{\textcolor{green}{\bfseries Switch}}
 \W2{\textcolor{cyan}{\bfseries AltGr}}
 \W2{Ctrl}
 \smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.55}{\small PgUp}}}%
