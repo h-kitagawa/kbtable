@@ -1,16 +1,17 @@
 
 (setq inhibit-startup-screen t)
-(tool-bar-mode nil)
 (blink-cursor-mode 0)
 
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+(if window-system
+    (set-frame-font "DjvsmHW+VL-11:spacing=0")
+)
 
   (setq default-frame-alist
       (append (list
                '(foreground-color . "white")
                '(background-color . "black")
-               '(cursor-type . box)
-               '(cursor-color ."red"))
+               '(cursor-type . box))
                default-frame-alist))
   (setq-default line-spacing -1)
 
@@ -24,9 +25,8 @@
 (setq tex-command "conv_synctex_wine luajitlatex -synctex=1")
 (setq bibtex-command "pbibtex")
 (setq makeindex-command "mendex")
-;(setq dvi2-command "zathura -x \"emacsclient --no-wait +%{line} %{input}\"")
-(setq dvi2-command "sumatra")
-
+(setq dvi2-command "zathura -x \"emacsclient --no-wait +%{line} %{input}\"")
+;(setq dvi2-command "sumatra")
 (setq YaTeX-use-LaTeX2e t)
 (setq YaTeX-use-AMS-LaTeX t)
 (setq YaTeX-use-font-lock t)
@@ -34,31 +34,14 @@
 (setq YaTeX-inhibit-prefix-letter t)
 (setq YaTeX-default-pop-window-height 6)
 (setq YaTeX-dvipdf-command "dvipdfmx")
-(add-hook 'yatex-mode-hook '(lambda () (auto-fill-mode t) (setq fill-column 90)))
 
+(add-hook 'yatex-mode-hook '(lambda () (auto-fill-mode t) (setq fill-column 90)))
 (setq YaTeX-dvi2-command-ext-alist
       '(("TeXworks\\|texworks\\|texstudio\\|mupdf\\|SumatraPDF\\|Preview\\|Skim\\|TeXShop\\|evince\\|okular\\|zathura\\|qpdfview\\|Firefox\\|firefox\\|chrome\\|chromium\\|Adobe\\|Acrobat\\|AcroRd32\\|acroread\\|pdfopen\\|xdg-open\\|open\\|start\\|sumatra" . ".pdf")))
 
-;; (defun zathura-forward-search ()
-;;   (interactive)
-;;   (progn
-;;     (process-kill-without-query
-;;      (start-process
-;;       "zathura"
-;;       nil
-;;       "zathura"
-;;       "--synctex-forward"
-;;       (concat (number-to-string (save-restriction
-;;                                   (widen)
-;;                                   (count-lines (point-min) (point))))
-;;               ":0:"
-;;               (buffer-name))
-;;       (expand-file-name
-;;        (concat (file-name-sans-extension (or YaTeX-parent-file
-;;                                              (save-excursion
-;;                                                (YaTeX-visit-main t)
-;;                                                buffer-file-name)))
-;;                ".pdf"))))))
+(setq YaTeX-latex-message-code 'utf-8
+      YaTeX-no-begend-shortcut t 
+      )
 
 (defun sumatra-forward-search ()
   (interactive)
@@ -84,11 +67,6 @@
 (add-hook 'yatex-mode-hook
           '(lambda ()
              (define-key YaTeX-mode-map (kbd "C-c C-g") 'sumatra-forward-search)))
-
-(setq YaTeX-latex-message-code 'utf-8
-      YaTeX-no-begend-shortcut t 
-      )
-
 
 (require 'font-lock)
 (setq font-lock-maximum-decoration t)
@@ -154,8 +132,8 @@
  '(blink-cursor-mode nil)
  '(column-number-mode t)
  '(electric-indent-mode nil)
- '(ibus-mode-local nil)
- '(ibus-prediction-window-position nil)
+; '(ibus-mode-local nil)
+; '(ibus-prediction-window-position nil)
  '(safe-local-variable-values (quote ((buffer-file-coding-system . sjis-dos))))
  '(selection-coding-system (quote utf-8-unix))
  '(show-paren-mode t)
@@ -186,23 +164,20 @@
 (setq uniquify-ignore-buffers-re "*[^*]+*")
 
 
-(require 'mozc)
-(require 'ccc)
 (set-language-environment "Japanese")
-(setq default-input-method "japanese-mozc")
-(setq mozc-candidate-style 'echo-area)
-(defun mozc-change-cursor-color ()
-  (if mozc-mode
-      (set-buffer-local-cursor-color "green")
-      (set-buffer-local-cursor-color "red")))
-(add-hook 'input-method-activate-hook
-  (lambda () (mozc-change-cursor-color)))
-(add-hook 'input-method-inactivate-hook
-  (lambda () (mozc-change-cursor-color)))
-(global-set-key [?\S- ] 'toggle-input-method)
-(add-hook 'mozc-mode-hook
-  (lambda()
-    (define-key mozc-mode-map [?\S- ] 'toggle-input-method)))
+(if window-system (progn
+  (load-file "/usr/share/emacs/site-lisp/mozc/mozc.el")
+  (require 'mozc)
+  (setq default-input-method "japanese-mozc")
+  (setq mozc-candidate-style 'echo-area)
+  (add-hook 'input-method-activate-hook '(lambda () (set-cursor-color "green")))
+  (add-hook 'input-method-inactivate-hook '(lambda () (set-cursor-color "red")))
+  (global-set-key [?\S- ] 'toggle-input-method)
+  (add-hook 'mozc-mode-hook
+    (lambda()
+      (define-key mozc-mode-map [?\S- ] 'toggle-input-method)))
+))
+
 (set-default-coding-systems 'utf-8-unix)
 (set-terminal-coding-system 'utf-8-unix)
 (prefer-coding-system 'utf-8-unix)
@@ -222,8 +197,35 @@
  )
 
 
-; 6段キーボード
-(global-set-key (kbd "C-<print>") '(lambda () (interactive) (insert "\\expandafter")))
+(defun zathura-forward-search ()
+  (interactive)
+  (progn
+    (process-kill-without-query
+     (start-process
+      "zathura"
+      nil
+      "zathura"
+      "--synctex-forward"
+      (concat (number-to-string (save-restriction
+                                  (widen)
+                                  (count-lines (point-min) (point))))
+              ":0:"
+              (buffer-name))
+      (expand-file-name
+       (concat (file-name-sans-extension (or YaTeX-parent-file
+                                             (save-excursion
+                                               (YaTeX-visit-main t)
+                                               buffer-file-name)))
+               ".pdf"))))))
 
-; 7段キーボード
-(global-set-key (kbd "C-<menu>") '(lambda () (interactive) (insert "\\expandafter")))
+(add-hook 'yatex-mode-hook
+          '(lambda ()
+             (define-key YaTeX-mode-map (kbd "C-c z") 'zathura-forward-search)))
+
+;; xterm-mouse-mode
+(unless (fboundp 'track-mouse)
+  (defun track-mouse (e)))
+(xterm-mouse-mode t)
+(require 'mouse)
+(require 'mwheel)
+(mouse-wheel-mode t)
