@@ -4,7 +4,7 @@
 
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 (if window-system
-    (set-frame-font "DjvsmHW+VL-11:spacing=0")
+    (set-frame-font "DjvsmHW+VL-12:spacing=0")
 )
 
   (setq default-frame-alist
@@ -25,8 +25,8 @@
 (setq tex-command "conv_synctex_wine luajitlatex -synctex=1")
 (setq bibtex-command "pbibtex")
 (setq makeindex-command "mendex")
-(setq dvi2-command "zathura -x \"emacsclient --no-wait +%{line} %{input}\"")
-;(setq dvi2-command "sumatra")
+;(setq dvi2-command "zathura")
+(setq dvi2-command "sumatra")
 (setq YaTeX-use-LaTeX2e t)
 (setq YaTeX-use-AMS-LaTeX t)
 (setq YaTeX-use-font-lock t)
@@ -173,9 +173,12 @@
   (add-hook 'input-method-activate-hook '(lambda () (set-cursor-color "green")))
   (add-hook 'input-method-inactivate-hook '(lambda () (set-cursor-color "red")))
   (global-set-key [?\S- ] 'toggle-input-method)
+  (global-set-key [(super q)] (lambda() (interactive) (set-input-method "japanese-mozc")))
+  (global-set-key [(super a)] (lambda() (interactive) (set-input-method nil)))
   (add-hook 'mozc-mode-hook
     (lambda()
-      (define-key mozc-mode-map [?\S- ] 'toggle-input-method)))
+      (define-key mozc-mode-map [?\S- ] 'toggle-input-method))
+    )
 ))
 
 (set-default-coding-systems 'utf-8-unix)
@@ -189,38 +192,6 @@
 
 (server-start)
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-
-(defun zathura-forward-search ()
-  (interactive)
-  (progn
-    (process-kill-without-query
-     (start-process
-      "zathura"
-      nil
-      "zathura"
-      "--synctex-forward"
-      (concat (number-to-string (save-restriction
-                                  (widen)
-                                  (count-lines (point-min) (point))))
-              ":0:"
-              (buffer-name))
-      (expand-file-name
-       (concat (file-name-sans-extension (or YaTeX-parent-file
-                                             (save-excursion
-                                               (YaTeX-visit-main t)
-                                               buffer-file-name)))
-               ".pdf"))))))
-
-(add-hook 'yatex-mode-hook
-          '(lambda ()
-             (define-key YaTeX-mode-map (kbd "C-c z") 'zathura-forward-search)))
 
 ;; xterm-mouse-mode
 (unless (fboundp 'track-mouse)
