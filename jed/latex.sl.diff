@@ -1,12 +1,37 @@
 --- latex.sl.orig	2016-02-21 14:57:43.193910200 +0900
-+++ latex.sl	2016-02-21 15:54:10.103853895 +0900
-@@ -4981,14 +4981,16 @@
- #ifdef HAS_DFA_SYNTAX
- private define setup_dfa_callback(name)
- {
--    dfa_enable_highlight_cache("latex.dfa", name);
-+    dfa_enable_highlight_cache("latex.dfa", name);
++++ latex.sl	2016-08-27 13:06:25.810124324 +0900
+@@ -4491,13 +4491,7 @@
+     copy_keymap(MODE, SIMPLE_KEYMAP);
  
+     % misc
+-    definekey("latex->insert_quote", "\"", MODE);
+-    definekey("latex->insert_quote", "`",  MODE);
+     definekey("latex->insert_dollar", "$",  MODE);
+-    definekey("latex->math_ll", "<", MODE);
+-    definekey("latex->math_arrow", ">", MODE);
+-    definekey("latex->math_arrow", "-", MODE);
+-    definekey("latex->math_arrow", "=", MODE);
+ 
+     foreach $1 ([" ", "~"])
+       definekey_textormath("latex->insert_without_spaces", "self_insert_cmd",
+@@ -4508,7 +4502,6 @@
+     definekey("latex->typo_percent", "%", MODE);
+     definekey_textormath("latex->insert_without_spaces",
+                          "latex->typo_german_decimal_point", ",", MODE);
+-    definekey("latex->typo_dots", ".",  MODE);
+ 
+     % math stuff
+     definekey_textormath("self_insert_cmd", "latex->cmd_insert(\"colon\")",
+@@ -4517,8 +4510,6 @@
+                          ")", MODE);
+     definekey_textormath("self_insert_cmd", "latex->math_right_parenthesis",
+                          "]", MODE);
+-    definekey("latex->insert_limits_char()", "^", MODE);
+-    definekey("latex->insert_limits_char()", "_", MODE);
+     definekey("latex->newline_with_completion", Key_Shift_Return, MODE);
+ 
+     definekey("latex->unfold_or_newline", Key_Return, MODE);
+@@ -4986,9 +4977,11 @@
      % comments:
      dfa_define_highlight_rule("%(.*[^ \t])?", "comment", name);
  
@@ -19,7 +44,7 @@
  
      % % known keywords in curly braces
      % dfa_define_highlight_rule("{article}", "Qstring", name);
-@@ -5051,12 +5053,12 @@
+@@ -5051,12 +5044,12 @@
      % dfa_define_highlight_rule("^.*\\\\[\\)\\]]", "Qstring", name);
      % dfa_define_highlight_rule("\\\\[\\(\\[].*", "string", name);
  
@@ -34,7 +59,7 @@
  
      % % \leftX \rightY constructions where X and Y are
      % % one of \| \{ \} [ ]( ) / | .
-@@ -5110,11 +5112,21 @@
+@@ -5110,11 +5103,21 @@
      dfa_define_highlight_rule("\\[\-,:;!%\$#&_ \|\\/{}~\^'`\.=>]"R,
      			      "keyword1", name);
  
@@ -58,7 +83,7 @@
      % % a backslash followed by a single char not covered by one of the
      % % previous rules is probably an error
      % dfa_define_highlight_rule("\\.", "error", name);
-@@ -5123,11 +5135,11 @@
+@@ -5123,11 +5126,11 @@
      dfa_define_highlight_rule("[~\\^_]", "operator", name);
  
      % numbers
@@ -72,7 +97,7 @@
  
      % quoted strings
      dfa_define_highlight_rule("\"`.*\"'", "Qstring", name); % german
-@@ -5142,13 +5154,12 @@
+@@ -5142,13 +5145,23 @@
      dfa_define_highlight_rule(".?.?.?\"'", "string", name);
      dfa_define_highlight_rule(".?.?.?''", "string", name);
  
@@ -82,12 +107,23 @@
      % <C3><nn> or <E2><nn><nn>
      dfa_define_highlight_rule("\xC2.", "normal", name);
      dfa_define_highlight_rule("\xC3.", "normal", name);
++    dfa_define_highlight_rule("\xC4.", "normal", name);
++    dfa_define_highlight_rule("\xC5.", "normal", name);
++    dfa_define_highlight_rule("\xC6.", "normal", name);
++    dfa_define_highlight_rule("\xC7.", "normal", name);
++    dfa_define_highlight_rule("\xC8.", "normal", name);
++    dfa_define_highlight_rule("\xC9.", "normal", name);
++    dfa_define_highlight_rule("\xCA.", "normal", name);
++    dfa_define_highlight_rule("\xCB.", "normal", name);
++    dfa_define_highlight_rule("\xCD.", "normal", name);
++    dfa_define_highlight_rule("\xCE.", "normal", name);
++    dfa_define_highlight_rule("\xCF.", "normal", name);
      dfa_define_highlight_rule("\xE2..", "normal", name);
 +    dfa_define_highlight_rule("\xE3\x80\x80", "Qkeyword2", name);
      dfa_define_highlight_rule("\xE3..", "normal", name);
      dfa_define_highlight_rule("\xE4..", "normal", name);
      dfa_define_highlight_rule("\xE5..", "normal", name);
-@@ -5156,9 +5167,25 @@
+@@ -5156,9 +5169,25 @@
      dfa_define_highlight_rule("\xE7..", "normal", name);
      dfa_define_highlight_rule("\xE8..", "normal", name);
      dfa_define_highlight_rule("\xE9..", "normal", name);
