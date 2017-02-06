@@ -11,7 +11,9 @@
 
 \@ifpackageloaded{amssymb}{}{%
   \@ifpackageloaded{newtxmath}{}{%
-    \usepackage{amssymb,stmaryrd}
+    \@ifpackageloaded{libertinust1math}{}{%
+      \usepackage{amssymb,stmaryrd}
+    }
   }
 }
 \RequirePackage{amsmath,bm}
