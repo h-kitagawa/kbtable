@@ -1,12 +1,13 @@
 *fontList:	-*-gothic-medium-r-normal-*-12-*-*-*-p-*-*-1
 
+rxvt.print-pipe: "cat > /dev/null"
 URxvt.print-pipe: "cat > /dev/null"
 URxvt.foreground:         white
 URxvt.background:         black
-URxvt.font: xft:DjvsmHW+VL-11
-URxvt.keysym.M-C-1: command:\033]710;xft:DjvsmHW+VL-15:pixelsize=18\007
-URxvt.keysym.M-C-2: command:\033]710;xft:DjvsmHW+VL-13:pixelsize=16\007
-URxvt.keysym.M-C-3: command:\033]710;xft:DjvsmHW+VL-11:pixelsize=14\007
+URxvt.font: xft:DjvsmHW+VL-12:pixelsize=13
+URxvt.keysym.M-C-1: command:\033]710;xft:DjvsmHW+VL-16:pixelsize=17\007
+URxvt.keysym.M-C-2: command:\033]710;xft:DjvsmHW+VL-14:pixelsize=15\007
+URxvt.keysym.M-C-3: command:\033]710;xft:DjvsmHW+VL-12:pixelsize=13\007
 URxvt.saveLines: 10240
 URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
@@ -14,28 +15,28 @@ URxvt*scrollTtyKeypress: true
 URxvt.preeditType: OverTheSpot
 URxvt.letterSpace: -1
 URxvt.lineSpace: 0
-URxvt.inputMethod: xim
+URxvt.inputMethod: uim
 URxvt*modifier: alt
 URxvt.backspacekey: 
-URxvt.cursorColor: red
+URxvt.cursorColor: #FF3333
 URxvt.cursorBlink: true
 
 
 Emacs*useXim: false
 
-urxvt*color0:  #000000
-urxvt*color1:  #FF0000
-urxvt*color2:  #00FF00
-urxvt*color3:  #FFFF00
-urxvt*color4:  #0000FF
-urxvt*color5:  #FF00FF
-urxvt*color6:  #00FFFF
-urxvt*color7:  #FFFFFF
-urxvt*color8:  #555555
-urxvt*color9:  #FF5555
-urxvt*color10: #55FF55
-urxvt*color11: #FFFF55
-urxvt*color12: #5555FF
-urxvt*color13: #FF55FF
-urxvt*color14: #55FFFF
-urxvt*color15: #FFFFFF
+URxvt*color0:  #000000
+URxvt*color1:  #FF3333
+URxvt*color2:  #33FF33
+URxvt*color3:  #FFFF33
+URxvt*color4:  #3333FF
+URxvt*color5:  #FF33FF
+URxvt*color6:  #33FFFF
+URxvt*color7:  #FFFFFF
+URxvt*color8:  #7F7F7F
+URxvt*color9:  #FF7F7F
+URxvt*color10: #7FFF7F
+URxvt*color11: #FFFF7F
+URxvt*color12: #7F7FFF
+URxvt*color13: #FF7FFF
+URxvt*color14: #7FFFFF
+URxvt*color15: #FFFFFF
