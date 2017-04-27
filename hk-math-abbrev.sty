@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{hk-math-abbrev}[%
-  2014/12/18 Unicode input of several math symbols
+  2017/02/26 Unicode input of several math symbols
 ]
 % 完全に個人的なもの。記号の取捨選択も独断と偏見による
 
@@ -11,7 +11,9 @@
 
 \@ifpackageloaded{amssymb}{}{%
   \@ifpackageloaded{newtxmath}{}{%
-    \usepackage{amssymb,stmaryrd}
+    \@ifpackageloaded{libertinust1math}{}{%
+      \usepackage{amssymb,stmaryrd}
+    }
   }
 }
 \RequirePackage{amsmath,bm}
@@ -66,7 +68,12 @@
 \my@math{"003B2}{\beta                   }%"
 \my@math{"003B3}{\gamma                  }%"
 \my@math{"003B4}{\delta                  }%"
-\my@math{"003B5}{\epsilon                }%"
+\ifdefined\varepsilon
+  \my@math{"003B5}{\varepsilon             }%"
+\else
+  \my@math{"003B5}{\epsilon                }%"
+\fi
+\my@math{"003F5}{\epsilon                }%"
 \my@math{"003B6}{\zeta                   }%"
 \my@math{"003B7}{\eta                    }%"
 \my@math{"003B8}{\theta                  }%"
@@ -122,6 +129,7 @@
 % key =
 \my@math{"02261}{\equiv                    }%"
 \my@math{"0223C}{\sim                      }%"
+\my@math{"000F7}{\div                      }%"
 
 % key q
 \my@math{"02282}{\subset                   }%"

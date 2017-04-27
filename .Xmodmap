@@ -76,7 +76,7 @@ keysym l = l L Greek_lambda Greek_LAMBDA oslash Oslash
 keysym m = m M Greek_mu 0x10022a7 mu mu
 ! bold N
 keysym n = n N Greek_nu 0x1002115 ntilde Ntilde
-keysym x = x X Greek_xi Greek_XI x X
+keysym x = x X Greek_xi Greek_XI 0x10003f5 X
 ! \notin
 keysym o = o O Greek_omicron 0x1002209 oacute Oacute
 keysym p = p P Greek_pi Greek_PI odiaeresis Odiaeresis
