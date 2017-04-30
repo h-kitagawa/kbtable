@@ -1,0 +1,25 @@
+/*
+ * Edit this file and copy it as userContent.css into your
+ * profile-directory/chrome/
+ */
+
+/* 
+ * For more examples see http://www.mozilla.org/unix/customizing.html
+ */
+
+
+body,h1,h2,h3,p,br,ul,ol,li,dl,blockquote,table,pre,div,xmp,center { 
+  line-height: 130% !important;
+}
+ .doc {
+  line-height: 130% !important;
+} 
+
+
+select,input,textarea{
+  -moz-appearance: none !important;
+  font-family: "DjvsmHW+VL" !important;
+  font-size: 14px  !important;
+  color : -moz-fieldtext !important ;
+  background-color : -moz-field !important ;
+}

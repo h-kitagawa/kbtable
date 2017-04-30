@@ -1,0 +1,59 @@
+* {
+        font-family: "MGen+ 1p" !important;
+	font-size: 12px !important;
+        /* color: black !important;*/
+        line-height: 12px !important;
+-moz-appearance: none !important;
+}
+
+#context-back {
+display: none !important;
+}
+/* 進む */
+#context-forward {
+display: none !important;
+}
+/* 更新 */
+#context-reload {
+display: none !important;
+}
+/* 中止 */
+#context-stop {
+display: none !important;
+}
+/* 「中止」の下のセパレーター */
+#context-sep-stop {
+display: none !important;
+}
+
+#context-sendpage,
+#context-sendlink{
+	display: none !important;
+}
+#context-metadata,
+#context-keywordfield,
+#context-viewpartialsource-selection{
+	display: none !important;
+}
+menuitem[command="Browser:ReadMail"],
+menuitem[command="Browser:NewMessage"], menuitem[command="Browser:NewMessage"] + menuseparator{
+	display: none !important;
+}
+dialog#addBookmarkDialog bookmarks-tree#folder-tree{
+	visibility: visible !important;
+}
+
+dialog#addBookmarkDialog button#expander{
+	visibility: hidden !important;
+}
+embed[src*=".mid"]{
+	display: none !important;
+}
+ 
+/* Change appearance of tabs */
+tab{
+-moz-appearance: none !important;
+padding-top:1px !important;
+padding-bottom:1px !important;
+margin:0 !important;
+}
