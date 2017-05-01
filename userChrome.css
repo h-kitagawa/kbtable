@@ -1,9 +1,9 @@
 * {
-        font-family: "MGen+ 1p" !important;
-	font-size: 12px !important;
-        /* color: black !important;*/
-        line-height: 12px !important;
--moz-appearance: none !important;
+  font-family: "MGen+ 1p" !important;
+  font-size: 12px !important;
+  /* color: black !important;*/
+  line-height: 12px !important;
+  -moz-appearance: none !important;  
 }
 
 #context-back {
@@ -56,4 +56,30 @@ tab{
 padding-top:1px !important;
 padding-bottom:1px !important;
 margin:0 !important;
+}
+
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+
+#urlbar *|input:hover, textbox:hover {
+  color:#ffff00 !important;
+}
+
+richlistitem[selected="true"]{
+  background-color:#00009f!important;
+  color:white!important;
+}
+richlistitem[selected="true"].text-link{
+  color:#00ffff!important;
+}
+.ac-action{
+  color:#00ff00!important;
+}
+*|input {
+  font-family: monospace !important;
+  font-size: 110% !important;
+}
+.ac-url-text {
+  font-size:100% !important;
+  font-family: monospace !important;
 }
