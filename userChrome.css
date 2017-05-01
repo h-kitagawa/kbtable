@@ -60,6 +60,15 @@ margin:0 !important;
 
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 
+:root[privatebrowsingmode=temporary] #urlbar,
+:root[privatebrowsingmode=permanent] #urlbar{
+  background-color:#5f002f!important;
+}
+
+:root[privatebrowsingmode=temporary] #urlbar:not([readonly="true"]) .urlbar-input-box,
+:root[privatebrowsingmode=temporary] #urlbar:not([readonly="true"]) .urlbar-input-box{
+  background: #5f002f !important;
+}
 
 #urlbar *|input:hover, textbox:hover {
   color:#ffff00 !important;
@@ -79,7 +88,9 @@ richlistitem[selected="true"].text-link{
   font-family: monospace !important;
   font-size: 110% !important;
 }
+
 .ac-url-text {
   font-size:100% !important;
   font-family: monospace !important;
 }
+
