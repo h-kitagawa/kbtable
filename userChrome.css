@@ -3,7 +3,7 @@
   font-size: 12px !important;
   /* color: black !important;*/
   line-height: 12px !important;
-  -moz-appearance: none !important;  
+  -moz-appearance: none !important;
 }
 
 #context-back {
@@ -52,7 +52,6 @@ embed[src*=".mid"]{
  
 /* Change appearance of tabs */
 tab{
--moz-appearance: none !important;
 padding-top:1px !important;
 padding-bottom:1px !important;
 margin:0 !important;
@@ -63,23 +62,18 @@ margin:0 !important;
 :root[privatebrowsingmode=temporary] #urlbar,
 :root[privatebrowsingmode=permanent] #urlbar{
   background-color:#5f002f!important;
+  color:white!important;
 }
 
 :root[privatebrowsingmode=temporary] #urlbar:not([readonly="true"]) .urlbar-input-box,
 :root[privatebrowsingmode=temporary] #urlbar:not([readonly="true"]) .urlbar-input-box{
   background: #5f002f !important;
-}
-
-#urlbar *|input:hover, textbox:hover {
-  color:#ffff00 !important;
+  color:white!important;
 }
 
 richlistitem[selected="true"]{
-  background-color:#00009f!important;
+  background-color:#0000af!important;
   color:white!important;
-}
-richlistitem[selected="true"].text-link{
-  color:#00ffff!important;
 }
 .ac-action{
   color:#00ff00!important;
