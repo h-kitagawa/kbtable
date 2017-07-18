@@ -173,6 +173,8 @@
   (add-hook 'input-method-activate-hook '(lambda () (set-cursor-color "green")))
   (add-hook 'input-method-inactivate-hook '(lambda () (set-cursor-color "red")))
   (global-set-key [?\S- ] 'toggle-input-method)
+  (substitute-key-definition
+   'toggle-input-method 'isearch-toggle-input-method isearch-mode-map global-map)
   (global-set-key [(super q)] (lambda() (interactive) (set-input-method "japanese-mozc")))
   (global-set-key [(super a)] (lambda() (interactive) (set-input-method nil)))
   (add-hook 'mozc-mode-hook
@@ -200,3 +202,7 @@
 (require 'mouse)
 (require 'mwheel)
 (mouse-wheel-mode t)
+
+(define-key global-map "\M-[7~" 'beginning-of-line)
+(define-key global-map "\M-[8~" 'end-of-line)
+

@@ -6,7 +6,7 @@ inherit eutils multilib savedconfig toolchain-funcs
 
 DESCRIPTION="simple terminal implementation for X"
 HOMEPAGE="http://st.suckless.org/"
-SRC_URI="http://dl.suckless.org/st/${P}.tar.gz"
+SRC_URI="http://git.suckless.org/st/snapshot/st-5a10aca702bf7bc9094cb4abaea6c59558740d29.tar.gz"
 
 LICENSE="MIT-with-advertising"
 SLOT="0"
@@ -40,7 +40,9 @@ src_prepare() {
 	tc-export CC
 
 	restore_config config.h
-	epatch "${FILESDIR}/st-scrollback-0.7.diff" #added
+	epatch "${FILESDIR}/st-scrollback-20170329-149c0d3.diff" #added
+	epatch "${FILESDIR}/st-scrollback-mouse-20170427-5a10aca.diff" #added
+	epatch "${FILESDIR}/st-scrollback-mouse-altscreen-20170427-5a10aca.diff" #added
 }
 
 src_install() {
@@ -52,3 +54,11 @@ src_install() {
 
 	save_config config.h
 }
+
+src_unpack() {
+    if [ "${A}" != "" ]; then
+        unpack ${A}
+    fi
+    mv "${WORKDIR}/st-5a10aca702bf7bc9094cb4abaea6c59558740d29" "${WORKDIR}/${P}"
+}
+
