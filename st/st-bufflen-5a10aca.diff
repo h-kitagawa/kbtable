@@ -1,0 +1,12 @@
+diff -u -udr st-orig/x.c st-5a10aca702bf7bc9094cb4abaea6c59558740d29/x.c
+--- x.c	2017-04-11 01:32:10.000000000 +0900
++++ x.c	2017-07-27 16:47:10.789270262 +0900
+@@ -1515,7 +1515,7 @@
+ {
+ 	XKeyEvent *e = &ev->xkey;
+ 	KeySym ksym;
+-	char buf[32], *customkey;
++	char buf[512], *customkey;
+ 	int len;
+ 	Rune c;
+ 	Status status;

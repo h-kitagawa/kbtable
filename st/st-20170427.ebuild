@@ -40,6 +40,7 @@ src_prepare() {
 	tc-export CC
 
 	restore_config config.h
+	epatch "${FILESDIR}/st-bufflen-5a10aca.diff" #added
 	epatch "${FILESDIR}/st-scrollback-20170329-149c0d3.diff" #added
 	epatch "${FILESDIR}/st-scrollback-mouse-20170427-5a10aca.diff" #added
 	epatch "${FILESDIR}/st-scrollback-mouse-altscreen-20170427-5a10aca.diff" #added
