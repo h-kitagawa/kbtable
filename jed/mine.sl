@@ -27,14 +27,14 @@ set_color ("cursorovr", "black", "cyan");
 
 %% The following have been automatically generated:
 set_color("linenum", "yellow", "blue");
-set_color("trailing_whitespace", "yellow", "color088");
+set_color("trailing_whitespace", "black", "magenta");
 set_color("tab", "yellow", $2);
 set_color("url", "magenta", $2);
 set_color("italic", $1, $2);
 set_color("underline", "green", $2);
 set_color("bold", "brightred", $2);
 set_color("html", "brightred", $2);
-set_color("keyword2", "color157", "color089"); % 全角空白
+set_color("keyword2", "black", "red"); % 全角空白
 set_color("keyword3", "color118", $2); % def, newcommand
 set_color("keyword4", $1, $2);
 set_color("keyword5", $1, $2);
