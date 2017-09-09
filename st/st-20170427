@@ -108,8 +108,8 @@ const char *colorname[] = {
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#ff0000",
-	"#00ffff",
+	"#7fafff",
+	"#0000af",
 };
 
 
@@ -120,7 +120,7 @@ const char *colorname[] = {
 unsigned int defaultfg = 7;
 unsigned int defaultbg = 0;
 unsigned int defaultcs = 256;
-unsigned int defaultrcs = 256;
+unsigned int defaultrcs = 257;
 
 /*
  * Default shape of cursor
