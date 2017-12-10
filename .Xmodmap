@@ -15,10 +15,16 @@ clear mod5
 remove mod1 = Mode_switch Mode_switch
 ! Alt_R -> mode_switch
 keycode 108 = Mode_switch
-! PrtSC -> (AltGr, Menu)
-keycode 107 = ISO_Level3_Shift ISO_Level3_Shift Menu Menu
+! Menu -> (AltGr, Menu)
+keycode 135 = ISO_Level3_Latch ISO_Level3_Latch Menu Menu
+! ! PrtSC -> (AltGr, Menu)
+! keycode 107 = ISO_Level3_Latch ISO_Level3_Latch Menu Menu
+
+! Space
+keycode 65 = space space space space
+
 add mod3 = Mode_switch
-add mod5 = ISO_Level3_Shift
+add mod5 = ISO_Level3_Latch
 
 
 ! ` ~ \emptyset \fallingdotseq
@@ -116,7 +122,5 @@ keycode 61 = 0x2f 0x3f 0x1002194 0x10021d4 questiondown dead_stroke
 ! \pm, \mp
 keycode 48 = 0x27 0x22 0x10000b1 0x1002213 dead_acute dead_diaeresis
 
-! Space
-keycode 65 = space space space space
 
 
