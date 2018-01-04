@@ -16,9 +16,9 @@ remove mod1 = Mode_switch Mode_switch
 ! Alt_R -> mode_switch
 keycode 108 = Mode_switch
 ! Menu -> (AltGr, Menu)
-keycode 135 = ISO_Level3_Latch ISO_Level3_Latch Menu Menu
+keycode 135 = ISO_Level3_Latch Multi_key Menu Menu
 ! ! PrtSC -> (AltGr, Menu)
-! keycode 107 = ISO_Level3_Latch ISO_Level3_Latch Menu Menu
+! keycode 107 = ISO_Level3_Latch Multi_key Menu Menu
 
 ! Space
 keycode 65 = space space space space
