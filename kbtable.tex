@@ -66,7 +66,7 @@
 \def\xf@@[#1](#2)#3{%
 \fbox{\vbox{\hsize=#1\dimexpr\DX+\fboxsep+\fboxrule\relax
 \advance\hsize-2\fboxrule\advance\hsize-2\fboxsep{%
-  \noindent\null\Large\strut\rm\textcolor{\LINECOLOR}{\normalsize #3\hfill\DXV{green}{\JP #2}}\null}}}%
+  \noindent\null\Large\strut\rm\textcolor{\LINECOLOR}{\normalsize\rlap{#3}\hfill\DXV{green}{\JP #2}}\null}}}%
 \ignorespaces}
 
 \def\XDS#1{\@ifnextchar({\xds@{#1}}{\xds@{#1}()}}%)
@@ -76,8 +76,8 @@
 \def\XD#1#2{%
 \fbox{\vbox{\hsize=#1\dimexpr\DX+\fboxsep+\fboxrule\relax
 \advance\hsize-2\fboxrule\advance\hsize-2\fboxsep{%
-  \noindent\null\Large\strut\rm\textcolor{\LINECOLOR}{\normalsize%
-	#2}\hfill\null\\[\dimexpr-.5\fboxrule-\lineskip]\strut}}}%
+  \noindent\null\Large\strut\rm\textcolor{\LINECOLOR}{\rlap{\normalsize%
+	#2}}\hfill\null\\[\dimexpr\fboxrule+2\fboxsep-\lineskip]\strut}}}%
 \ignorespaces}
 
 \def\AC#1{%
@@ -100,7 +100,7 @@
 \XF(①){F1}\XF(②){F2}\XF(③){F3}\XF(④){F4}\hfill
 \XF(⑤){F5}\XF(⑥){F6}\XF(⑦){F7}\XF(⑧){F8}\hfill
 \XDS{PrtSc}(⑨){F9}\XDS{ScrLk}(⑩){F10}\XDS{Pause}{F11}\XDS{Insert}{F12}\hfill
-\XD{1.8}{Delete}
+\XD{1.8}{Delete}%
 \XDS{Home}{End}\XDS{PgUp}{PgDn}
 \fi}
 \par\kern2pt
@@ -108,7 +108,7 @@
 \K{\char`\`}{\char`\~}{≠}{≒}{\AC{02CB}}{\AC{02DC}}
 \K{1}{!}{¬}{△}{¡}{¹}
 \K{2}{@}{∅}{⊆}{²}{\AC{02D8}}
-\K{3}{\#}{\JP ∽}{}{³}{\AC{02DD}}
+\K{3}{\#}{\JP ∽}{∠}{³}{\AC{02DD}}
 \K{4}{\$}{∞}{}{¤}{£}
 \K{5}{\%}{\scalebox{0.7}[1]{‰}}{}{€}{\AC{02DA}}
 \K{6}{\char`\^}{∨}{∪}{¼}{\AC{02C6}}
@@ -146,7 +146,7 @@
 \K{}{F}{φ}{Φ}{ϕ}{Φ}
 \K{}{G}{γ}{Γ}{}{}
 \K{}{H}{θ}{Θ}{}{}
-\K{}{J}{⊦}{⊩}{}{}
+\K{}{J}{⊦}{⊩}{\raisebox{.2ex}{\mathversion{bold}\scriptsize$\sqrt{\phantom{H}}$\,}}{}
 \K{}{K}{κ}{Κ}{}{Œ}
 \K{}{L}{λ}{Λ}{}{Ø}
 \K{;}{:}{∴}{∵}{¶}{°}
@@ -166,7 +166,7 @@
 \null
 \W{4.5}{\SY{⇧}Shift}
 \K{}{Z}{ζ}{ℤ}{}{Æ}
-\K{}{X}{ξ}{Ξ}{ϵ}{}
+\K{}{X}{ξ}{Ξ}{ϵ}{·}
 \K{}{C}{χ}{ℂ}{©}{¢}
 \K{}{V}{ψ}{Ψ}{}{}%
 \K{}{B}{β}{⊥}{}{}
@@ -196,14 +196,14 @@
   {\textcolor{green}{\rlap{\bfseries\normalsize Switch}\phantom{Q}}}{}{}{}{}
 \W2{\textcolor{cyan}{\bfseries AltGr}}
 \W2{Ctrl}
-\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.78}{\ifnum\ROW=6\small PgUp\fi}}}%
-\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.77}{↑}}}%
-\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.78}{\ifnum\ROW=6\small PgDn\fi}}}
+\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\XF[1.78]{\ifnum\ROW=6\small PgUp\fi}}}%
+\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\XF[1.77]($⇑$){\Large ↑}}}%
+\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\XF[1.78]{\ifnum\ROW=6\small PgDn\fi}}}
 
 \kern-17pt
 \null
 \hskip24.5\dimexpr\DX+\fboxsep+\fboxrule\relax
-\X{1.78}{←}\X{1.77}{↓}\X{1.78}{→}
+\XF[1.78]($⇐$){\Large ←}\XF[1.77]($⇓$){\Large ↓}\XF[1.78]($⇒$){\Large →}
 
 \def\TEMP{white}
 \catcode`\&=12
