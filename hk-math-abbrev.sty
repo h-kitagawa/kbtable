@@ -222,4 +222,10 @@
 \my@mathd{"027E7}{\rrbracket                }%"
 \my@mathd{"02016}{\Vert                     }%"
 
+
+\catcode`☡=13
+\protected\def☡{\begingroup\leavevmode
+  \setbox2=\hbox{\font\manfnt=manfnt at.65\dimexpr\f@size pt\manfnt\char127}%
+  \smash{\raise\ht2\copy2}\endgroup\ignorespaces}
+
 \endinput

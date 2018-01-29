@@ -8,6 +8,7 @@ clear lock
 keycode 66 = Control_L
 add Control = Control_L
 
+keycode 9 = Escape Escape U2621 U2621
 
 clear mod2
 clear mod3

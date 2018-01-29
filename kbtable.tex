@@ -73,11 +73,13 @@
 \def\xds@#1(#2)#3{\hbox{\offinterlineskip
   \setbox0=\hbox{\XF{}}\vbox{\hsize=\wd0\XF{#1}\\[-\fboxrule]\XF(#2){#3}}}\ignorespaces}
 
-\def\XD#1#2{%
+\def\XD{\@ifnextchar[{\xd@}{\xd@[2]}}%]
+\def\xd@[#1]{\@ifnextchar({\xd@@[#1]}{\xd@@[#1]()}}%)
+\def\xd@@[#1](#2)#3{%
 \fbox{\vbox{\hsize=#1\dimexpr\DX+\fboxsep+\fboxrule\relax
 \advance\hsize-2\fboxrule\advance\hsize-2\fboxsep{%
   \noindent\null\Large\strut\rm\textcolor{\LINECOLOR}{\rlap{\normalsize%
-	#2}}\hfill\null\\[\dimexpr\fboxrule+2\fboxsep-\lineskip]\strut}}}%
+	#3}}\hfill\null\\[\dimexpr\fboxrule+2\fboxsep-\lineskip]\strut\hfill\DXV{green}{#2}}}}%
 \ignorespaces}
 
 \def\AC#1{%
@@ -90,17 +92,17 @@
 
 \hbox to29.83\dimexpr\DX+\fboxsep+\fboxrule\relax{%
 \ifnum\ROW=6
-\XF[2.5]{Esc}%
+\XF[2.5](\raisebox{0.9\height}{\font\m=manfnt at7pt\m\char127}){Esc}%
 \XF[1.66](①){F1}\XF[1.66](②){F2}\XF[1.66](③){F3}\XF[1.66](④){F4}\hfill
 \XF[1.66](⑤){F5}\XF[1.66](⑥){F6}\XF[1.66](⑦){F7}\XF[1.66](⑧){F8}\hfill
 \XF[1.66](⑨){F9}\XF[1.66](\scalebox{0.9}[1]{⑩}){\scalebox{0.9}[1]{F10}}\XF[1.66]{F11}\XF[1.66]{F12}\hfill
 \XF[1.66]{\small Home}\XF[1.66]{\small End}\XF[1.66]{\small Insert}\XF[2]{\hfill Delete}
 \else
-\XD{1.8}{Esc}\hfill
+\XD[1.8](\raisebox{0.9\height}{\font\m=manfnt at7pt\m\char127}){Esc}\hfill
 \XF(①){F1}\XF(②){F2}\XF(③){F3}\XF(④){F4}\hfill
 \XF(⑤){F5}\XF(⑥){F6}\XF(⑦){F7}\XF(⑧){F8}\hfill
 \XDS{PrtSc}(⑨){F9}\XDS{ScrLk}(⑩){F10}\XDS{Pause}{F11}\XDS{Insert}{F12}\hfill
-\XD{1.8}{Delete}%
+\XD[1.8]{Delete}%
 \XDS{Home}{End}\XDS{PgUp}{PgDn}
 \fi}
 \par\kern2pt
