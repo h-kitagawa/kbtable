@@ -103,7 +103,7 @@ keysym w = w W Greek_omega Greek_OMEGA aring Aring
 ! \subset, bold Q
 keysym q = q Q U2282 U211A adiaeresis Adiaeresis
 ! proves, forces, \surd
-keysym j = j J U22a6 U22a9 U221a J
+keysym j = j J U22a6 U22a9 U221a U221a
 
 ! arrows
 keycode 113 = 0xff51 0xff51 U2190 U21d0 

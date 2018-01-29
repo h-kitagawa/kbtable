@@ -93,7 +93,7 @@
 \XF[2.5]{Esc}%
 \XF[1.66](①){F1}\XF[1.66](②){F2}\XF[1.66](③){F3}\XF[1.66](④){F4}\hfill
 \XF[1.66](⑤){F5}\XF[1.66](⑥){F6}\XF[1.66](⑦){F7}\XF[1.66](⑧){F8}\hfill
-\XF[1.66](⑨){F9}\XF[1.66](⑩){F10}\XF[1.66]{F11}\XF[1.66]{F12}\hfill
+\XF[1.66](⑨){F9}\XF[1.66](\scalebox{0.9}[1]{⑩}){\scalebox{0.9}[1]{F10}}\XF[1.66]{F11}\XF[1.66]{F12}\hfill
 \XF[1.66]{\small Home}\XF[1.66]{\small End}\XF[1.66]{\small Insert}\XF[2]{\hfill Delete}
 \else
 \XD{1.8}{Esc}\hfill
@@ -197,13 +197,15 @@
 \W2{\textcolor{cyan}{\bfseries AltGr}}
 \W2{Ctrl}
 \smash{\raisebox{\dimexpr\baselineskip+.2pt}{\XF[1.78]{\ifnum\ROW=6\small PgUp\fi}}}%
-\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\XF[1.77]($⇑$){\Large ↑}}}%
+\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\XF[1.77]($\vcenter{\hbox{\oalign{\hss$⇑$\hss\crcr\hss$↑$\hss}}}$){\Large ↑}}}%
 \smash{\raisebox{\dimexpr\baselineskip+.2pt}{\XF[1.78]{\ifnum\ROW=6\small PgDn\fi}}}
 
 \kern-17pt
 \null
 \hskip24.5\dimexpr\DX+\fboxsep+\fboxrule\relax
-\XF[1.78]($⇐$){\Large ←}\XF[1.77]($⇓$){\Large ↓}\XF[1.78]($⇒$){\Large →}
+\XF[1.78]($\vcenter{\hbox{\oalign{\hss$⇐$\hss\crcr\hss$←$\vphantom{↑}\hss}}}$){\Large ←}
+\XF[1.77]($\vcenter{\hbox{\oalign{\hss$⇓$\hss\crcr\hss$↓$\hss}}}$){\Large ↓}
+\XF[1.78]($\vcenter{\hbox{\oalign{\hss$⇒$\hss\crcr\hss$→$\vphantom{↑}\hss}}}$){\Large →}
 
 \def\TEMP{white}
 \catcode`\&=12
