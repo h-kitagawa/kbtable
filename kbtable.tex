@@ -2,12 +2,13 @@
 \RequirePackage{luatex85}
 \documentclass[landscape]{article}
 \usepackage{fontspec,unicode-math,xcolor,graphicx}
+\usepackage{fontawesome}
 \pagestyle{empty}
 \newdimen\DX
 \DX=1.35\baselineskip
-\paperwidth=29.33\dimexpr\DX+\fboxsep+\fboxrule\relax
+\paperwidth=30\dimexpr\DX+\fboxsep+\fboxrule\relax
 \advance\paperwidth20pt
-\paperheight=17\baselineskip
+\paperheight=20\baselineskip
 \advance\paperheight20pt
 \usepackage[margin=10pt]{geometry}
 \def\pgfsysdriver{pgfsys-pdftex.def}
@@ -30,16 +31,21 @@
   \definecolor{green}{rgb}{0.25,0.75,0.25}
   \advance\paperheight3\DX
 \fi
-
+\ifdefined\ROW\else\def\ROW{7}\fi
+\definecolor{enter}{HTML}{466BB0}
+  
 \def\DXV#1#2{\textcolor{#1}{\normalsize\hbox to1em{\strut\hss\smash{\normalsize#2}\hss}}}
 \pagecolor{\BACKCOLOR}
 \begin{document}
 \sf\parindent0pt
 
-\def\K#1#2#3#4#5#6{%
-\fbox{\vbox{\hsize=2\DX{%
-  \noindent{\large\strut}\DXV{\FORECOLOR}{\rm\Large\strut#2}\hfill \DXV{cyan}{#6}\DXV{green}{#4}\\
-  {\large\strut}\DXV{\FORECOLOR}{\rm\Large#1}\hfill\DXV{cyan}{#5}\DXV{green}{#3}%
+\makeatletter
+\def\K{\@ifnextchar[{\k@}{\k@[0]}}%]
+\def\k@[#1]#2#3#4#5#6#7{%
+\fbox{\vbox{\hsize=2\DX
+  \advance\hsize#1\dimexpr\dimexpr\DX+\fboxsep+\fboxrule\relax{%
+  \noindent{\large\strut}\DXV{\FORECOLOR}{\rm\Large\strut#3}\hfill \DXV{cyan}{#7}\DXV{green}{#5}\\
+  {\large\strut}\DXV{\FORECOLOR}{\rm\Large#2}\hfill\DXV{cyan}{#6}\DXV{green}{#4}%
 }}}\ignorespaces}
 \def\W#1#2{%
 \fbox{\vbox{\hsize=#1\dimexpr\DX+\fboxsep+\fboxrule\relax
@@ -55,12 +61,49 @@
   \noindent\null\hfill\Large\strut\rm\textcolor{\LINECOLOR}{#2}\hfill\null}}}%
 \ignorespaces}
 
+\def\XF{\@ifnextchar[{\xf@}{\xf@[1.8]}}%]
+\def\xf@[#1]{\@ifnextchar({\xf@@[#1]}{\xf@@[#1]()}}%)
+\def\xf@@[#1](#2)#3{%
+\fbox{\vbox{\hsize=#1\dimexpr\DX+\fboxsep+\fboxrule\relax
+\advance\hsize-2\fboxrule\advance\hsize-2\fboxsep{%
+  \noindent\null\Large\strut\rm\textcolor{\LINECOLOR}{\normalsize #3\hfill\DXV{green}{\JP #2}}\null}}}%
+\ignorespaces}
+
+\def\XDS#1{\@ifnextchar({\xds@{#1}}{\xds@{#1}()}}%)
+\def\xds@#1(#2)#3{\hbox{\offinterlineskip
+  \setbox0=\hbox{\XF{}}\vbox{\hsize=\wd0\XF{#1}\\[-\fboxrule]\XF(#2){#3}}}\ignorespaces}
+
+\def\XD#1#2{%
+\fbox{\vbox{\hsize=#1\dimexpr\DX+\fboxsep+\fboxrule\relax
+\advance\hsize-2\fboxrule\advance\hsize-2\fboxsep{%
+  \noindent\null\Large\strut\rm\textcolor{\LINECOLOR}{\normalsize%
+	#2}\hfill\null\\[\dimexpr-.5\fboxrule-\lineskip]\strut}}}%
+\ignorespaces}
+
 \def\AC#1{%
   {\fboxsep=0pt\fbox{\setbox0=\hbox{Äp}\vrule height\ht0 depth\dp0width0pt%
      \smash{\hbox to .6em{\hss\char"#1\hss}}}}%
 }
 
+\def\SY#1{\ifnum\ROW=7\textsf{\smash{\raisebox{-.2ex}{\Large#1}}}\fi}
 \color{\LINECOLOR}
+
+\hbox to29.83\dimexpr\DX+\fboxsep+\fboxrule\relax{%
+\ifnum\ROW=6
+\XF[2.5]{Esc}%
+\XF[1.66]{F1}\XF[1.66]{F2}\XF[1.66]{F3}\XF[1.66]{F4}\hfill
+\XF[1.66]{F5}\XF[1.66]{F6}\XF[1.66]{F7}\XF[1.66]{F8}\hfill
+\XF[1.66]{F9}\XF[1.66]{F10}\XF[1.66]{F11}\XF[1.66]{F12}\hfill
+\XF[1.66]{\small Home}\XF[1.66]{\small End}\XF[1.66]{\small Insert}\XF[2]{\hfill Delete}
+\else
+\XD{1.8}{Esc}\hfill
+\XF(①){F1}\XF(②){F2}\XF(③){F3}\XF(④){F4}\hfill
+\XF(⑤){F5}\XF(⑥){F6}\XF(⑦){F7}\XF(⑧){F8}\hfill
+\XDS{PrtSc}(⑨){F9}\XDS{ScrLk}(⑩){F10}\XDS{Pause}{F11}\XDS{Insert}{F12}\hfill
+\XD{1.8}{Delete}
+\XDS{Home}{End}\XDS{PgUp}{PgDn}
+\fi}
+\par\kern2pt
 
 \K{\char`\`}{\char`\~}{≠}{≒}{\AC{02CB}}{\AC{02DC}}
 \K{1}{!}{¬}{△}{¡}{¹}
@@ -75,11 +118,11 @@
 \K{0}{)}{⌉}{⌋}{’}{\AC{002E}}
 \K{-}{\_}{≅}{≃}{¥}{\AC{00AF}}
 \K{=}{+}{≡}{∼}{×}{÷}
-\W{3.17}{\hfill\small Backspace}
+\W{3.83}{\ifnum\ROW=6\hfill\fi \SY{←}Backspace}
 
 \kern-5.5pt
 \null
-\W{3}{Tab}
+\W{3}{Tab\SY{↹}}
 \K{\COND\normalsize\fboxsep=.1em\fbox{JA}}{Q}{⊂}{ℚ}{}{Ä}
 \K{}{W}{ω}{Ω}{}{Å}
 \K{}{E}{ε}{∃}{}{É}
@@ -92,7 +135,7 @@
 \K{}{P}{π}{Π}{}{Ö}
 \K{[}{\{}{$〈$}{⟦}{«}{“}
 \K{]}{\}}{$〉$}{⟧}{»}{”}
-{\DX=1.1\DX\K{\char`\\}{|}{‖}{}{¬}{¦}}
+\K[.83]{\char`\\}{|}{‖}{␣}{¬}{¦}
 
 \kern-5.5pt
 \null
@@ -108,11 +151,20 @@
 \K{}{L}{λ}{Λ}{}{Ø}
 \K{;}{:}{∴}{∵}{¶}{°}
 \K{'}{"}{±}{∓}{\AC{02CA}}{\AC{00A8}}
-\W{3.66}{\hfill Enter}
+\ifnum\ROW=6
+\W{4.33}{\hfill Enter}
+\else
+\fcolorbox{\LINECOLOR}{enter!80!\BACKCOLOR}{\vbox{\hsize=4.33\dimexpr\DX+\fboxsep+\fboxrule\relax
+\advance\hsize-2\fboxrule\advance\hsize-2\fboxsep{%
+  \noindent\large\strut\smash{%
+    \raisebox{-.5\DX}{\hbox to\hsize{%
+      \normalsize\rm\textcolor{white}{\raisebox{-.3ex}{\SY{↵}}Enter}\hfil}}}\\\ \strut
+}}}%
+\fi
 
 \kern-5.5pt
 \null
-\W{4.5}{Shift}
+\W{4.5}{\SY{⇧}Shift}
 \K{}{Z}{ζ}{ℤ}{}{Æ}
 \K{}{X}{ξ}{Ξ}{ϵ}{}
 \K{}{C}{χ}{ℂ}{©}{¢}
@@ -131,26 +183,27 @@
 \K{,}{<}{≤}{≦}{}{Ç}
 \K{.}{>}{≥}{≧}{}{\AC{00B8}}
 \K{/}{?}{↔}{⇔}{¿}{\AC{002F}}
-\W{4.66}{\hfill Shift}
+\W{5.33}{\ifnum\ROW=6\hfill\fi\SY{⇧}Shift}
 
 \kern-5.5pt
 \null
 \W{2}{Fn}
 \W{2.50}{Ctrl}
-\W2{Win}%"
+\W2{\faWindows}%"
 \W2{Alt}
 \W{10}{}
-\W2{\textcolor{green}{\bfseries Switch}}
+\K{\COND\normalsize\fboxsep=.1em\fbox{US}}%
+  {\textcolor{green}{\rlap{\bfseries\normalsize Switch}\phantom{Q}}}{}{}{}{}
 \W2{\textcolor{cyan}{\bfseries AltGr}}
 \W2{Ctrl}
-\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.55}{\small PgUp}}}%
-\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.56}{↑}}}%
-\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.55}{\small PgDn}}}
+\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.78}{\ifnum\ROW=6\small PgUp\fi}}}%
+\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.77}{↑}}}%
+\smash{\raisebox{\dimexpr\baselineskip+.2pt}{\X{1.78}{\ifnum\ROW=6\small PgDn\fi}}}
 
 \kern-17pt
 \null
 \hskip24.5\dimexpr\DX+\fboxsep+\fboxrule\relax
-\X{1.55}{←}\X{1.56}{↓}\X{1.55}{→}
+\X{1.78}{←}\X{1.77}{↓}\X{1.78}{→}
 
 \def\TEMP{white}
 \catcode`\&=12
@@ -159,6 +212,11 @@
   luajitlatex -jobname=kbtable-blk %
   '\string\def\string\BACKCOLOR{black}\string\input\space kbtable.tex' &>/dev/null
   && convert -bordercolor black -geometry 1600x900 -resize 1600 -density 300  -border 0x104 kbtable-blk.pdf kbd.png
+}")}
+\directlua{ os.execute("\luaescapestring{%
+  luajitlatex -jobname=kbtable-blk6 %
+  '\string\def\string\ROW{6}\string\def\string\BACKCOLOR{black}\string\input\space kbtable.tex' &>/dev/null
+  && convert -bordercolor black -geometry 1920x1080 -resize 1920 -density 300  -border 0x104 kbtable-blk6.pdf kbd6.png
 }")}
 \fi
 \end{document}
