@@ -1,4 +1,3 @@
-
 (setq inhibit-startup-screen t)
 (blink-cursor-mode 0)
 
@@ -6,7 +5,6 @@
 (if window-system
     (set-frame-font "DjvsmHW+VL-12:spacing=0")
 )
-
   (setq default-frame-alist
       (append (list
                '(foreground-color . "white")
@@ -22,11 +20,11 @@
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/yatex")
 (autoload 'yatex-mode "yatex" "Yet Another LaTeX mode" t)
-(setq tex-command "conv_synctex_wine luajitlatex -synctex=1")
+(setq tex-command "luajitlatex -synctex=1")
 (setq bibtex-command "pbibtex")
 (setq makeindex-command "mendex")
-;(setq dvi2-command "zathura")
-(setq dvi2-command "sumatra")
+(setq dvi2-command "zathura")
+;(setq dvi2-command "sumatra")
 (setq YaTeX-use-LaTeX2e t)
 (setq YaTeX-use-AMS-LaTeX t)
 (setq YaTeX-use-font-lock t)
@@ -35,38 +33,13 @@
 (setq YaTeX-default-pop-window-height 6)
 (setq YaTeX-dvipdf-command "dvipdfmx")
 
-(add-hook 'yatex-mode-hook '(lambda () (auto-fill-mode t) (setq fill-column 90)))
+(add-hook 'yatex-mode-hook '(lambda () (auto-fill-mode nil) (setq fill-column 90)))
 (setq YaTeX-dvi2-command-ext-alist
       '(("TeXworks\\|texworks\\|texstudio\\|mupdf\\|SumatraPDF\\|Preview\\|Skim\\|TeXShop\\|evince\\|okular\\|zathura\\|qpdfview\\|Firefox\\|firefox\\|chrome\\|chromium\\|Adobe\\|Acrobat\\|AcroRd32\\|acroread\\|pdfopen\\|xdg-open\\|open\\|start\\|sumatra" . ".pdf")))
 
 (setq YaTeX-latex-message-code 'utf-8
       YaTeX-no-begend-shortcut t 
       )
-
-(defun sumatra-forward-search ()
-  (interactive)
-  (progn
-    (process-kill-without-query
-     (start-process
-      "sumatra"
-      nil
-      "sumatra"
-      (expand-file-name
-       (concat (file-name-sans-extension (or YaTeX-parent-file
-                                             (save-excursion
-                                               (YaTeX-visit-main t)
-                                               buffer-file-name)))
-               ".pdf"))
-      "-forward-search"
-      (buffer-file-name)
-      (number-to-string (save-restriction
-                        (widen)
-                        (count-lines (point-min) (point))))
-))))
-
-(add-hook 'yatex-mode-hook
-          '(lambda ()
-             (define-key YaTeX-mode-map (kbd "C-c C-g") 'sumatra-forward-search)))
 
 (require 'font-lock)
 (setq font-lock-maximum-decoration t)
@@ -123,6 +96,11 @@
   :group 'font-lock-faces)
 (defvar YaTeX-font-lock-italic-face 'YaTeX-font-lock-italic-face)
 
+(defface font-latex-math-face'((t (:foreground "brightyellow")))
+    "Font Lock mode face used to highlight math in LaTeX."
+    :group 'font-latex-highlighting-faces)
+(setq YaTeX-font-lock-formula-face 'font-latex-math-face)
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -132,8 +110,6 @@
  '(blink-cursor-mode nil)
  '(column-number-mode t)
  '(electric-indent-mode nil)
-; '(ibus-mode-local nil)
-; '(ibus-prediction-window-position nil)
  '(safe-local-variable-values (quote ((buffer-file-coding-system . sjis-dos))))
  '(selection-coding-system (quote utf-8-unix))
  '(show-paren-mode t)
@@ -142,11 +118,13 @@
 
 
 
-(defface my-face-b-1 '((t (:foreground "Red" :underline t))) nil)
+(defface my-face-b-1 '((t (:background "color-52"))) nil)
+(defface my-face-b-3 '((t (:foreground "color-215"))) nil)
 (defface my-face-b-2 '((t (:background "gray15"))) nil)
 (defface my-face-u-1 '((t (:foreground "SteelBlue" :underline t))) nil)
 (defvar my-face-b-1 'my-face-b-1)
 (defvar my-face-b-2 'my-face-b-2)
+(defvar my-face-b-3 'my-face-b-3)
 (defvar my-face-u-1 'my-face-u-1)
 
 (defadvice font-lock-mode (before my-font-lock-mode ())
@@ -154,10 +132,13 @@
    major-mode
    '(("\t" 0 my-face-b-2 append)
      ("　" 0 my-face-b-1 append)
+     ("（\\|）" 0 my-face-b-3 append)
      ("[ ]+$" 0 my-face-u-1 append)
      )))
 (ad-enable-advice 'font-lock-mode 'before 'my-font-lock-mode)
 (ad-activate 'font-lock-mode)
+
+
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
@@ -206,3 +187,15 @@
 (define-key global-map "\M-[7~" 'beginning-of-line)
 (define-key global-map "\M-[8~" 'end-of-line)
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(YaTeX-font-lock-bold-face ((t (:weight bold))))
+ '(YaTeX-font-lock-delimiter-face ((t (:weight bold))))
+ '(YaTeX-font-lock-formula-face ((t (:foreground "brightyellow"))))
+ '(YaTeX-font-lock-italic-face ((t (:slant italic))))
+ '(YaTeX-font-lock-math-sub-face ((t (:inherit YaTeX-font-lock-formula-face))))
+ '(YaTeX-font-lock-math-sup-face ((t (:inherit YaTeX-font-lock-formula-face))))
+ '(font-lock-comment-face ((t (:foreground "color-40")))))

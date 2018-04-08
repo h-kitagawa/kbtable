@@ -4,12 +4,12 @@ set_color("status", "yellow", "blue"); % status or mode line
 set_color("region", "yellow", "blue"); % for marking regions
 set_color("operator", $1, $2);	       % +, -, etc..
 set_color("number", "yellow", $2);     % 10, 2.71,... TeX formulas
-set_color("comment", "color034", $2);    % /* comment */
+set_color("comment", "color040", $2);    % /* comment */
 set_color("string", "yellow", $2);    % "string" or 'char'
 set_color("keyword", "color147", $2); % if, while, unsigned, ...
-set_color("keyword1", "green", $2);    % malloc, exit, etc...
-set_color("delimiter", "yellow", $2);	       % {}[](),.;...
-set_color("preprocess", "cyan", $2);% #ifdef ....
+set_color("keyword1", "color118", $2);    % malloc, exit, etc...
+set_color("delimiter", "color227", $2);	       % {}[](),.;...
+set_color("preprocess", "color12", $2);% #ifdef ....
 set_color("message", "cyan", $2);% color for messages
 set_color("error", "brightred", $2);   % color for errors
 set_color("dollar", "magenta", $2);    % color dollar sign continuat$
@@ -34,9 +34,9 @@ set_color("italic", $1, $2);
 set_color("underline", "green", $2);
 set_color("bold", "brightred", $2);
 set_color("html", "brightred", $2);
-set_color("keyword2", "black", "red"); % 全角空白
+set_color("keyword2", "white", "color52"); % 全角空白
 set_color("keyword3", "color118", $2); % def, newcommand
-set_color("keyword4", $1, $2);
+set_color("keyword4", "color215", $2);
 set_color("keyword5", $1, $2);
 set_color("keyword6", $1, $2);
 set_color("keyword7", $1, $2);
