@@ -1,5 +1,5 @@
 --- latex.sl.orig	2016-02-21 14:57:43.193910200 +0900
-+++ latex.sl	2016-08-27 13:06:25.810124324 +0900
++++ latex.sl	2018-04-08 13:33:58.069898956 +0900
 @@ -4491,13 +4491,7 @@
      copy_keymap(MODE, SIMPLE_KEYMAP);
  
@@ -97,7 +97,7 @@
  
      % quoted strings
      dfa_define_highlight_rule("\"`.*\"'", "Qstring", name); % german
-@@ -5142,13 +5145,23 @@
+@@ -5142,13 +5145,40 @@
      dfa_define_highlight_rule(".?.?.?\"'", "string", name);
      dfa_define_highlight_rule(".?.?.?''", "string", name);
  
@@ -118,12 +118,29 @@
 +    dfa_define_highlight_rule("\xCD.", "normal", name);
 +    dfa_define_highlight_rule("\xCE.", "normal", name);
 +    dfa_define_highlight_rule("\xCF.", "normal", name);
++    dfa_define_highlight_rule("\xD0.", "normal", name);
++    dfa_define_highlight_rule("\xD1.", "normal", name);
++    dfa_define_highlight_rule("\xD2.", "normal", name);
++    dfa_define_highlight_rule("\xD3.", "normal", name);
++    dfa_define_highlight_rule("\xD4.", "normal", name);
++    dfa_define_highlight_rule("\xD5.", "normal", name);
++    dfa_define_highlight_rule("\xD6.", "normal", name);
++    dfa_define_highlight_rule("\xD7.", "normal", name);
++    dfa_define_highlight_rule("\xD8.", "normal", name);
++    dfa_define_highlight_rule("\xD9.", "normal", name);
++    dfa_define_highlight_rule("\xDA.", "normal", name);
++    dfa_define_highlight_rule("\xDB.", "normal", name);
++    dfa_define_highlight_rule("\xDD.", "normal", name);
++    dfa_define_highlight_rule("\xDE.", "normal", name);
++    dfa_define_highlight_rule("\xDF.", "normal", name);
++    dfa_define_highlight_rule("\xE0..", "normal", name);
++    dfa_define_highlight_rule("\xE1..", "normal", name);
      dfa_define_highlight_rule("\xE2..", "normal", name);
-+    dfa_define_highlight_rule("\xE3\x80\x80", "Qkeyword2", name);
++    dfa_define_highlight_rule("\xE3\x80\x80", "Qkeyword2", name); % ideographic space
      dfa_define_highlight_rule("\xE3..", "normal", name);
      dfa_define_highlight_rule("\xE4..", "normal", name);
      dfa_define_highlight_rule("\xE5..", "normal", name);
-@@ -5156,9 +5169,25 @@
+@@ -5156,9 +5186,27 @@
      dfa_define_highlight_rule("\xE7..", "normal", name);
      dfa_define_highlight_rule("\xE8..", "normal", name);
      dfa_define_highlight_rule("\xE9..", "normal", name);
@@ -132,6 +149,8 @@
 +    dfa_define_highlight_rule("\xEC..", "normal", name);
 +    dfa_define_highlight_rule("\xED..", "normal", name);
 +    dfa_define_highlight_rule("\xEE..", "normal", name);
++    dfa_define_highlight_rule("\xEF\xBC\x88", "Qkeyword4", name); % fullwidth parenthesis
++    dfa_define_highlight_rule("\xEF\xBC\x89", "Qkeyword4", name); % fullwidth parenthesis
 +    dfa_define_highlight_rule("\xEF..", "normal", name);
 +    dfa_define_highlight_rule("\xF0...", "normal", name);
 +    dfa_define_highlight_rule("\xF1...", "normal", name);
@@ -150,3 +169,12 @@
      dfa_define_highlight_rule(".", "normal", name);
  
      dfa_build_highlight_table(name);
+@@ -5260,7 +5308,7 @@
+     append_to_hook("_jed_save_buffer_before_hooks", &save_buf_before_hook);
+     set_buffer_hook("par_sep", &paragraph_separator);
+ 
+-    WRAP_INDENTS = 1;
++    WRAP_INDENTS = 0;
+     define_blocal_var("info_page", "latex");
+ 
+     if ( abbrev_table_p("TeX") )
