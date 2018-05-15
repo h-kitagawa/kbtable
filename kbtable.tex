@@ -69,9 +69,11 @@
   \noindent\null\Large\strut\rm\textcolor{\LINECOLOR}{\normalsize\rlap{#3}\hfill\DXV{green}{\JP #2}}\null}}}%
 \ignorespaces}
 
-\def\XDS#1{\@ifnextchar({\xds@{#1}}{\xds@{#1}()}}%)
-\def\xds@#1(#2)#3{\hbox{\offinterlineskip
-  \setbox0=\hbox{\XF{}}\vbox{\hsize=\wd0\XF{#1}\\[-\fboxrule]\XF(#2){#3}}}\ignorespaces}
+\def\XDS{\@ifnextchar({\xds@}{\xds@()}}%)
+\def\xds@(#1)#2{\@ifnextchar({\xds@@(#1){#2}}{\xds@@(#1){#2}()}}%)
+\def\xds@@(#1)#2(#3)#4{\hbox{\offinterlineskip
+  \setbox0=\hbox{\XF{}}\vbox{\hsize=\wd0\XF(#1){#2}%
+    \\[-\fboxrule]\XF(#3){#4}}}\ignorespaces}
 
 \def\XD{\@ifnextchar[{\xd@}{\xd@[2]}}%]
 \def\xd@[#1]{\@ifnextchar({\xd@@[#1]}{\xd@@[#1]()}}%)
@@ -97,6 +99,12 @@
 \XF[1.66](⑤){F5}\XF[1.66](⑥){F6}\XF[1.66](⑦){F7}\XF[1.66](⑧){F8}\hfill
 \XF[1.66](⑨){F9}\XF[1.66](\scalebox{0.9}[1]{⑩}){\scalebox{0.9}[1]{F10}}\XF[1.66]{F11}\XF[1.66]{F12}\hfill
 \XF[1.66]{\small Home}\XF[1.66]{\small End}\XF[1.66]{\small Insert}\XF[2]{\hfill Delete}
+\else\ifnum\ROW=17
+\XDS(\raisebox{0.9\height}{\font\m=manfnt at7pt\m\char127}){Esc}(①){F1}%
+\XF(②){F2}\XF(③){F3}\XF(④){F4}\hfill
+\XF(⑤){F5}\XF(⑥){F6}\XF(⑦){F7}\XF(⑧){F8}\hfill
+\XF(⑨){F9}\XDS{PrtSc}(⑩){F10}\XDS{ScrLk}{F11}\XDS{Pause}{F12}\hfill
+\XDS{Insert}{Delete}\XDS{Home}{End}\XDS{PgUp}{PgDn}
 \else
 \XD[1.8](\raisebox{0.9\height}{\font\m=manfnt at7pt\m\char127}){Esc}\hfill
 \XF(①){F1}\XF(②){F2}\XF(③){F3}\XF(④){F4}\hfill
@@ -104,7 +112,7 @@
 \XDS{PrtSc}(⑨){F9}\XDS{ScrLk}(⑩){F10}\XDS{Pause}{F11}\XDS{Insert}{F12}\hfill
 \XD[1.8]{Delete}%
 \XDS{Home}{End}\XDS{PgUp}{PgDn}
-\fi}
+\fi\fi}
 \par\kern2pt
 
 \K{\char`\`}{\char`\~}{≠}{≒}{\AC{02CB}}{\AC{02DC}}
@@ -221,6 +229,11 @@
   luajitlatex -jobname=kbtable-blk6 %
   '\string\def\string\ROW{6}\string\def\string\BACKCOLOR{black}\string\input\space kbtable.tex' &>/dev/null
   && convert -bordercolor black -geometry 1920x1080 -resize 1920 -density 300  -border 0x104 kbtable-blk6.pdf kbd6.png
+}")}
+\directlua{ os.execute("\luaescapestring{%
+  luajitlatex -jobname=kbtable-blk7o %
+  '\string\def\string\ROW{17}\string\def\string\BACKCOLOR{black}\string\input\space kbtable.tex' &>/dev/null
+  && convert -bordercolor black -geometry 1280x800 -resize 1280 -density 300  -border 0x104 kbtable-blk7o.pdf kbd7o.png
 }")}
 \fi
 \end{document}
