@@ -213,16 +213,9 @@ xkb_keycodes "evdev+aliases(qwerty)" {
     indicator 2 = "Num Lock";
     indicator 3 = "Scroll Lock";
     indicator 4 = "Compose";
-    indicator 5 = "Kana";
-    indicator 6 = "Sleep";
-    indicator 7 = "Suspend";
-    indicator 8 = "Mute";
-    indicator 9 = "Misc";
-    indicator 10 = "Mail";
-    indicator 11 = "Charging";
-    virtual indicator 12 = "Shift Lock";
-    virtual indicator 13 = "Group 2";
-    virtual indicator 14 = "Mouse Keys";
+    virtual indicator 5 = "AltGr";
+    virtual indicator 6 = "Mode Switch";
+    virtual indicator 7 = "Mouse Keys";
     alias <AC12> = <BKSL>;
     alias <MENU> = <COMP>;
     alias <HZTG> = <TLDE>;
@@ -258,7 +251,7 @@ xkb_keycodes "evdev+aliases(qwerty)" {
 
 xkb_types "complete" {
 
-    virtual_modifiers NumLock,Alt,LevelThree,LAlt,RAlt,RControl,LControl,ScrollLock,LevelFive,AltGr,Meta,Super;
+    virtual_modifiers NumLock,Alt,LevelThree,LAlt,RAlt,RControl,LControl,ScrollLock,AltGr,Meta,Super;
 
     type "ONE_LEVEL" {
         modifiers= none;
@@ -351,13 +344,11 @@ xkb_compatibility "complete" {
         action= LockMods(modifiers=modMapMods);
     };
     interpret Mode_switch+AnyOfOrNone(all) {
-        virtualModifier= AltGr;
-        useModMapMods=level1;
+        virtualModifier= LevelThree;
         action= SetGroup(group=+1);
     };
     interpret ISO_Level3_Shift+AnyOf(all) {
-        virtualModifier= LevelThree;
-        useModMapMods=level1;
+        virtualModifier= AltGr;
         action= SetGroup(group=+2);
     };
     interpret KP_1+AnyOfOrNone(all) {
@@ -665,14 +656,13 @@ xkb_compatibility "complete" {
         whichModState= locked;
         modifiers= ScrollLock;
     };
-    indicator "Shift Lock" {
-        !allowExplicit;
-        whichModState= locked;
-        modifiers= Shift;
+    indicator "AltGr" {
+	   !allowExplicit;
+       groups = 0x04;
     };
-    indicator "Group 2" {
-        !allowExplicit;
-        groups= 0xfe;
+    indicator "Mode Switch" {
+	   !allowExplicit;
+       groups = 0x02;
     };
     indicator "Mouse Keys" {
         indicatorDrivesKeyboard;
@@ -683,11 +673,12 @@ xkb_compatibility "complete" {
 xkb_symbols "pc+us+us(altgr-intl):2+inet(evdev)" {
 
     name[group1]="English (US)";
-    name[group2]="English (intl., with AltGr dead keys)";
+    name[group2]="Mathematical Symbols";
+    name[group3]="English (intl.)";
 
     key  <ESC> {
         symbols[Group1]= [          Escape,          Escape ],
-        symbols[Group2]= [           U2621,           U2621 ]
+        symbols[Group2]= [          U2621,           U2621 ]
     };
     key <AE01> {
         symbols[Group1]= [               1,          exclam ],
@@ -749,7 +740,7 @@ xkb_symbols "pc+us+us(altgr-intl):2+inet(evdev)" {
         symbols[Group2]= [           U2261,           U223C ],
         symbols[Group3]= [        multiply,        division ]
     };
-    key <BKSP> {         [       BackSpace,       BackSpace ] };
+    key <BKSP> { [       BackSpace] };
     key  <TAB> {         [             Tab,    ISO_Left_Tab ] };
     key <AD01> {
         type[group1]= "ALPHABETIC",
@@ -1079,12 +1070,7 @@ xkb_symbols "pc+us+us(altgr-intl):2+inet(evdev)" {
         type= "PC_ALT_LEVEL2",
         symbols[Group1]= [           Print,         Sys_Req ]
     };
-    key <RALT> {
-        type[group1]= "TWO_LEVEL",
-        type[group2]= "ONE_LEVEL",
-        symbols[Group1]= [     Mode_switch,        NoSymbol ],
-        symbols[Group2]= [        NoSymbol ]
-    };
+    key <RALT> { [     Mode_switch ] };
     key <LNFD> {         [        Linefeed ] };
     key <HOME> {         [            Home ] };
     key   <UP> {
@@ -1122,7 +1108,6 @@ xkb_symbols "pc+us+us(altgr-intl):2+inet(evdev)" {
     key <I129> {         [      KP_Decimal,      KP_Decimal ] };
     key <LWIN> {         [         Super_L ] };
     key <COMP> {
-	    virtualMods= AltGr,
         symbols[Group1]= [ ISO_Level3_Shift,       Multi_key ],
         symbols[Group2]= [            Menu,            Menu ]
     };
@@ -1232,5 +1217,238 @@ xkb_symbols "pc+us+us(altgr-intl):2+inet(evdev)" {
     modifier_map Mod5 { <COMP> };
 };
 
+xkb_geometry "pc(pc105)" {
+
+    width=       292;
+    height=      140;
+
+    alias <AC00> = <CAPS>;
+    alias <AA00> = <LCTL>;
+
+    baseColor=   "white";
+    labelColor=  "black";
+    xfont=       "-*-helvetica-medium-r-normal--*-120-*-*-*-*-iso8859-1";
+    description= "55Y9003 and other Thinkpad Keyboard";
+
+    shape "NORM" {
+        corner= 1,
+        { [  18,  18 ] },
+        { [   2,   1 ], [  16,  16 ] }
+    };
+    shape "BKSP" {
+        corner= 1,
+        { [  38,  18 ] },
+        { [   2,   1 ], [  36,  16 ] }
+    };
+    shape "TABK" {
+        corner= 1,
+        { [  28,  18 ] },
+        { [   2,   1 ], [  26,  16 ] }
+    };
+    shape "BKSL" {
+        corner= 1,
+        { [  28,  18 ] },
+        { [   2,   1 ], [  26,  16 ] }
+    };
+    shape "RTRN" {
+        corner= 1,
+        { [  42,  18 ] },
+        { [   2,   1 ], [  40,  16 ] }
+    };
+    shape "CAPS" {
+        corner= 1,
+        { [  33,  18 ] },
+        { [   2,   1 ], [  31,  16 ] }
+    };
+    shape "LFSH" {
+        corner= 1,
+        { [  43,  18 ] },
+        { [   2,   1 ], [  41,  16 ] }
+    };
+    shape "RTSH" {
+        corner= 1,
+        { [  51,  18 ] },
+        { [   2,   1 ], [  49,  16 ] }
+    };
+    shape "MODK" {
+        corner= 1,
+        { [  24,  18 ] },
+        { [   2,   1 ], [  22,  16 ] }
+    };
+    shape "LSPR" {
+        corner= 1,
+        { [  14,  18 ] },
+        { [   2,   1 ], [  12,  16 ] }
+    };
+    shape "SPCE" {
+        corner= 1,
+        { [ 98,  18 ] },
+        { [   2,   1 ], [ 96,  16 ] }
+    };
+    shape "ESC" {
+        corner= 1,
+        { [ 16,  25 ] },
+        { [   2,   1 ], [ 14,  23 ] }
+    };
+    shape "FNKY" {
+        corner= 1,
+        { [ 16,  12 ] },
+        { [   2,   1 ], [ 14,  10 ] }
+    };
+    shape "ARWK" {
+        corner= 1,
+        { [ 16.3333,  12 ] },
+        { [   2,   1 ], [ 14.3333,  10 ] }
+    };
+    section "Function" {
+        key.color= "white";
+        priority=  7;
+        top=       16;
+        left=      1;
+        width=     351;
+        height=    19;
+		row {
+            key.color= "grey20";
+		    top= -12;
+            left= 1;
+            keys {
+                {  <ESC>,  "ESC",   1 },
+				{ <PRSC>, "FNKY",  148 },
+				{ <SCLK>, "FNKY",   1 },
+				{ <PAUS>, "FNKY",   1 },
+				{  <INS>, "FNKY",   1 },
+                { <DELE>, "ESC",    4 },
+				{ <HOME>, "FNKY",   1 },
+				{ <PGUP>, "FNKY",   1 }
+			};
+		};
+        row {
+            top=  1;
+            left= 1;
+            keys {
+                { <FK01>, "FNKY",  22 },
+                { <FK02>, "FNKY",   1 },
+                { <FK03>, "FNKY",   1 },
+                { <FK04>, "FNKY",   1 },
+                { <FK05>, "FNKY",   4.5 },
+                { <FK06>, "FNKY",   1 },
+                { <FK07>, "FNKY",   1 },
+                { <FK08>, "FNKY",   1 },
+                { <FK09>, "FNKY",   4.5 },
+                { <FK10>, "FNKY",   1 },
+                { <FK11>, "FNKY",   1 },
+                { <FK12>, "FNKY",   1 },
+                { <END>,  "FNKY",  21, color="grey20" },
+                { <PGDN>, "FNKY",   1, color="grey20" }
+            };
+        };
+    }; // End of "Function" section
+
+    section "Alpha" {
+        key.color= "white";
+        priority=  8;
+        top=       30;
+        left=      1;
+        width=     287;
+        height=    95;
+        row {
+            top=  1;
+            left= 1;
+            keys {
+                { <TLDE>, "NORM",   1 }, { <AE01>, "NORM",   1 },
+                { <AE02>, "NORM",   1 }, { <AE03>, "NORM",   1 },
+                { <AE04>, "NORM",   1 }, { <AE05>, "NORM",   1 },
+                { <AE06>, "NORM",   1 }, { <AE07>, "NORM",   1 },
+                { <AE08>, "NORM",   1 }, { <AE09>, "NORM",   1 },
+                { <AE10>, "NORM",   1 }, { <AE11>, "NORM",   1 },
+                { <AE12>, "NORM",   1 },
+                { <BKSP>, "BKSP",   1, color="grey20" }
+            };
+        };
+        row {
+            top=  20;
+            left= 1;
+            keys {
+                {  <TAB>, "TABK",   1, color="grey20" },
+                { <AD01>, "NORM",   1 }, { <AD02>, "NORM",   1 },
+                { <AD03>, "NORM",   1 }, { <AD04>, "NORM",   1 },
+                { <AD05>, "NORM",   1 }, { <AD06>, "NORM",   1 },
+                { <AD07>, "NORM",   1 }, { <AD08>, "NORM",   1 },
+                { <AD09>, "NORM",   1 }, { <AD10>, "NORM",   1 },
+                { <AD11>, "NORM",   1 }, { <AD12>, "NORM",   1 },
+                { <BKSL>, "BKSL",   1 }
+            };
+        };
+        row {
+            top=  39;
+            left= 1;
+            keys {
+                { <CAPS>, "CAPS",   1, color="grey20" },
+                { <AC01>, "NORM",   1 }, { <AC02>, "NORM",   1 },
+                { <AC03>, "NORM",   1 }, { <AC04>, "NORM",   1 },
+                { <AC05>, "NORM",   1 }, { <AC06>, "NORM",   1 },
+                { <AC07>, "NORM",   1 }, { <AC08>, "NORM",   1 },
+                { <AC09>, "NORM",   1 }, { <AC10>, "NORM",   1 },
+                { <AC11>, "NORM",   1 },
+				{ <RTRN>, "RTRN",   1, color="grey20" }
+            };
+        };
+        row {
+            top=  58;
+            left= 1;
+            keys {
+                { <LFSH>, "LFSH",   1, color="grey20" },
+                { <AB01>, "NORM",   1 },
+                { <AB02>, "NORM",   1 }, { <AB03>, "NORM",   1 },
+                { <AB04>, "NORM",   1 }, { <AB05>, "NORM",   1 },
+                { <AB06>, "NORM",   1 }, { <AB07>, "NORM",   1 },
+                { <AB08>, "NORM",   1 }, { <AB09>, "NORM",   1 },
+                { <AB10>, "NORM",   1 },
+                { <RTSH>, "RTSH",   1, color="grey20" }
+            };
+        };
+        row {
+            top=  77;
+            left= 1;
+            keys {
+			    { <FN>, "NORM", 1, color="grey20" },
+                { <LCTL>, "MODK",   1, color="grey20" },
+                { <LWIN>, "LSPR",   1, color="grey20" },
+                { <LALT>, "NORM",   1, color="grey20" },
+                { <SPCE>, "SPCE",   1 },
+                { <RALT>, "NORM",   1, color="grey20" },
+                { <MENU>, "NORM",   1, color="grey20" },
+                { <RCTL>, "NORM",   1, color="grey20" }
+            };
+        };
+        row {
+            key.color= "grey20";
+            top=  77;
+            left= 253;
+            keys {
+                {   <UP>, "ARWK",   1 }
+            };
+        };
+        row {
+            key.color= "grey20";
+            top=  90;
+            left= 236;
+            keys {
+                { <LEFT>, "ARWK",   1 }, { <DOWN>, "ARWK",   1 },
+                { <RGHT>, "ARWK",   1 }
+            };
+        };
+    }; // End of "Alpha" section
+	
+	shape "STIK" { cornerRadius = 3.5, { [7, 7] } };
+    solid "STIK" {
+      priority = 255;
+	  color = "red";
+	  shape = "STIK";
+	  top = 83;
+	  left = 128.5;
+	};
+													
+};
 
 };
