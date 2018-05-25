@@ -1,5 +1,5 @@
 xkb_keymap {
-xkb_keycodes "evdev+aliases(qwerty)" {
+xkb_keycodes "55y9003" {
     minimum = 8;
     maximum = 255;
      <ESC> = 9;
@@ -209,13 +209,18 @@ xkb_keycodes "evdev+aliases(qwerty)" {
     <I246> = 246;
     <I254> = 254;
     <I255> = 255;
-    indicator 1 = "Caps Lock";
-    indicator 2 = "Num Lock";
-    indicator 3 = "Scroll Lock";
-    indicator 4 = "Compose";
-    virtual indicator 5 = "AltGr";
-    virtual indicator 6 = "Mode Switch";
-    virtual indicator 7 = "Mouse Keys";
+    virtual indicator 1 = "AltGr";
+    virtual indicator 2 = "Mode Switch";
+    virtual indicator 3 = "Scroll Lock";
+    virtual indicator 4 = "Compose";
+    virtual indicator 5 = "Num Lock";
+    //indicator 1 = "Caps Lock";
+    //indicator 2 = "Num Lock";
+    //indicator 3 = "Scroll Lock";
+    //indicator 4 = "Compose";
+    //virtual indicator 5 = "AltGr";
+    //virtual indicator 6 = "Mode Switch";
+    //virtual indicator 7 = "Mouse Keys";
     alias <AC12> = <BKSL>;
     alias <MENU> = <COMP>;
     alias <HZTG> = <TLDE>;
@@ -249,7 +254,7 @@ xkb_keycodes "evdev+aliases(qwerty)" {
     alias <LatM> = <AB07>;
 };
 
-xkb_types "complete" {
+xkb_types "55y9003" {
 
     virtual_modifiers NumLock,Alt,LevelThree,LAlt,RAlt,RControl,LControl,ScrollLock,AltGr,Meta,Super;
 
@@ -289,6 +294,12 @@ xkb_types "complete" {
         level_name[Level1]= "Base";
         level_name[Level2]= "Alt";
     };
+    type "PC_SUPER_LEVEL2" {
+        modifiers= Super;
+        map[Super]= Level2;
+        level_name[Level1]= "Base";
+        level_name[Level2]= "Super";
+    };
     type "CTRL+ALT" {
         modifiers= Shift+Control+Alt+LevelThree;
         map[Shift]= Level2;
@@ -305,23 +316,15 @@ xkb_types "complete" {
     };
 };
 
-xkb_compatibility "complete" {
+xkb_compatibility "55y9003" {
 
     virtual_modifiers NumLock,Alt,LevelThree,LAlt,RAlt,RControl,LControl,ScrollLock,AltGr,Meta,Super;
 
     interpret.useModMapMods= AnyLevel;
     interpret.repeat= False;
     interpret.locking= False;
-    interpret ISO_Level2_Latch+Exactly(Shift) {
-        useModMapMods=level1;
-        action= LatchMods(modifiers=Shift,clearLocks,latchToLock);
-    };
     interpret Shift_Lock+AnyOf(Shift+Lock) {
         action= LockMods(modifiers=Shift);
-    };
-    interpret Num_Lock+AnyOf(all) {
-        virtualModifier= NumLock;
-        action= LockMods(modifiers=NumLock);
     };
     interpret Alt_L+AnyOf(all) {
         virtualModifier= Alt;
@@ -339,15 +342,23 @@ xkb_compatibility "complete" {
         virtualModifier= Super;
         action= SetMods(modifiers=modMapMods,clearLocks);
     };
-    interpret Scroll_Lock+AnyOf(all) {
+    interpret Scroll_Lock+NoneOf(mod4) {
         virtualModifier= ScrollLock;
+        action= LockMods(modifiers=ScrollLock);
+    };
+    interpret Num_Lock+AnyOf(all) {
+        virtualModifier= NumLock;
         action= LockMods(modifiers=modMapMods);
     };
     interpret Mode_switch+AnyOfOrNone(all) {
         virtualModifier= LevelThree;
         action= SetGroup(group=+1);
     };
-    interpret ISO_Level3_Shift+AnyOf(all) {
+    interpret ISO_Level3_Latch+NoneOf(shift) {
+        virtualModifier= AltGr;
+        action= LatchGroup(group=+2);
+    };
+    interpret ISO_Level3_Shift+NoneOf(shift) {
         virtualModifier= AltGr;
         action= SetGroup(group=+2);
     };
@@ -670,7 +681,7 @@ xkb_compatibility "complete" {
     };
 };
 
-xkb_symbols "pc+us+us(altgr-intl):2+inet(evdev)" {
+xkb_symbols "us+math+us(altgr-intl)" {
 
     name[group1]="English (US)";
     name[group2]="Mathematical Symbols";
@@ -983,56 +994,62 @@ xkb_symbols "pc+us+us(altgr-intl):2+inet(evdev)" {
     key <CAPS> {         [       Control_L ] };
     key <FK01> {
         type[group1]= "CTRL+ALT",
-        symbols[Group1]= [              F1,              F1,        NoSymbol,        NoSymbol,        NoSymbol ],
+        symbols[Group1]= [              F1,              F1,        NoSymbol,        NoSymbol,        XF86Switch_VT_1 ],
         symbols[Group2]= [           U2460,           U2460 ]
     };
     key <FK02> {
         type[group1]= "CTRL+ALT",
-        symbols[Group1]= [              F2,              F2,        NoSymbol,        NoSymbol,        NoSymbol ],
+        symbols[Group1]= [              F2,              F2,        NoSymbol,        NoSymbol,        XF86Switch_VT_2 ],
         symbols[Group2]= [           U2461,           U2461 ]
     };
     key <FK03> {
         type[group1]= "CTRL+ALT",
-        symbols[Group1]= [              F3,              F3,        NoSymbol,        NoSymbol,        NoSymbol ],
+        symbols[Group1]= [              F3,              F3,        NoSymbol,        NoSymbol,        XF86Switch_VT_3 ],
         symbols[Group2]= [           U2462,           U2462 ]
     };
     key <FK04> {
         type[group1]= "CTRL+ALT",
-        symbols[Group1]= [              F4,              F4,        NoSymbol,        NoSymbol,        NoSymbol ],
+        symbols[Group1]= [              F4,              F4,        NoSymbol,        NoSymbol,        XF86Switch_VT_4 ],
         symbols[Group2]= [           U2463,           U2463 ]
     };
     key <FK05> {
         type[group1]= "CTRL+ALT",
-        symbols[Group1]= [              F5,              F5,        NoSymbol,        NoSymbol,        NoSymbol ],
+        symbols[Group1]= [              F5,              F5,        NoSymbol,        NoSymbol,        XF86Switch_VT_5 ],
         symbols[Group2]= [           U2464,           U2464 ]
     };
     key <FK06> {
         type[group1]= "CTRL+ALT",
-        symbols[Group1]= [              F6,              F6,        NoSymbol,        NoSymbol,        NoSymbol ],
+        symbols[Group1]= [              F6,              F6,        NoSymbol,        NoSymbol,        XF86Switch_VT_6 ],
         symbols[Group2]= [           U2465,           U2465 ]
     };
     key <FK07> {
         type[group1]= "CTRL+ALT",
-        symbols[Group1]= [              F7,              F7,        NoSymbol,        NoSymbol,        NoSymbol ],
+        symbols[Group1]= [              F7,              F7,        NoSymbol,        NoSymbol,        XF86Switch_VT_7 ],
         symbols[Group2]= [           U2466,           U2466 ]
     };
     key <FK08> {
         type[group1]= "CTRL+ALT",
-        symbols[Group1]= [              F8,              F8,        NoSymbol,        NoSymbol,        NoSymbol ],
+        symbols[Group1]= [              F8,              F8,        NoSymbol,        NoSymbol,        XF86Switch_VT_8 ],
         symbols[Group2]= [           U2467,           U2467 ]
     };
     key <FK09> {
         type[group1]= "CTRL+ALT",
-        symbols[Group1]= [              F9,              F9,        NoSymbol,        NoSymbol,        NoSymbol ],
+        symbols[Group1]= [              F9,              F9,        NoSymbol,        NoSymbol,        XF86Switch_VT_9 ],
         symbols[Group2]= [           U2468,           U2468 ]
     };
     key <FK10> {
         type[group1]= "CTRL+ALT",
-        symbols[Group1]= [             F10,             F10,        NoSymbol,        NoSymbol,        NoSymbol ],
+        symbols[Group1]= [             F10,             F10,        NoSymbol,        NoSymbol,        XF86Switch_VT_10 ],
         symbols[Group2]= [           U2469,           U2469 ]
     };
-    key <NMLK> {         [        Num_Lock ] };
-    key <SCLK> {         [     Scroll_Lock ] };
+    key <SCLK> {
+	    type= "PC_SUPER_LEVEL2",
+		symbols[Group1]= [     Scroll_Lock, Num_Lock ]
+	};
+    key <NMLK> {
+	    type= "PC_SUPER_LEVEL2",
+		symbols[Group1]= [     Scroll_Lock, Num_Lock ]
+	};
     key  <KP7> {         [            KP_7 ] };
     key  <KP8> {         [            KP_8 ] };
     key  <KP9> {         [            KP_9 ] };
@@ -1069,6 +1086,10 @@ xkb_symbols "pc+us+us(altgr-intl):2+inet(evdev)" {
     key <PRSC> {
         type= "PC_ALT_LEVEL2",
         symbols[Group1]= [           Print,         Sys_Req ]
+    };
+    key <COMP> {
+        symbols[Group1]= [ ISO_Level3_Shift,       Multi_key ],
+        symbols[Group2]= [            Menu,            Menu ]
     };
     key <RALT> { [     Mode_switch ] };
     key <LNFD> {         [        Linefeed ] };
@@ -1107,10 +1128,6 @@ xkb_symbols "pc+us+us(altgr-intl):2+inet(evdev)" {
     key <I128> {         [     XF86LaunchA ] };
     key <I129> {         [      KP_Decimal,      KP_Decimal ] };
     key <LWIN> {         [         Super_L ] };
-    key <COMP> {
-        symbols[Group1]= [ ISO_Level3_Shift,       Multi_key ],
-        symbols[Group2]= [            Menu,            Menu ]
-    };
     key <STOP> {         [          Cancel ] };
     key <AGAI> {         [            Redo ] };
     key <PROP> {         [        SunProps ] };
@@ -1215,9 +1232,10 @@ xkb_symbols "pc+us+us(altgr-intl):2+inet(evdev)" {
     modifier_map Mod3 { <RALT> };
     modifier_map Mod4 { <LWIN> };
     modifier_map Mod5 { <COMP> };
+    modifier_map Mod2 { <SCLK> };
 };
 
-xkb_geometry "pc(pc105)" {
+xkb_geometry "55y9003" {
 
     width=       292;
     height=      140;
