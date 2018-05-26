@@ -3,4 +3,5 @@ kbtable-blk.*
 *.aux
 *.log
 wingding.ttf
+indicator/indicator-xkbmod
 
