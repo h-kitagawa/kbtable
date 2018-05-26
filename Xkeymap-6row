@@ -751,7 +751,11 @@ xkb_symbols "us+math+us(altgr-intl)" {
         symbols[Group2]= [           U2261,           U223C ],
         symbols[Group3]= [        multiply,        division ]
     };
-    key <BKSP> { [       BackSpace] };
+    key <BKSP> {
+        type= "CTRL+ALT",
+        symbols[Group1]= [       BackSpace,       BackSpace,
+                BackSpace,       BackSpace, Terminate_Server ]
+    };
     key  <TAB> {         [             Tab,    ISO_Left_Tab ] };
     key <AD01> {
         type[group1]= "ALPHABETIC",
