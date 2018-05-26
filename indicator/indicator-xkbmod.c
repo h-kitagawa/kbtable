@@ -69,8 +69,8 @@ int main (int argc, char **argv) {
   XColor c_altgr, c_switch, c_bk, cexact; Colormap cmap;
   cmap = DefaultColormap(dpy, 0);
   XAllocNamedColor(dpy, cmap, "Gold", &c_bk, &cexact); val_ledon.foreground = c_bk.pixel;
-  XAllocNamedColor(dpy, cmap, "rgb:00/C0/C0", &c_altgr, &cexact); val_altgr.foreground = c_altgr.pixel;
-  XAllocNamedColor(dpy, cmap, "rgb:00/C0/00", &c_switch, &cexact); val_switch.foreground = c_switch.pixel;
+  XAllocNamedColor(dpy, cmap, "rgb:00/E0/E0", &c_altgr, &cexact); val_altgr.foreground = c_altgr.pixel;
+  XAllocNamedColor(dpy, cmap, "rgb:00/E0/00", &c_switch, &cexact); val_switch.foreground = c_switch.pixel;
 
   GC gc_altgr, gc_switch;
   gc_ledon = XCreateGC(dpy, win, GCForeground, &val_ledon);
