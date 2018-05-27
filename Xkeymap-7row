@@ -275,6 +275,25 @@ xkb_types "55y9003" {
         level_name[Level1]= "Base";
         level_name[Level2]= "Caps";
     };
+    type "ALPHABETIC+NUMPAD" {
+        modifiers= Shift+Lock+NumLock;
+        map[Shift]= Level2;
+        map[Lock]= Level2;
+        map[NumLock]= Level3;
+        map[Shift+NumLock]=Level3;
+        level_name[Level1]= "Base";
+        level_name[Level2]= "Caps";
+        level_name[Level3]= "Keypad";
+    };
+    type "TWO_LEVEL+NUMPAD" {
+        modifiers= NumLock;
+        map[Shift]= Level2;
+        map[NumLock]= Level3;
+        map[Shift+NumLock]=Level3;
+        level_name[Level1]= "Base";
+        level_name[Level2]= "Shift";
+        level_name[Level3]= "Keypad";
+    };
     type "KEYPAD" {
         modifiers= Shift+NumLock;
         map[Shift]= Level2;
@@ -342,25 +361,25 @@ xkb_compatibility "55y9003" {
         virtualModifier= Super;
         action= SetMods(modifiers=modMapMods,clearLocks);
     };
-    interpret Scroll_Lock+NoneOf(mod4) {
+    interpret Scroll_Lock+AnyOf(all) {
         virtualModifier= ScrollLock;
         action= LockMods(modifiers=ScrollLock);
     };
     interpret Num_Lock+AnyOf(all) {
         virtualModifier= NumLock;
-        action= LockMods(modifiers=modMapMods);
+        action= LockMods(modifiers=NumLock);
     };
-    interpret Mode_switch+AnyOfOrNone(all) {
+    interpret Mode_switch+AnyOf(all) {
         virtualModifier= LevelThree;
-        action= SetGroup(group=+1);
+        action= SetGroup(group=2);
     };
     interpret ISO_Level3_Latch+AnyOf(all) {
         virtualModifier= AltGr;
-        action= LatchGroup(group=+2);
+        action= LatchGroup(group=3);
     };
     interpret ISO_Level3_Shift+AnyOf(all) {
         virtualModifier= AltGr;
-        action= SetGroup(group=+2);
+        action= SetGroup(group=3);
     };
     interpret KP_1+AnyOfOrNone(all) {
         repeat= True;
@@ -659,20 +678,16 @@ xkb_compatibility "55y9003" {
         modifiers= Lock;
     };
     indicator "Num Lock" {
-        !allowExplicit;
+       !allowExplicit;
         whichModState= locked;
         modifiers= NumLock;
-    };
-    indicator "Scroll Lock" {
-        whichModState= locked;
-        modifiers= ScrollLock;
     };
     indicator "AltGr" {
 	   !allowExplicit;
        groups = 0x04;
     };
     indicator "Mode Switch" {
-	   !allowExplicit;
+       !allowExplicit;
        groups = 0x02;
     };
     indicator "Mouse Keys" {
@@ -694,17 +709,17 @@ xkb_symbols "us+math+us(altgr-intl)" {
     key <AE01> {
         symbols[Group1]= [               1,          exclam ],
         symbols[Group2]= [         notsign,           U25B3 ],
-		symbols[Group3]= [      exclamdown,     onesuperior ]
+        symbols[Group3]= [      exclamdown,     onesuperior ]
     };
     key <AE02> {
         symbols[Group1]= [               2,              at ],
         symbols[Group2]= [        emptyset,           U2286 ],
-		symbols[Group3]= [     twosuperior,      dead_breve ]
+        symbols[Group3]= [     twosuperior,      dead_breve ]
     };
     key <AE03> {
         symbols[Group1]= [               3,      numbersign ],
         symbols[Group2]= [           U223D,           U2220 ],
-		symbols[Group3]= [   threesuperior, dead_doubleacute ]
+        symbols[Group3]= [   threesuperior, dead_doubleacute ]
     };
     key <AE04> {
         symbols[Group1]= [               4,          dollar],
@@ -714,37 +729,41 @@ xkb_symbols "us+math+us(altgr-intl)" {
     key <AE05> {
         symbols[Group1]= [               5,         percent ],
         symbols[Group2]= [           U2030,           U2030 ],
-		symbols[Group3]= [           U20AC,  dead_abovering ]
+        symbols[Group3]= [           U20AC,  dead_abovering ]
     };
     key <AE06> {
         symbols[Group1]= [               6,     asciicircum ],
         symbols[Group2]= [           U2228,           U222A ],
-		symbols[Group3]= [      onequarter, dead_circumflex ]
+        symbols[Group3]= [      onequarter, dead_circumflex ]
     };
     key <AE07> {
-        symbols[Group1]= [               7,       ampersand ],
+        type[Group1]="ALPHABETIC+NUMPAD",
+        symbols[Group1]= [               7,       ampersand, KP_7 ],
         symbols[Group2]= [           U2227,           U2229 ],
-		symbols[Group3]= [         onehalf,      dead_caron ]
+        symbols[Group3]= [         onehalf,      dead_caron ]
     };
     key <AE08> {
-        symbols[Group1]= [               8,        asterisk ],
+        type[Group1]="ALPHABETIC+NUMPAD",
+        symbols[Group1]= [               8,        asterisk, KP_8 ],
         symbols[Group2]= [           U2135,           U2135 ],
-		symbols[Group3]= [   threequarters,     dead_ogonek ]
+        symbols[Group3]= [   threequarters,     dead_ogonek ]
     };
     key <AE09> {
-        symbols[Group1]= [               9,       parenleft ],
+        type[Group1]="ALPHABETIC+NUMPAD",
+        symbols[Group1]= [               9,       parenleft, KP_9 ],
         symbols[Group2]= [           U2308,           U230A ],
-		symbols[Group3]= [           U2018,   dead_abovedot ]
+        symbols[Group3]= [           U2018,   dead_abovedot ]
     };
     key <AE10> {
-        symbols[Group1]= [               0,      parenright ],
+        type[Group1]="ALPHABETIC+NUMPAD",
+        symbols[Group1]= [               0,      parenright, KP_Divide ],
         symbols[Group2]= [           U2309,           U230B ],
-		symbols[Group3]= [           U2019,   dead_belowdot ]
+        symbols[Group3]= [           U2019,   dead_belowdot ]
     };
     key <AE11> {
         symbols[Group1]= [           minus,      underscore ],
         symbols[Group2]= [           U2245,           U2243 ],
-		symbols[Group3]= [             yen,     dead_macron ]
+        symbols[Group3]= [             yen,     dead_macron ]
     };
     key <AE12> {
         symbols[Group1]= [           equal,            plus ],
@@ -762,7 +781,7 @@ xkb_symbols "us+math+us(altgr-intl)" {
         type[group3]= "ALPHABETIC",
         symbols[Group1]= [               q,               Q ],
         symbols[Group2]= [           U2282,           U211A ],
-		symbols[Group3]= [      adiaeresis,      Adiaeresis ]
+        symbols[Group3]= [      adiaeresis,      Adiaeresis ]
     };
     key <AD02> {
         type[group1]= "ALPHABETIC",
@@ -770,28 +789,28 @@ xkb_symbols "us+math+us(altgr-intl)" {
         type[group3]= "ALPHABETIC",
         symbols[Group1]= [               w,               W ],
         symbols[Group2]= [     Greek_omega,     Greek_OMEGA ],
-		symbols[Group3]= [           aring,           Aring ]
+        symbols[Group3]= [           aring,           Aring ]
     };
     key <AD03> {
         type[group1]= "ALPHABETIC",
         type[group3]= "ALPHABETIC",
         symbols[Group1]= [               e,               E ],
         symbols[Group2]= [   Greek_epsilon,           U2203 ],
-		symbols[Group3]= [          eacute,          Eacute ]
+        symbols[Group3]= [          eacute,          Eacute ]
     };
     key <AD04> {
         type[group1]= "ALPHABETIC",
         type[group3]= "ALPHABETIC",
         symbols[Group1]= [               r,               R ],
         symbols[Group2]= [       Greek_rho,           U211D ],
-		symbols[Group3]= [      registered,      registered ]
+        symbols[Group3]= [      registered,      registered ]
     };
     key <AD05> {
         type[group1]= "ALPHABETIC",
         type[group3]= "ALPHABETIC",
         symbols[Group1]= [               t,               T ],
         symbols[Group2]= [       Greek_tau,           U22A4 ],
-		symbols[Group3]= [           thorn,           THORN ]
+        symbols[Group3]= [           thorn,           THORN ]
     };
     key <AD06> {
         type[group1]= "ALPHABETIC",
@@ -799,47 +818,47 @@ xkb_symbols "us+math+us(altgr-intl)" {
         type[group3]= "ALPHABETIC",
         symbols[Group1]= [               y,               Y ],
         symbols[Group2]= [       Greek_eta,       Greek_ETA ],
-		symbols[Group3]= [      udiaeresis,      Udiaeresis ]
+        symbols[Group3]= [      udiaeresis,      Udiaeresis ]
     };
     key <AD07> {
-        type[group1]= "ALPHABETIC",
+        type[group1]= "ALPHABETIC+NUMPAD",
         type[group2]= "ALPHABETIC",
         type[group3]= "ALPHABETIC",
-        symbols[Group1]= [               u,               U ],
+        symbols[Group1]= [               u,               U, KP_4 ],
         symbols[Group2]= [   Greek_upsilon,   Greek_UPSILON ],
-		symbols[Group3]= [          uacute,          Uacute ]
+        symbols[Group3]= [          uacute,          Uacute ]
     };
     key <AD08> {
-        type[group1]= "ALPHABETIC",
+        type[group1]= "ALPHABETIC+NUMPAD",
         type[group3]= "ALPHABETIC",
-        symbols[Group1]= [               i,               I ],
+        symbols[Group1]= [               i,               I, KP_5 ],
         symbols[Group2]= [      Greek_iota,       elementof ],
-		symbols[Group3]= [          iacute,          Iacute ]
+        symbols[Group3]= [          iacute,          Iacute ]
     };
     key <AD09> {
-        type[group1]= "ALPHABETIC",
+        type[group1]= "ALPHABETIC+NUMPAD",
         type[group3]= "ALPHABETIC",
-        symbols[Group1]= [               o,               O ],
+        symbols[Group1]= [               o,               O, KP_6 ],
         symbols[Group2]= [   Greek_omicron,    notelementof ],
-		symbols[Group3]= [          oacute,          Oacute ]
+        symbols[Group3]= [          oacute,          Oacute ]
     };
     key <AD10> {
-        type[group1]= "ALPHABETIC",
+        type[group1]= "ALPHABETIC+NUMPAD",
         type[group2]= "ALPHABETIC",
         type[group3]= "ALPHABETIC",
-        symbols[Group1]= [               p,               P ],
+        symbols[Group1]= [               p,               P, KP_Multiply ],
         symbols[Group2]= [        Greek_pi,        Greek_PI ],
-		symbols[Group3]= [      odiaeresis,      Odiaeresis ]
+        symbols[Group3]= [      odiaeresis,      Odiaeresis ]
     };
     key <AD11> {
         symbols[Group1]= [     bracketleft,       braceleft ],
         symbols[Group2]= [           U27E8,           U27E6 ],
-		symbols[Group3]= [ guillemotleft, leftdoublequotemark ]
+        symbols[Group3]= [ guillemotleft, leftdoublequotemark ]
     };
     key <AD12> {
         symbols[Group1]= [    bracketright,      braceright ],
         symbols[Group2]= [           U27E9,           U27E7 ],
-		symbols[Group3]= [ guillemotright, rightdoublequotemark ]
+        symbols[Group3]= [ guillemotright, rightdoublequotemark ]
     };
     key <RTRN> {         [          Return ] };
     key <LCTL> {         [       Control_L ] };
@@ -848,14 +867,14 @@ xkb_symbols "us+math+us(altgr-intl)" {
         type[group3]= "ALPHABETIC",
         symbols[Group1]= [               a,               A ],
         symbols[Group2]= [     Greek_alpha,           U2200 ],
-		symbols[Group3]= [          aacute,          Aacute ]
+        symbols[Group3]= [          aacute,          Aacute ]
     };
     key <AC02> {
         type[group1]= "ALPHABETIC",
         type[group2]= "ALPHABETIC",
         symbols[Group1]= [               s,               S ],
         symbols[Group2]= [     Greek_sigma,     Greek_SIGMA ],
-		symbols[Group3]= [          ssharp,         section ]
+        symbols[Group3]= [          ssharp,         section ]
     };
     key <AC03> {
         type[group1]= "ALPHABETIC",
@@ -863,7 +882,7 @@ xkb_symbols "us+math+us(altgr-intl)" {
         type[group3]= "ALPHABETIC",
         symbols[Group1]= [               d,               D ],
         symbols[Group2]= [     Greek_delta,     Greek_DELTA ],
-		symbols[Group3]= [             eth,             ETH ]
+        symbols[Group3]= [             eth,             ETH ]
     };
     key <AC04> {
         type[group1]= "ALPHABETIC",
@@ -871,7 +890,7 @@ xkb_symbols "us+math+us(altgr-intl)" {
         type[group3]= "ALPHABETIC",
         symbols[Group1]= [               f,               F ],
         symbols[Group2]= [           U03C6,       Greek_PHI ],
-		symbols[Group3]= [           U03D5,       Greek_PHI ]
+        symbols[Group3]= [           U03D5,       Greek_PHI ]
     };
     key <AC05> {
         type[group1]= "ALPHABETIC",
@@ -886,67 +905,68 @@ xkb_symbols "us+math+us(altgr-intl)" {
         symbols[Group2]= [     Greek_theta,     Greek_THETA ]
     };
     key <AC07> {
-        type[group1]= "ALPHABETIC",
-        symbols[Group1]= [               j,               J ],
+        type[group1]= "ALPHABETIC+NUMPAD",
+        symbols[Group1]= [               j,               J, KP_1 ],
         symbols[Group2]= [           U22A6,           U22A9 ],
-		symbols[Group3]= [      squareroot,      squareroot ]
+        symbols[Group3]= [      squareroot,      squareroot ]
     };
     key <AC08> {
-        type[group1]= "ALPHABETIC",
+        type[group1]= "ALPHABETIC+NUMPAD",
         type[group2]= "ALPHABETIC",
         type[group3]= "ALPHABETIC",
-        symbols[Group1]= [               k,               K ],
+        symbols[Group1]= [               k,               K, KP_2 ],
         symbols[Group2]= [     Greek_kappa,     Greek_KAPPA ],
-		symbols[Group3]= [              oe,              OE ]
+        symbols[Group3]= [              oe,              OE ]
     };
     key <AC09> {
-        type[group1]= "ALPHABETIC",
+        type[group1]= "ALPHABETIC+NUMPAD",
         type[group2]= "ALPHABETIC",
         type[group3]= "ALPHABETIC",
-        symbols[Group1]= [               l,               L ],
+        symbols[Group1]= [               l,               L, KP_3 ],
         symbols[Group2]= [     Greek_lamda,     Greek_LAMDA ],
-		symbols[Group3]= [          oslash,          Oslash ]
+        symbols[Group3]= [          oslash,          Oslash ]
     };
     key <AC10> {
-        symbols[Group1]= [       semicolon,           colon ],
+        type[Group1]="TWO_LEVEL+NUMPAD",
+        symbols[Group1]= [       semicolon,           colon, KP_Subtract ],
         symbols[Group2]= [           U2234,         because ],
-		symbols[Group3]= [       paragraph,          degree ]
+        symbols[Group3]= [       paragraph,          degree ]
     };
     key <AC11> {
         symbols[Group1]= [      apostrophe,        quotedbl ],
         symbols[Group2]= [       plusminus,           U2213 ],
-		symbols[Group3]= [      dead_acute,  dead_diaeresis ]
+        symbols[Group3]= [      dead_acute,  dead_diaeresis ]
     };
     key <TLDE> {
         symbols[Group1]= [           grave,      asciitilde ],
         symbols[Group2]= [           U2260,           U2252 ],
-		symbols[Group3]= [      dead_grave,      dead_tilde ]
+        symbols[Group3]= [      dead_grave,      dead_tilde ]
     };
     key <LFSH> {         [         Shift_L ] };
     key <BKSL> {
         symbols[Group1]= [       backslash,             bar ],
         symbols[Group2]= [           U2016,           U2423 ],
-		symbols[Group3]= [         notsign,       brokenbar ]
+        symbols[Group3]= [         notsign,       brokenbar ]
     };
     key <AB01> {
         type[group1]= "ALPHABETIC",
         type[group3]= "ALPHABETIC",
         symbols[Group1]= [               z,               Z ],
         symbols[Group2]= [      Greek_zeta,           U2124 ],
-		symbols[Group3]= [              ae,              AE ]
+        symbols[Group3]= [              ae,              AE ]
     };
     key <AB02> {
         type[group1]= "ALPHABETIC",
         type[group2]= "ALPHABETIC",
         symbols[Group1]= [               x,               X ],
         symbols[Group2]= [        Greek_xi,        Greek_XI ],
-		symbols[Group3]= [           U03F5,  periodcentered ]
+        symbols[Group3]= [           U03F5,  periodcentered ]
     };
     key <AB03> {
         type[group1]= "ALPHABETIC",
         symbols[Group1]= [               c,               C ],
         symbols[Group2]= [       Greek_chi,           U2102 ],
-		symbols[Group3]= [       copyright,            cent ]
+        symbols[Group3]= [       copyright,            cent ]
     };
     key <AB04> {
         type[group1]= "ALPHABETIC",
@@ -964,29 +984,31 @@ xkb_symbols "us+math+us(altgr-intl)" {
         type[group3]= "ALPHABETIC",
         symbols[Group1]= [               n,               N ],
         symbols[Group2]= [        Greek_nu,           U2115 ],
-		symbols[Group3]= [          ntilde,          Ntilde ]
+        symbols[Group3]= [          ntilde,          Ntilde ]
     };
     key <AB07> {
-        type[group1]= "ALPHABETIC",
-        symbols[Group1]= [               m,               M ],
+        type[group1]= "ALPHABETIC+NUMPAD",
+        symbols[Group1]= [               m,               M, KP_0 ],
         symbols[Group2]= [        Greek_mu,           U22A7 ],
-		symbols[Group3]= [              mu,              mu ]
+        symbols[Group3]= [              mu,              mu ]
     };
     key <AB08> {
-        type[group3]= "ALPHABETIC",
+        type[group3]= "TWO_LEVEL",
         symbols[Group1]= [           comma,            less ],
         symbols[Group2]= [           U2264,           U2266 ],
         symbols[Group3]= [        ccedilla,        Ccedilla ]
     };
     key <AB09> {
-        symbols[Group1]= [          period,         greater ],
+        type[Group1]="TWO_LEVEL+NUMPAD",
+        symbols[Group1]= [          period,         greater, KP_Decimal ],
         symbols[Group2]= [           U2265,           U2267 ],
-		symbols[Group3]= [          period,    dead_cedilla ]
+        symbols[Group3]= [          period,    dead_cedilla ]
     };
     key <AB10> {
-        symbols[Group1]= [           slash,        question ],
+        type[Group1]="TWO_LEVEL+NUMPAD",
+        symbols[Group1]= [           slash,        question, KP_Add ],
         symbols[Group2]= [           U2194,           U21D4 ],
-		symbols[Group3]= [    questiondown,     dead_stroke ]
+        symbols[Group3]= [    questiondown,     dead_stroke ]
     };
     key <RTSH> {         [         Shift_R ] };
     key <KPMU> {
@@ -1046,14 +1068,8 @@ xkb_symbols "us+math+us(altgr-intl)" {
         symbols[Group1]= [             F10,             F10,        NoSymbol,        NoSymbol,        XF86Switch_VT_10 ],
         symbols[Group2]= [           U2469,           U2469 ]
     };
-    key <SCLK> {
-	    type= "PC_SUPER_LEVEL2",
-		symbols[Group1]= [     Scroll_Lock, Num_Lock ]
-	};
-    key <NMLK> {
-	    type= "PC_SUPER_LEVEL2",
-		symbols[Group1]= [     Scroll_Lock, Num_Lock ]
-	};
+    key <SCLK> {         [ Num_Lock ] };
+    key <NMLK> {         [ Num_Lock ] };
     key  <KP7> {         [            KP_7 ] };
     key  <KP8> {         [            KP_8 ] };
     key  <KP9> {         [            KP_9 ] };
@@ -1329,21 +1345,21 @@ xkb_geometry "55y9003" {
         left=      1;
         width=     351;
         height=    19;
-		row {
+        row {
             key.color= "grey20";
-		    top= -12;
+            top= -12;
             left= 1;
             keys {
                 {  <ESC>,  "ESC",   1 },
-				{ <PRSC>, "FNKY",  148 },
-				{ <SCLK>, "FNKY",   1 },
-				{ <PAUS>, "FNKY",   1 },
-				{  <INS>, "FNKY",   1 },
+                { <PRSC>, "FNKY",  148 },
+                { <SCLK>, "FNKY",   1 },
+                { <PAUS>, "FNKY",   1 },
+                {  <INS>, "FNKY",   1 },
                 { <DELE>, "ESC",    4 },
-				{ <HOME>, "FNKY",   1 },
-				{ <PGUP>, "FNKY",   1 }
-			};
-		};
+                { <HOME>, "FNKY",   1 },
+                { <PGUP>, "FNKY",   1 }
+        	};
+        };
         row {
             top=  1;
             left= 1;
@@ -1412,7 +1428,7 @@ xkb_geometry "55y9003" {
                 { <AC07>, "NORM",   1 }, { <AC08>, "NORM",   1 },
                 { <AC09>, "NORM",   1 }, { <AC10>, "NORM",   1 },
                 { <AC11>, "NORM",   1 },
-				{ <RTRN>, "RTRN",   1, color="grey20" }
+                { <RTRN>, "RTRN",   1, color="grey20" }
             };
         };
         row {
@@ -1433,7 +1449,7 @@ xkb_geometry "55y9003" {
             top=  77;
             left= 1;
             keys {
-			    { <FN>, "NORM", 1, color="grey20" },
+        	    { <FN>, "NORM", 1, color="grey20" },
                 { <LCTL>, "MODK",   1, color="grey20" },
                 { <LWIN>, "LSPR",   1, color="grey20" },
                 { <LALT>, "NORM",   1, color="grey20" },
@@ -1465,12 +1481,10 @@ xkb_geometry "55y9003" {
 	shape "STIK" { cornerRadius = 3.5, { [7, 7] } };
     solid "STIK" {
       priority = 255;
-	  color = "red";
-	  shape = "STIK";
-	  top = 83;
-	  left = 128.5;
+      color = "red";
+      shape = "STIK";
+      top = 83;
+      left = 128.5;
 	};
-													
-};
-
+    };
 };

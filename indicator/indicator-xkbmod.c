@@ -56,24 +56,26 @@ int main (int argc, char **argv) {
   XMapWindow(dpy,win);
 
   XFontStruct* Font_info;
-  char *font_name = "-*-gothic-medium-r-normal-*-16-*-*-*-*-*-*-*";
+  char *font_name = "-*-gothic-medium-r-normal-*-16-*-*-*-*-*-iso8859-1";
   XFontStruct *font_info;
   font_info = XLoadQueryFont(dpy, font_name);
   if (!font_info) return 1;
 
-  XGCValues val_bk, val_ledon, val_altgr, val_switch;
+  XGCValues val_bk, val_ledon, val_altgr, val_switch, val_num;
   val_bk.foreground = BlackPixel(dpy,scr_num);
   val_bk.font = font_info->fid;
   gc_bk = XCreateGC(dpy, win, GCForeground|GCFont, &val_bk);
 
-  XColor c_altgr, c_switch, c_bk, cexact; Colormap cmap;
+  XColor c_altgr, c_switch, c_bk, c_num, cexact; Colormap cmap;
   cmap = DefaultColormap(dpy, 0);
   XAllocNamedColor(dpy, cmap, "Gold", &c_bk, &cexact); val_ledon.foreground = c_bk.pixel;
+  XAllocNamedColor(dpy, cmap, "rgb:FF/5F/5F", &c_num, &cexact); val_num.foreground = c_num.pixel;
   XAllocNamedColor(dpy, cmap, "rgb:00/E0/E0", &c_altgr, &cexact); val_altgr.foreground = c_altgr.pixel;
   XAllocNamedColor(dpy, cmap, "rgb:00/E0/00", &c_switch, &cexact); val_switch.foreground = c_switch.pixel;
 
-  GC gc_altgr, gc_switch;
+  GC gc_altgr, gc_switch, gc_num;
   gc_ledon = XCreateGC(dpy, win, GCForeground, &val_ledon);
+  gc_num = XCreateGC(dpy, win, GCForeground, &val_num);
   gc_altgr = XCreateGC(dpy, win, GCForeground, &val_altgr);
   gc_switch = XCreateGC(dpy, win, GCForeground, &val_switch);
   if ((gc_bk<0)||(gc_ledon<0)) return 1;
@@ -96,6 +98,12 @@ int main (int argc, char **argv) {
 	    case 2:
 	      XFillRectangle(dpy,win,gc_altgr,44,0,50,16 );
 	      XDrawString(dpy,win,gc_bk,45,15, "AltGr ", 6);
+	    break;
+	    default:
+	      if (s.mods&0x10) {
+		XFillRectangle(dpy,win,gc_num,44,0,50,16 );
+		XDrawString(dpy,win,gc_bk,45,15, "NumLk ", 6);
+	      }
 	    break;
 	  }
 	  p.mods = s.mods; p.group = s.group;
