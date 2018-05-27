@@ -56,7 +56,7 @@ int main (int argc, char **argv) {
   XMapWindow(dpy,win);
 
   XFontStruct* Font_info;
-  char *font_name = "-*-gothic-bold-r-normal-*-14-*-*-*-*-*-iso8859-1";
+  char *font_name = "-*-fixed-bold-r-normal-*-14-*-*-*-*-*-iso8859-1";
   XFontStruct *font_info;
   font_info = XLoadQueryFont(dpy, font_name);
   if (!font_info) return 1;

@@ -1,12 +1,12 @@
-    s.mywibox = awful.wibar({ position = "top", screen = s, height =15, width =$
-      x = 0, stretch = false})
+    s.mywibox = awful.wibar({ position = "top", screen = s, height =15, 
+      width = s.geometry.width - 96, x = 0, stretch = false})
     awful.placement.top_left(s.mywibox);
 
 
     { rule = { class = "indicator-xkbmod" },
       properties = {
          floating = true, sticky = true,
-         placement = awful.placement.align.top_right+awful.placement.no_offscre$
+         placement = awful.placement.align.top_right+awful.placement.no_offscreen,
          border_width = 0, ontop = true, above = true, skip_taskbar= true,
       }
     },

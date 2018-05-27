@@ -286,7 +286,7 @@ xkb_types "55y9003" {
         level_name[Level3]= "Keypad";
     };
     type "TWO_LEVEL+NUMPAD" {
-        modifiers= NumLock;
+        modifiers= Shift+NumLock;
         map[Shift]= Level2;
         map[NumLock]= Level3;
         map[Shift+NumLock]=Level3;
