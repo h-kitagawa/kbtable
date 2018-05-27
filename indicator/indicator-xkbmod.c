@@ -10,8 +10,8 @@ GC gc_bk, gc_ledon;
 
 void led_mod(int flag, int x, char *s) {
   if (flag) {
-    XFillRectangle(dpy,win,gc_ledon,11*x,0,10,16 );
-    XDrawString(dpy,win,gc_bk,11*x+1,15, s, 1);
+    XFillRectangle(dpy,win,gc_ledon,10*x,0,9,14 );
+    XDrawString(dpy,win,gc_bk,10*x+1,13, s, 1);
   }
 }
 
@@ -37,13 +37,13 @@ int main (int argc, char **argv) {
   int scr_num = DefaultScreen(dpy);
   XSizeHints win_hint;
   win_hint.min_width =  94; win_hint.max_width  = 94;
-  win_hint.min_height = 16; win_hint.max_height = 16;
+  win_hint.min_height = 14; win_hint.max_height = 14;
   win_hint.x = DisplayWidth(dpy,scr_num)-94; win_hint.y = 0;
   win_hint.flags = PMinSize|PMaxSize|PPosition;
 
   win = XCreateSimpleWindow(dpy,
 			    RootWindow(dpy, scr_num),
-			    win_hint.x, 0, 94, 16, 0, 
+			    win_hint.x, 0, win_hint.min_width, win_hint.min_height, 0,  
 			    WhitePixel(dpy, scr_num),
 			    BlackPixel(dpy, scr_num)
 			    );
@@ -56,7 +56,7 @@ int main (int argc, char **argv) {
   XMapWindow(dpy,win);
 
   XFontStruct* Font_info;
-  char *font_name = "-*-gothic-medium-r-normal-*-16-*-*-*-*-*-iso8859-1";
+  char *font_name = "-*-gothic-bold-r-normal-*-14-*-*-*-*-*-iso8859-1";
   XFontStruct *font_info;
   font_info = XLoadQueryFont(dpy, font_name);
   if (!font_info) return 1;
@@ -87,23 +87,20 @@ int main (int argc, char **argv) {
       if (xkb_eve.any.xkb_type == XkbStateNotify){
 	XkbStateNotifyEvent s= xkb_eve.state;
 	if (  (s.mods!=p.mods)||(s.group!=p.group) ) {
-	  XFillRectangle(dpy,win,gc_bk,0,0, 100,16 );
+	  XFillRectangle(dpy,win,gc_bk,0,0, 100,14 );
 	  led_mod(s.mods&1, 0, "S"); led_mod(s.mods&4, 1, "C");
-	  led_mod(s.mods&8, 2, "A"); led_mod(s.mods&0x40, 3, "W");
+	  led_mod(s.mods&0x40, 2, "W"); led_mod(s.mods&8, 3, "A"); 
+          led_mod(s.mods&0x10, 4, "N");
 	  switch (s.group) {
 	    case 1:
-	      XFillRectangle(dpy,win,gc_switch,44,0,50,16 );
-	      XDrawString(dpy,win,gc_bk,45,15, "Switch", 6);
+	      XFillRectangle(dpy,win,gc_switch,50,0,50,14 );
+	      XDrawString(dpy,win,gc_bk,51,13, "Switch", 6);
 	    break;
 	    case 2:
-	      XFillRectangle(dpy,win,gc_altgr,44,0,50,16 );
-	      XDrawString(dpy,win,gc_bk,45,15, "AltGr ", 6);
+	      XFillRectangle(dpy,win,gc_altgr,50,0,50,14 );
+	      XDrawString(dpy,win,gc_bk,51,13, "AltGr ", 6);
 	    break;
 	    default:
-	      if (s.mods&0x10) {
-		XFillRectangle(dpy,win,gc_num,44,0,50,16 );
-		XDrawString(dpy,win,gc_bk,45,15, "NumLk ", 6);
-	      }
 	    break;
 	  }
 	  p.mods = s.mods; p.group = s.group;
