@@ -7,11 +7,12 @@
 Display *dpy;
 Window win;
 GC gc_bk, gc_ledon;
+XSizeHints win_hint;
 
 void led_mod(int flag, int x, char *s) {
   if (flag) {
-    XFillRectangle(dpy,win,gc_ledon,10*x,0,9,14 );
-    XDrawString(dpy,win,gc_bk,10*x+1,13, s, 1);
+    XFillRectangle(dpy,win,gc_ledon,9*x,0,8,win_hint.min_height );
+    XDrawString(dpy,win,gc_bk,9*x+1,14, s, 1);
   }
 }
 
@@ -35,10 +36,9 @@ int main (int argc, char **argv) {
     return 1;
 
   int scr_num = DefaultScreen(dpy);
-  XSizeHints win_hint;
-  win_hint.min_width =  94; win_hint.max_width  = 94;
-  win_hint.min_height = 14; win_hint.max_height = 14;
-  win_hint.x = DisplayWidth(dpy,scr_num)-94; win_hint.y = 0;
+  win_hint.min_width =  97; win_hint.max_width  = 97;
+  win_hint.min_height = 16; win_hint.max_height = win_hint.min_height;
+  win_hint.x = DisplayWidth(dpy,scr_num)-97; win_hint.y = 0;
   win_hint.flags = PMinSize|PMaxSize|PPosition;
 
   win = XCreateSimpleWindow(dpy,
@@ -68,7 +68,7 @@ int main (int argc, char **argv) {
 
   XColor c_altgr, c_switch, c_bk, c_num, cexact; Colormap cmap;
   cmap = DefaultColormap(dpy, 0);
-  XAllocNamedColor(dpy, cmap, "Gold", &c_bk, &cexact); val_ledon.foreground = c_bk.pixel;
+  XAllocNamedColor(dpy, cmap, "rgb:FF/DF/08", &c_bk, &cexact); val_ledon.foreground = c_bk.pixel;
   XAllocNamedColor(dpy, cmap, "rgb:FF/5F/5F", &c_num, &cexact); val_num.foreground = c_num.pixel;
   XAllocNamedColor(dpy, cmap, "rgb:00/E0/E0", &c_altgr, &cexact); val_altgr.foreground = c_altgr.pixel;
   XAllocNamedColor(dpy, cmap, "rgb:00/E0/00", &c_switch, &cexact); val_switch.foreground = c_switch.pixel;
@@ -80,6 +80,8 @@ int main (int argc, char **argv) {
   gc_switch = XCreateGC(dpy, win, GCForeground, &val_switch);
   if ((gc_bk<0)||(gc_ledon<0)) return 1;
 
+#define BUF_SIZE 256
+  unsigned char buf[BUF_SIZE];
   while (True) {
     XNextEvent( dpy, &eve );
     if (eve.type==eventCode) {
@@ -87,20 +89,22 @@ int main (int argc, char **argv) {
       if (xkb_eve.any.xkb_type == XkbStateNotify){
 	XkbStateNotifyEvent s= xkb_eve.state;
 	if (  (s.mods!=p.mods)||(s.group!=p.group) ) {
-	  XFillRectangle(dpy,win,gc_bk,0,0, 100,14 );
-	  led_mod(s.mods&1, 0, "S"); led_mod(s.mods&4, 1, "C");
-	  led_mod(s.mods&0x40, 2, "W"); led_mod(s.mods&8, 3, "A"); 
-          led_mod(s.mods&0x10, 4, "N");
+	  XFillRectangle(dpy,win,gc_bk,0,0, 100,win_hint.min_height );
+	  led_mod(s.mods&1, 0, "s"); led_mod(s.mods&4, 1, "c");
+	  led_mod(s.mods&0x40, 2, "w"); led_mod(s.mods&8, 3, "a"); 
+      led_mod(s.mods&0x10, 4, "N"); led_mod(s.mods&0x80, 5, "S"); 
 	  switch (s.group) {
 	    case 1:
-	      XFillRectangle(dpy,win,gc_switch,50,0,50,14 );
-	      XDrawString(dpy,win,gc_bk,51,13, "Switch", 6);
+	      XFillRectangle(dpy,win,gc_switch,54,0,50,win_hint.min_height );
+	      XDrawString(dpy,win,gc_bk,55,14, "Switch", 6);
 	    break;
 	    case 2:
-	      XFillRectangle(dpy,win,gc_altgr,50,0,50,14 );
-	      XDrawString(dpy,win,gc_bk,51,13, "AltGr ", 6);
+	      XFillRectangle(dpy,win,gc_altgr,54,0,50,win_hint.min_height );
+	      XDrawString(dpy,win,gc_bk,55,14, "AltGr ", 6);
 	    break;
-	    default:
+	    case 3:
+	      XFillRectangle(dpy,win,gc_num,54,0,50,win_hint.min_height );
+	      XDrawString(dpy,win,gc_bk,55,14, "Group3", 6);
 	    break;
 	  }
 	  p.mods = s.mods; p.group = s.group;

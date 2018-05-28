@@ -103,15 +103,16 @@
 \XDS(\raisebox{0.9\height}{\font\m=manfnt at7pt\m\char127}){Esc}(①){F1}%
 \XF(②){F2}\XF(③){F3}\XF(④){F4}\hfill
 \XF(⑤){F5}\XF(⑥){F6}\XF(⑦){F7}\XF(⑧){F8}\hfill
-\XF(⑨){F9}\XDS{PrtSc}(⑩){F10}
-\XDS{\textcolor{\FORECOLOR}{\bfseries\COND NumLk}}{F11}\XDS{Pause}{F12}\hfill
+\XF(⑨){F9}\XDS{PrtSc}(⑩){F10}%
+\XDS{\textcolor{\FORECOLOR}{\bfseries\COND NumLk}}{F11}%
+\XDS{\textcolor{\FORECOLOR}{\bfseries\COND ScrLk}}{F12}\hfill
 \XDS{Insert}{Delete}\XDS{Home}{End}\XDS{PgUp}{PgDn}
 \else
 \XD[1.8](\raisebox{0.9\height}{\font\m=manfnt at7pt\m\char127}){Esc}\hfill
 \XF(①){F1}\XF(②){F2}\XF(③){F3}\XF(④){F4}\hfill
 \XF(⑤){F5}\XF(⑥){F6}\XF(⑦){F7}\XF(⑧){F8}\hfill
-\XDS{PrtSc}(⑨){F9}\XDS{\textcolor{\FORECOLOR}{\bfseries\COND NumLk}}(⑩){F10}
-\XDS{Pause}{F11}\XDS{Insert}{F12}\hfill
+\XDS{PrtSc}(⑨){F9}\XDS{\textcolor{\FORECOLOR}{\bfseries\COND NumLk}}(⑩){F10}%
+\XDS{\textcolor{\FORECOLOR}{\bfseries\COND ScrLk}}{F11}\XDS{Insert}{F12}\hfill
 \XD[1.8]{Delete}%
 \XDS{Home}{End}\XDS{PgUp}{PgDn}
 \fi\fi}
