@@ -1073,7 +1073,7 @@ xkb_symbols "us+math+us(altgr-intl)" {
     };
     key <SCLK> {
 	    type[group1]= "PC_SUPER_LEVEL2",
-		symbols[Group1]= [ Scroll_Lock, Num_Lock]
+		symbols[Group1]= [ Num_Lock, Pause]
 	};
     key <NMLK> { actions[Group1]=[RedirectKey(key=<SCLK>)] };
     key  <KP7> { actions[Group1]=[RedirectKey(key=<AD07>)] };
@@ -1142,7 +1142,7 @@ xkb_symbols "us+math+us(altgr-intl)" {
     key <I126> {         [       plusminus ] };
     key <PAUS> {
         type= "PC_SUPER_LEVEL2",
-        symbols[Group1]= [ Pause,           Break ]
+        symbols[Group1]= [        Scroll_Lock,           Break ]
     };
     key <I128> {         [     XF86LaunchA ] };
     key <I129> {         [      KP_Decimal,      KP_Decimal ] };
@@ -1251,8 +1251,8 @@ xkb_symbols "us+math+us(altgr-intl)" {
     modifier_map Mod3 { <RALT> };
     modifier_map Mod4 { <LWIN> };
     modifier_map Mod3 { <COMP> };
-    modifier_map Mod5 { Scroll_Lock };
-    modifier_map Mod2 { Num_Lock };
+    modifier_map Mod5 { <PAUS> };
+    modifier_map Mod2 { <SCLK> };
 };
 
 xkb_geometry "55y9003" {
