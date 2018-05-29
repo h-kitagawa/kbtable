@@ -365,7 +365,7 @@ xkb_compatibility "55y9003" {
         virtualModifier= NumLock;
         action= LockMods(modifiers=NumLock);
     };
-    interpret Scroll_Lock+AnyOf(all) {
+    interpret Scroll_Lock{
         virtualModifier= ScrollLock;
         action= LockMods(modifiers=ScrollLock);
     };
@@ -1102,18 +1102,21 @@ xkb_symbols "us+math+us(altgr-intl)" {
     key <KPEN> {         [        KP_Enter ] };
     key <RCTL> {         [       Control_R ] };
     key <COMP> {
- 	    type[group1]= "PC_CONTROL_LEVEL2",
+ 	    type[group1]= "PC_SUPER_LEVEL2",
 		symbols[Group1]= [ ISO_Level3_Latch,       Multi_key ],
         symbols[Group2]= [            Menu,            Menu ]
     };
     key <PRSC> {
-	    type[group1]= "PC_CONTROL_LEVEL2",
+	    type[group1]= "PC_SUPER_LEVEL2",
 		symbols[Group1]= [ ISO_Level3_Latch,       Multi_key ],
         symbols[Group2]= [            Menu,            Menu ]
     };
     key <RALT> { [     Mode_switch ] };
     key <LNFD> {         [        Linefeed ] };
-    key <HOME> {         [            Home ] };
+    key <HOME> {
+	    type= "PC_SUPER_LEVEL2",
+        symbols[Group1]= [            Home,            Pause]
+    };
     key   <UP> {
         symbols[Group1]= [              Up,              Up ],
         symbols[Group2]= [           U2191,           U21D1 ]
@@ -1127,14 +1130,23 @@ xkb_symbols "us+math+us(altgr-intl)" {
         symbols[Group1]= [           Right,           Right ],
         symbols[Group2]= [           U2192,           U21D2 ]
     };
-    key  <END> {         [             End ] };
+    key  <END> {
+	    type= "PC_SUPER_LEVEL2",
+        symbols[Group1]= [             End,            Break]
+	};
     key <DOWN> {
         symbols[Group1]= [            Down,            Down ],
         symbols[Group2]= [           U2193,           U21D3 ]
     };
     key <PGDN> {         [            Next ] };
-    key  <INS> {         [          Insert ] };
-    key <DELE> {         [          Delete ] };
+    key  <INS> {
+	    type= "PC_SUPER_LEVEL2",
+        symbols[Group1]= [          Insert,     Num_Lock]
+	};
+    key <DELE> {
+	    type= "PC_SUPER_LEVEL2",
+        symbols[Group1]= [          Delete,     Scroll_Lock]
+    };
     key <MUTE> {         [   XF86AudioMute ] };
     key <VOL-> {         [ XF86AudioLowerVolume ] };
     key <VOL+> {         [ XF86AudioRaiseVolume ] };
@@ -1252,8 +1264,8 @@ xkb_symbols "us+math+us(altgr-intl)" {
     modifier_map Mod3 { <RALT> };
     modifier_map Mod4 { <LWIN> };
     modifier_map Mod3 { <PRSC> };
-    modifier_map Mod5 { <PAUS> };
-    modifier_map Mod2 { <SCLK> };
+    modifier_map Mod5 { Scroll_Lock };
+    modifier_map Mod2 { Num_Lock };
 };
 
 xkb_geometry "55y9003" {

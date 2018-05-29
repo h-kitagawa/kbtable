@@ -1072,8 +1072,8 @@ xkb_symbols "us+math+us(altgr-intl)" {
         symbols[Group2]= [           U2469,           U2469 ]
     };
     key <SCLK> {
-	    type[group1]= "PC_CONTROL_LEVEL2",
-		symbols[Group1]= [ Num_Lock, Pause]
+	    type[group1]= "PC_SUPER_LEVEL2",
+		symbols[Group1]= [ Scroll_Lock, Num_Lock]
 	};
     key <NMLK> { actions[Group1]=[RedirectKey(key=<SCLK>)] };
     key  <KP7> { actions[Group1]=[RedirectKey(key=<AD07>)] };
@@ -1106,7 +1106,7 @@ xkb_symbols "us+math+us(altgr-intl)" {
         symbols[Group1]= [           Print,         Sys_Req ]
     };
     key <COMP> {
-	    type[group1]= "PC_CONTROL_LEVEL2",
+	    type[group1]= "PC_SUPER_LEVEL2",
 		symbols[Group1]= [ ISO_Level3_Latch,       Multi_key ],
         symbols[Group2]= [            Menu,            Menu ]
     };
@@ -1141,8 +1141,8 @@ xkb_symbols "us+math+us(altgr-intl)" {
     key <KPEQ> {         [        KP_Equal ] };
     key <I126> {         [       plusminus ] };
     key <PAUS> {
-        type= "PC_CONTROL_LEVEL2",
-        symbols[Group1]= [        Scroll_Lock,           Break ]
+        type= "PC_SUPER_LEVEL2",
+        symbols[Group1]= [ Pause,           Break ]
     };
     key <I128> {         [     XF86LaunchA ] };
     key <I129> {         [      KP_Decimal,      KP_Decimal ] };
@@ -1251,8 +1251,8 @@ xkb_symbols "us+math+us(altgr-intl)" {
     modifier_map Mod3 { <RALT> };
     modifier_map Mod4 { <LWIN> };
     modifier_map Mod3 { <COMP> };
-    modifier_map Mod5 { <PAUS> };
-    modifier_map Mod2 { <SCLK> };
+    modifier_map Mod5 { Scroll_Lock };
+    modifier_map Mod2 { Num_Lock };
 };
 
 xkb_geometry "55y9003" {

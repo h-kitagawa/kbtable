@@ -92,27 +92,35 @@
 \def\SY#1{\ifnum\ROW=7\textsf{\smash{\raisebox{-.2ex}{\Large#1}}}\fi}
 \color{\LINECOLOR}
 
+\def\AX#1#2{\smash{%
+  \raisebox{.35\DX}{\rlap{\textcolor{\FORECOLOR}{\fboxsep.1mm\fbox{#1}}}}%
+  \raisebox{-.35\DX}{\rlap{#2}}%
+}}
+
 \hbox to29.83\dimexpr\DX+\fboxsep+\fboxrule\relax{%
 \ifnum\ROW=6
 \XF[2.5](\raisebox{0.9\height}{\font\m=manfnt at7pt\m\char127}){Esc}%
 \XF[1.66](①){F1}\XF[1.66](②){F2}\XF[1.66](③){F3}\XF[1.66](④){F4}\hfill
 \XF[1.66](⑤){F5}\XF[1.66](⑥){F6}\XF[1.66](⑦){F7}\XF[1.66](⑧){F8}\hfill
 \XF[1.66](⑨){F9}\XF[1.66](\scalebox{0.9}[1]{⑩}){\scalebox{0.9}[1]{F10}}\XF[1.66]{F11}\XF[1.66]{F12}\hfill
-\XF[1.66]{\small Home}\XF[1.66]{\small End}\XF[1.66]{\small Insert}\XF[2]{\hfill Delete}
+\XF[1.66]{\small \AX{Pause}{Home}}
+\XF[1.66]{\small \AX{Break}{End}}
+\XF[1.66]{\small \AX{NumLk}{Insert}}
+\XF[2]{\AX{ScrLk}{Delete}}
 \else\ifnum\ROW=17
 \XDS(\raisebox{0.9\height}{\font\m=manfnt at7pt\m\char127}){Esc}(①){F1}%
 \XF(②){F2}\XF(③){F3}\XF(④){F4}\hfill
 \XF(⑤){F5}\XF(⑥){F6}\XF(⑦){F7}\XF(⑧){F8}\hfill
 \XF(⑨){F9}\XDS{PrtSc}(⑩){F10}%
-\XDS{\textcolor{\FORECOLOR}{\bfseries\COND NumLk}}{F11}%
-\XDS{\textcolor{\FORECOLOR}{\bfseries\COND ScrLk}}{F12}\hfill
+\XDS{\AX{\COND NumLk}{ScrLk}}{F11}%
+\XDS{\AX{Break}{Pause}}{F12}\hfill
 \XDS{Insert}{Delete}\XDS{Home}{End}\XDS{PgUp}{PgDn}
 \else
 \XD[1.8](\raisebox{0.9\height}{\font\m=manfnt at7pt\m\char127}){Esc}\hfill
 \XF(①){F1}\XF(②){F2}\XF(③){F3}\XF(④){F4}\hfill
 \XF(⑤){F5}\XF(⑥){F6}\XF(⑦){F7}\XF(⑧){F8}\hfill
-\XDS{PrtSc}(⑨){F9}\XDS{\textcolor{\FORECOLOR}{\bfseries\COND NumLk}}(⑩){F10}%
-\XDS{\textcolor{\FORECOLOR}{\bfseries\COND ScrLk}}{F11}\XDS{Insert}{F12}\hfill
+\XDS{PrtSc}(⑨){F9}\XDS{\AX{\COND NumLk}{ScrLk}}(⑩){F10}%
+\XDS{\AX{Break}{Pause}}{F11}\XDS{Insert}{F12}\hfill
 \XD[1.8]{Delete}%
 \XDS{Home}{End}\XDS{PgUp}{PgDn}
 \fi\fi}
@@ -136,7 +144,7 @@
 \kern-5.5pt
 \null
 \W{3}{Tab\SY{↹}}
-\K{\COND\normalsize\fboxsep=.1em\fbox{JA}}{Q}{⊂}{ℚ}{}{Ä}
+\K{\COND\normalsize\fboxsep=.1em\fbox{JP}}{Q}{⊂}{ℚ}{}{Ä}
 \K{}{W}{ω}{Ω}{}{Å}
 \K{}{E}{ε}{∃}{}{É}
 \K{}{R}{ρ}{ℝ}{®}{}
@@ -207,8 +215,9 @@
 \W{10}{}
 \K{\COND\normalsize\fboxsep=.1em\fbox{US}}%
   {\textcolor{green}{\rlap{\bfseries\normalsize Switch}\phantom{Q}}}{}{}{}{}
-\K{\textcolor{cyan}{\rlap{\bfseries\normalsize AltGr}\phantom{Q}}}%
-  {\rlap{\normalsize\COND Compose}\phantom{Q}}{}{}{}{}
+\K{\COND\normalsize\fboxsep=.1mm\kern-.15\DX\rlap{\fbox{Compose}}\phantom{Q1}}%
+  {\textcolor{cyan}{\rlap{\bfseries\normalsize AltGr}\phantom{Q}}}%
+  {}{}{}{}
 \W2{Ctrl}
 \smash{\raisebox{\dimexpr\baselineskip+.2pt}{\XF[1.78]{\ifnum\ROW=6\small PgUp\fi}}}%
 \smash{\raisebox{\dimexpr\baselineskip+.2pt}{\XF[1.77]($\vcenter{\hbox{\oalign{\hss$⇑$\hss\crcr\hss$↑$\hss}}}$){\Large ↑}}}%
