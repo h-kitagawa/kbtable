@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{hk-math-abbrev}[%
-  2018/01/29 Unicode input of several math symbols
+  2019/01/31 Unicode input of several math symbols
 ]
 % 完全に個人的なもの。記号の取捨選択も独断と偏見による
 
@@ -28,7 +28,7 @@
   \expandafter\endgroup\x
 }
 \def\my@@getdelcode\delimiter#1\relax{%
-  \@tempcnta=#1 \@tempcntb=\@tempcnta
+  \@tempcnta=#1 \@tempcntb=\@tempcnta%
   \divide\@tempcntb"100 \multiply\@tempcntb"100
   \xdef\d@lcode{\the\numexpr\@tempcnta-\@tempcntb\relax}
   \divide\@tempcnta"100 \@tempcntb=\@tempcnta
@@ -40,8 +40,8 @@
   \divide\@tempcnta"100 \@tempcntb=\@tempcnta
   \divide\@tempcntb"10 \multiply\@tempcntb"10
   \xdef\d@sfam {\the\numexpr\@tempcnta-\@tempcntb\relax}
-  \divide\@tempcnta"10 \@tempcntb=\@tempcnta
-  \xdef\d@class {\the\numexpr\@tempcnta-\@tempcntb\relax}
+  \divide\@tempcnta"10\relax
+  \xdef\d@class {\the\@tempcnta}
 }
 \def\my@mathd#1#2{%x
   \expandafter\my@@getdelcode#2\relax

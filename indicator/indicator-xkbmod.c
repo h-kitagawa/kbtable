@@ -57,9 +57,13 @@ int main (int argc, char **argv) {
 
   XFontStruct* Font_info;
   char *font_name = "-*-fixed-bold-r-normal-*-14-*-*-*-*-*-iso8859-1";
+  char *font_name2 = "-*-gothic-bold-r-normal-*-14-*-*-*-*-*-iso8859-1";
   XFontStruct *font_info;
   font_info = XLoadQueryFont(dpy, font_name);
-  if (!font_info) return 1;
+  if (!font_info) {
+    font_info = XLoadQueryFont(dpy, font_name2);
+    if (!font_info) return 1;
+  }
 
   XGCValues val_bk, val_ledon, val_altgr, val_switch, val_num;
   val_bk.foreground = BlackPixel(dpy,scr_num);
