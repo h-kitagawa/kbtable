@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{hk-math-abbrev}[%
-  2019/01/31 Unicode input of several math symbols
+  2019/10/06 Unicode input of several math symbols
 ]
 % 完全に個人的なもの。記号の取捨選択も独断と偏見による
 
@@ -27,7 +27,16 @@
   \lowercase{\def\x{\gdef~{\ensuremath{#2}}}}%
   \expandafter\endgroup\x
 }
-\def\my@@getdelcode\delimiter#1\relax{%
+\def\my@@getdelcode#1{%
+  \let\next\relax
+  \ifx#1\delimiter\let\next\my@@getdelcode@d
+  \else\ifx#1\protect\let\next\my@@getdelcode@pr\fi\fi
+  \next
+}
+\def\my@@getdelcode@pr#1{%
+  \expandafter\expandafter\expandafter\my@@getdelcode@d\expandafter\@gobble#1\relax
+}
+\def\my@@getdelcode@d#1\relax{%
   \@tempcnta=#1 \@tempcntb=\@tempcnta%
   \divide\@tempcntb"100 \multiply\@tempcntb"100
   \xdef\d@lcode{\the\numexpr\@tempcnta-\@tempcntb\relax}
@@ -44,9 +53,9 @@
   \xdef\d@class {\the\@tempcnta}
 }
 \def\my@mathd#1#2{%x
-  \expandafter\my@@getdelcode#2\relax
+  {\let\protect\relax\expandafter\my@@getdelcode#2\relax
   \global\mathcode#1=\numexpr \d@class*"1000+\d@sfam*"100+\d@scode\relax
-  \global\delcode#1=\numexpr \d@sfam*"100000+\d@scode*"1000+ \d@lfam*"100+\d@lcode \relax%"
+  \global\delcode#1=\numexpr \d@sfam*"100000+\d@scode*"1000+ \d@lfam*"100+\d@lcode \relax}%"
 }
 
 % greeks
