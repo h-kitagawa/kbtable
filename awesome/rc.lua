@@ -165,6 +165,7 @@ local mem_info = {}
 function mem_update()
    local memtotal, memfree, buff, cached, swapfree, swaptotal
    local str, val
+   cached = 0
    local file = assert(io.open("/proc/meminfo", "r"))
    for line in file:lines() do
       str, val = string.match(line, "([%w_]+):\ +(%d+)")
@@ -175,7 +176,11 @@ function mem_update()
       elseif str == "Buffers" then
 	 buff = val
       elseif str == "Cached" then
-	 cached = val
+	 cached = cached + val
+      elseif str == "SReclaimable" then
+	 cached = cached + val
+      elseif str == "Shmem" then
+	 cached = cached - val
       elseif str == "SwapFree" then
 	 swapfree = val
       elseif str == "SwapTotal" then
