@@ -16,9 +16,9 @@ local naughty = require("naughty")
 beautiful.init("/home/h7k/.config/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvtc"
+terminal = "st"
 editor = "emacs"
-editor_cmd = "urxvtc -e jed"
+editor_cmd = "st -e jed"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -74,22 +74,19 @@ myawesomemenu = {
 }
 
 myvmmenu = {
-	    { "SSH (X200)", "urxvtc -e ssh -Y X200"},
-	    { "SSH NetBSD", "urxvtc -e ssh -Y -p 50022 192.168.11.2"},
-	    { "VM  NetBSD", "qemu-system-i386 -m 2048M -cpu host -smp 4 -drive file=/opt/home-supp/qemu-vm/NetBSD.raw,if=virtio  -net nic -net user -no-acpi -redir tcp:50022::22 -name NetBSD -machine q35,accel=kvm"},
-	    { "Windows 10 TP", "qemu-system-x86_64 -m 3072M  -cpu host -smp 2 -drive file=/opt/home-supp/qemu-vm/Win10TP.raw,if=virtio  -net nic -net user -machine accel=kvm -localtime -usbdevice tablet"}, 
-	    { "chroot CentOS", "urxvtc -e linux32 dchroot"},
- 	    { "SysRescCD customize", " qemu-system-x86_64 -drive file=/opt/home-supp/qemu-vm/sysresc.raw,if=virtio -drive file=/opt/home-supp/qemu-vm/systemrescuecd-x86-4.5.1.iso,media=cdrom -boot d -m 3072M -cpu host -smp 2 -machine q35,accel=kvm -net nic -net user"}
+	    { "VM  OpenBSD", terminal .. " -e /opt/home-supp/qemu-vm/openbsd.sh"},
+	    { "SSH OpenBSD", terminal .. " -e ssh -p 10022 localhost"},
 }
 
 mymainmenu = awful.menu({ items = { { "Terminal", terminal },
 				    { "Jed", editor_cmd },
 				    { "Emacs", 'emacs' },
-				    { "nano", "urxvtc -e nano"},
+				    { "nano", terminal .. " -e nano"},
 				    { "VMs", myvmmenu },
-				    { "Firefox", "firefox"},
+				    { "Firefox", "/opt/firefox/firefox --private-window"},
 				    { "Google Chrome", "google-chrome-beta"},
 				    { "Sylpheed", "sylpheed"},
+				    { "Simutrans", "/opt/home-supp/simutrans/sim"},
 				    { "awesome", myawesomemenu, beautiful.awesome_icon }
                                   }
                         })
@@ -100,9 +97,15 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("%H%M.%S ",1)
+mytextclock = wibox.widget.textclock("%H%M.%S ",1,'+09:00')
+-- Create a textclock widget
+mykblayout = wibox.widget.textbox()
+mykblayout:set_align("right")
 -- Create a systray
 mysystray = wibox.widget.systray()
+mysystray:set_base_size(nil)
+mysystray:set_horizontal(true)
+
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
@@ -149,11 +152,13 @@ local tasklist_buttons = awful.util.table.join(
 
 local cpu_temp = {}
 function cpu_update()
+   local max_temp = 0
    for s = 0, 3 do
       file = io.open("/sys/devices/platform/coretemp.0/hwmon/hwmon1/temp" .. (s+1) .. "_input", "r")
-      cpu_temp[s] = file:read ("*n")/1000
+      cpu_temp[s]= file:read ("*n")/1000
+      if cpu_temp[s]>max_temp then max_temp = cpu_temp[s] end
       file:close()
-   end
+  end
 end 
 
 local mem_info = {}
@@ -263,13 +268,13 @@ end
 widgets["caps"] = wibox.widget.textbox()
 widgets["caps"]:set_text("Caps")
 
-timers["timer"] = timer({ timeout = 2 })
-timers["timer"]:connect_signal("timeout",
+timers[1]  = timer({ timeout = 2 })
+timers[1]:connect_signal("timeout", cpu_update)
+timers[1]:start()
+timers[2] = timer({ timeout = 2 })
+timers[2]:connect_signal("timeout",
 			   function() 
-				
-				cpu_update()
 				local y =  "<b><span color=\"#00ffff\">CPU</span></b> "
-			
 				for s = 0, 3 do
 				   y = y .. string.format("%2i ", cpu_temp[s] or 0);
 				end
@@ -292,7 +297,7 @@ timers["timer"]:connect_signal("timeout",
 				widgets["Clbl"]:set_markup(y)
 			     end)
 
-timers["timer"]:stop()
+timers[2]:stop()
 
 -- Quake like console on top
 local quake = require("quake")
@@ -301,10 +306,11 @@ local quakeconsole = {}
 do
     local quake = require("quake")
     awful.screen.connect_for_each_screen(function(s)
-    quakeconsole[s] = quake({ terminal = "urxvt",
+    quakeconsole[s] = quake({ terminal = "st",
+                             argname = "-n %s",
 			     width =  1280,
 			     offset = 0.1,
-			     height = 0.3,
+			     height = 0.4,
 			     screen = s })
     end)
 end
@@ -341,8 +347,9 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height =15 })
-
+    s.mywibox = awful.wibar({ position = "top", screen = s, height =15, width = s.geometry.width-96,
+      x = 0, stretch = false})
+    awful.placement.top_left(s.mywibox);
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
     left_layout:add(mylauncher)
@@ -351,6 +358,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
+    right_layout:add(mykblayout)
     right_layout:add(wibox.widget.systray())
     right_layout:add(mytextclock)
     right_layout:add(s.mylayoutbox)
@@ -376,7 +384,8 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-   awful.key({ modkey }, "`",
+    awful.key({}, "Caps_Lock", function() naughty.notify{ text = "Caps!" } end),
+    awful.key({ modkey }, "`",
 	     function () quakeconsole[mouse.screen]:toggle() end),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
@@ -412,7 +421,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end),
     awful.key({ modkey,           }, "e", function () awful.spawn(editor_cmd) end),
     awful.key({ modkey, "Shift"   }, "e", function () awful.spawn("emacs") end),
-    awful.key({ modkey,           }, "b", function () awful.spawn("firefox") end),
+    awful.key({ modkey,           }, "b", function () awful.spawn("/opt/firefox/firefox --private-window") end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
@@ -431,10 +440,13 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "s",     
 	      function ()
 		 mystatusbar.visible = not mystatusbar.visible
+		 awful.screen.connect_for_each_screen(function(s)
+		     awful.placement.top_left(s.mywibox);
+                 end)
                  if mystatusbar.visible then
-                    timers["timer"]:start()
+                    timers[2]:start()
                  else
-                    timers["timer"]:stop()
+                    timers[2]:stop()
                  end
 	      end),
 
@@ -469,7 +481,15 @@ clientkeys = awful.util.table.join(
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
             c.maximized_vertical   = not c.maximized_vertical
-        end)
+        end),
+    awful.key({ modkey, "Shift" }, "m",
+	function (c)
+	    c.maximized = false
+	    c.maximized_vertical=false
+	    c.maximized_horizontal=false
+	    c.floating=false
+	    c:raise()
+	end)
 )
 
 awful.menu.menu_keys = { up    = { "k", "Up" },
@@ -548,20 +568,28 @@ awful.rules.rules = {
                      keys = clientkeys,
 		     buttons = clientbuttons,
 		     screen = awful.screen.preferred,
-		     placement = awful.placement.no_overlap+awful.placement.no_offscreen
+		     placement = awful.placement.no_overlap+awful.placement.no_offscreen,
+		     sticky = false,
 		     } },
     { rule = { class = "uim-toolbar-gtk" },
       properties = { floating = true, sticky = true } },
-    { rule = { class = "Google-chrome-beta" }, 
+    { rule = { class = "Google-chrome" }, 
       properties = { floating = false, sticky = false } },
     { rule = { class = "Ogle" },
       properties = { floating = true } },
-    { rule = { class = "simutrans" },
+    { rule = { class = "sim" },
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
     { rule = { class = "fontforge" },
       properties = { floating = true } },
+    { rule = { class = "indicator-xkbmod" },
+      properties = {
+	 floating = true, sticky = true,
+	 placement = awful.placement.align.top_right+awful.placement.no_offscreen,
+	 border_width = 0, ontop = true, above = true, skip_taskbar= true,
+      }
+    },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = {  screen = 1, tag = "2" } },
