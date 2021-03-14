@@ -1,4 +1,4 @@
-%#!luajitlatex -shell-escape kbtable
+%#!lualatex -shell-escape kbtable
 \RequirePackage{luatex85}
 \documentclass[landscape]{article}
 \usepackage{fontspec,unicode-math,xcolor,graphicx}
@@ -234,17 +234,17 @@
 \catcode`\&=12
 \ifx\BACKCOLOR\TEMP
 \directlua{ os.execute("\luaescapestring{%
-  luajitlatex -jobname=kbtable-blk %
+  lualatex -jobname=kbtable-blk %
   '\string\def\string\BACKCOLOR{black}\string\input\space kbtable.tex' &>/dev/null
   && convert -bordercolor black -geometry 1600x900 -resize 1600 -density 300  -border 0x104 kbtable-blk.pdf kbd.png
 }")}
 \directlua{ os.execute("\luaescapestring{%
-  luajitlatex -jobname=kbtable-blk6 %
+  lualatex -jobname=kbtable-blk6 %
   '\string\def\string\ROW{6}\string\def\string\BACKCOLOR{black}\string\input\space kbtable.tex' &>/dev/null
   && convert -bordercolor black -geometry 1920x1080 -resize 1920 -density 300  -border 0x104 kbtable-blk6.pdf kbd6.png
 }")}
 \directlua{ os.execute("\luaescapestring{%
-  luajitlatex -jobname=kbtable-blk7o %
+  lualatex -jobname=kbtable-blk7o %
   '\string\def\string\ROW{17}\string\def\string\BACKCOLOR{black}\string\input\space kbtable.tex' &>/dev/null
   && convert -bordercolor black -geometry 1280x800 -resize 1280 -density 300  -border 0x104 kbtable-blk7o.pdf kbd7o.png
 }")}
