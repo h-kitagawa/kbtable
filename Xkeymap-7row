@@ -1093,7 +1093,8 @@ xkb_symbols "us+math+us(altgr-intl)" {
     key <KPAD> { actions[Group1]=[RedirectKey(key=<AB10>)] };
     key <FK11> {
         type= "CTRL+ALT",
-        symbols[Group1]= [             F11,             F11,             F11,             F11, XF86Switch_VT_11 ]
+        symbols[Group1]= [             F11,             F11,             F11,             F11, XF86Switch_VT_11 ],
+        symbols[Group2]= [           U2603,           U2603 ]
     };
     key <FK12> {
         type= "CTRL+ALT",
@@ -1175,8 +1176,14 @@ xkb_symbols "us+math+us(altgr-intl)" {
     key <I163> {         [        XF86Mail ] };
     key <I164> {         [   XF86Favorites ] };
     key <I165> {         [  XF86MyComputer ] };
-    key <I166> {         [        XF86Back ] };
-    key <I167> {         [     XF86Forward ] };
+    key <I166> {
+        symbols[Group1]= [     U25C6, U25C7 ],
+        symbols[Group2]= [     XF86Back, XF86Back ]
+    };
+    key <I167> {
+        symbols[Group1]= [     U25A0, U25A1 ],
+        symbols[Group2]= [     XF86Forward, XF86Forward ]
+    };
     key <I169> {         [       XF86Eject ] };
     key <I170> {         [       XF86Eject,       XF86Eject ] };
     key <I171> {         [   XF86AudioNext ] };

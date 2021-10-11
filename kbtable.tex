@@ -102,7 +102,7 @@
 \XF[2.5](\raisebox{0.9\height}{\font\m=manfnt at7pt\m\char127}){Esc}%
 \XF[1.66](①){F1}\XF[1.66](②){F2}\XF[1.66](③){F3}\XF[1.66](④){F4}\hfill
 \XF[1.66](⑤){F5}\XF[1.66](⑥){F6}\XF[1.66](⑦){F7}\XF[1.66](⑧){F8}\hfill
-\XF[1.66](⑨){F9}\XF[1.66](\scalebox{0.9}[1]{⑩}){\scalebox{0.9}[1]{F10}}\XF[1.66]{F11}\XF[1.66]{F12}\hfill
+\XF[1.66](⑨){F9}\XF[1.66](\scalebox{0.9}[1]{⑩}){\scalebox{0.9}[1]{F10}}\XF[1.66](\char"2603){F11}\XF[1.66]{F12}\hfill
 \XF[1.66]{\small \AX{Pause}{Home}}
 \XF[1.66]{\small \AX{Break}{End}}
 \XF[1.66]{\small \AX{NumLk}{Insert}}
@@ -112,7 +112,7 @@
 \XF(②){F2}\XF(③){F3}\XF(④){F4}\hfill
 \XF(⑤){F5}\XF(⑥){F6}\XF(⑦){F7}\XF(⑧){F8}\hfill
 \XF(⑨){F9}\XDS{PrtSc}(⑩){F10}%
-\XDS{\AX{Pause}{\COND\textcolor{\FORECOLOR}{NumLk}}}{F11}%
+\XDS{\AX{Pause}{\COND\textcolor{\FORECOLOR}{NumLk}}}(\char"2603){F11}%
 \XDS{\AX{Break}{\textcolor{\FORECOLOR}{ScrLk}}}{F12}\hfill
 \XDS{Insert}{Delete}\XDS{Home}{End}\XDS{PgUp}{PgDn}
 \else
@@ -120,7 +120,7 @@
 \XF(①){F1}\XF(②){F2}\XF(③){F3}\XF(④){F4}\hfill
 \XF(⑤){F5}\XF(⑥){F6}\XF(⑦){F7}\XF(⑧){F8}\hfill
 \XDS{PrtSc}(⑨){F9}\XDS{\AX{Pause}{\COND\textcolor{\FORECOLOR}{NumLk}}}(⑩){F10}%
-\XDS{\AX{Break}{\textcolor{\FORECOLOR}{ScrLk}}}{F11}\XDS{Insert}{F12}\hfill
+\XDS{\AX{Break}{\textcolor{\FORECOLOR}{ScrLk}}}(\char"2603){F11}\XDS{Insert}{F12}\hfill
 \XD[1.8]{Delete}%
 \XDS{Home}{End}\XDS{PgUp}{PgDn}
 \fi\fi}
