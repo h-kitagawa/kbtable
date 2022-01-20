@@ -100,12 +100,13 @@
 \hbox to29.83\dimexpr\DX+\fboxsep+\fboxrule\relax{%
 \ifnum\ROW=6
 \XF[2.5](\raisebox{0.9\height}{\font\m=manfnt at7pt\m\char127}){Esc}%
-\XF[1.66](①){F1}\XF[1.66](②){F2}\XF[1.66](③){F3}\XF[1.66](④){F4}\hfill
-\XF[1.66](⑤){F5}\XF[1.66](⑥){F6}\XF[1.66](⑦){F7}\XF[1.66](⑧){F8}\hfill
-\XF[1.66](⑨){F9}\XF[1.66](\scalebox{0.9}[1]{⑩}){\scalebox{0.9}[1]{F10}}\XF[1.66](\char"2603){F11}\XF[1.66]{F12}\hfill
-\XF[1.66]{\small \AX{Pause}{Home}}
-\XF[1.66]{\small \AX{Break}{End}}
-\XF[1.66]{\small \AX{NumLk}{Insert}}
+\XF[1.6](①){F1}\XF[1.6](②){F2}\XF[1.6](③){F3}\XF[1.6](④){F4}\hfill
+\XF[1.6](⑤){F5}\XF[1.6](⑥){F6}\XF[1.6](⑦){F7}\XF[1.6](⑧){F8}\hfill
+\XF[1.6](⑨){F9}\XF[1.6](\scalebox{0.9}[1]{⑩}){\scalebox{0.9}[1]{F10}}%
+\XF[1.6](\char"2603){F11}\XF[1.6]{F12}\hfill
+\XF[1.6]{\small \AX{Pause}{Home}}
+\XF[1.6]{\small \AX{Break}{End}}
+\XF[1.6]{\small \AX{NumLk}{Insert}}
 \XF[2]{\AX{ScrLk}{Delete}}
 \else\ifnum\ROW=17
 \XDS(\raisebox{0.9\height}{\font\m=manfnt at7pt\m\char127}){Esc}(①){F1}%
@@ -160,7 +161,16 @@
 
 \kern-5.5pt
 \null
+\ifnum\ROW=6
+\W{3.5}{%
+  \parbox[t]{5em}{\vspace*{-1.5em}%
+    \textcolor{cyan}{\rlap{\bfseries\normalsize AltGr}\phantom{Q}}\\[1pt]
+    \textcolor{\FORECOLOR}{\COND\normalsize\fboxsep=.1mm\rlap{\fbox{Compose}}\phantom{Q1}}%
+  }%
+}%
+\else
 \W{3.5}{\textcolor{\FORECOLOR}{\bfseries Ctrl}}
+\fi
 \K{\COND\normalsize\fboxsep=.1em\fbox{US}}{A}{α}{∀}{}{Á}
 \K{}{S}{σ}{Σ}{ß}{§}
 \K{}{D}{δ}{Δ}{}{Ð}
