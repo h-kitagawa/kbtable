@@ -347,10 +347,6 @@ xkb_compatibility "55y9003" {
         virtualModifier= LevelThree;
         action= SetGroup(group=+1);
     };
-    interpret ISO_Level3_Latch+AnyOf(all) {
-        virtualModifier= AltGr;
-        action= LatchGroup(group=+2);
-    };
     interpret ISO_Level3_Shift+AnyOf(all) {
         virtualModifier= AltGr;
         action= SetGroup(group=+2);
@@ -989,7 +985,7 @@ xkb_symbols "us+math+us(altgr-intl)" {
     key <SPCE> {         [           space,           space ] };
     key <CAPS> {
         type[group1]= "PC_SUPER_LEVEL2",
-        symbols[Group1]= [ ISO_Level3_Latch,       Multi_key] };
+        symbols[Group1]= [ ISO_Level3_Shift,       Multi_key] };
     key <FK01> {
         type[group1]= "CTRL+ALT",
         symbols[Group1]= [              F1,              F1,        NoSymbol,        NoSymbol,        XF86Switch_VT_1 ],
@@ -1073,12 +1069,12 @@ xkb_symbols "us+math+us(altgr-intl)" {
     key <RCTL> {         [       Control_R ] };
     key <COMP> {
  	    type[group1]= "PC_SUPER_LEVEL2",
-		symbols[Group1]= [ ISO_Level3_Latch,       Multi_key ],
+		symbols[Group1]= [ ISO_Level3_Shift,       Multi_key ],
         symbols[Group2]= [            Menu,            Menu ]
     };
     key <PRSC> {
 	    type[group1]= "PC_SUPER_LEVEL2",
-		symbols[Group1]= [ ISO_Level3_Latch,       Multi_key ],
+		symbols[Group1]= [ ISO_Level3_Shift,       Multi_key ],
         symbols[Group2]= [            Menu,            Menu ]
     };
     key <RALT> { [     Mode_switch ] };
