@@ -1,5 +1,0 @@
-#!/bin/sh
-emacs $1 `winepath $2`
-exit 0
-
-
