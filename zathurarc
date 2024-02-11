@@ -1,0 +1,3 @@
+set recolor-keephue true
+map <S-☃> feedkeys <PageUp>
+map ☃ feedkeys <PageDown>

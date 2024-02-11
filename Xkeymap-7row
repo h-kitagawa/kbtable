@@ -1123,7 +1123,7 @@ xkb_symbols "us+math+us(altgr-intl)" {
     key  <CUT> {         [         XF86Cut ] };
     key <HELP> {         [            Help ] };
     key <I147> {         [      XF86MenuKB ] };
-    key <I148> {         [ Next, Prior ] };
+    key <I148> {         [ U2603 ] };
     key <I150> {         [       XF86Sleep ] };
     key <I151> {         [      XF86WakeUp ] };
     key <I152> {         [    XF86Explorer ] };
