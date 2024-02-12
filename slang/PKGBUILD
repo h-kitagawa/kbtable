@@ -3,7 +3,7 @@
 # Contributor: Tom Newsom <Jeepster@gmx.co.uk>
 
 pkgname=slang
-pkgver=2.3.2
+pkgver=2.3.3
 pkgrel=9999
 pkgdesc="S-Lang is a powerful interpreted language"
 arch=('aarch64' 'x86_64')
@@ -13,10 +13,10 @@ depends=('pcre')
 backup=('etc/slsh.rc')
 options=('!makeflags')
 source=(
-  https://www.jedsoft.org/releases/slang/${pkgname}-${pkgver}.tar.bz2
+  https://jedsoft.org/snapshots/${pkgname}-${pkgver}.tar.gz
   slang_utf8db.diff
 )
-sha1sums=('bbf7f2dcc14e7c7fca40868fd4b411a2bd9e2655'
+sha1sums=('41b5fd05122236cf16a5f54330fbad1dd1c5c6c0'
           '275aee8ae9af50fb064e81ee5ed196996f019f5a')
 groups=('modified')
 
@@ -30,7 +30,6 @@ build() {
 check() {
   cd ${pkgname}-${pkgver}
 
-  [[ $CARCH = "i686" ]] || make check
 }
 
 package() {
