@@ -875,7 +875,8 @@ xkb_symbols "us+math+us(altgr-intl)" {
         type[group1]= "ALPHABETIC",
         type[group2]= "ALPHABETIC",
         symbols[Group1]= [               h,               H ],
-        symbols[Group2]= [     Greek_theta,     Greek_THETA ]
+        symbols[Group2]= [     Greek_theta,     Greek_THETA ],
+        symbols[Group3]= [           U210D,           U210D ]
     };
     key <AC07> {
         type[group1]= "ALPHABETIC",
