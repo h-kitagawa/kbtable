@@ -700,12 +700,12 @@ xkb_symbols "us+math+us(altgr-intl)" {
     };
     key <AE04> {
         symbols[Group1]= [               4,          dollar],
-        symbols[Group2]= [           U221E,          0x221e],
+        symbols[Group2]= [           U221E,          U2202 ],
         symbols[Group3]= [        currency,        sterling ]
     };
     key <AE05> {
         symbols[Group1]= [               5,         percent ],
-        symbols[Group2]= [           U2030,           U2030 ],
+        symbols[Group2]= [           U2030,           U2294 ],
         symbols[Group3]= [           U20AC,  dead_abovering ]
     };
     key <AE06> {
@@ -720,7 +720,7 @@ xkb_symbols "us+math+us(altgr-intl)" {
     };
     key <AE08> {
         symbols[Group1]= [               8,        asterisk ],
-        symbols[Group2]= [           U2135,           U2135 ],
+        symbols[Group2]= [           U2135,           U2293 ],
         symbols[Group3]= [   threequarters,     dead_ogonek ]
     };
     key <AE09> {
@@ -1071,8 +1071,7 @@ xkb_symbols "us+math+us(altgr-intl)" {
     };
     key <COMP> {
 	    type[group1]= "PC_SUPER_LEVEL2",
-		symbols[Group1]= [ ISO_Level3_Shift,       Multi_key ],
-        symbols[Group2]= [            Menu,            Menu ]
+		symbols[Group1]= [ ISO_Level3_Shift,       Multi_key ]
     };
     key <RALT> { [     Mode_switch ] };
     key <LNFD> {         [        Linefeed ] };
