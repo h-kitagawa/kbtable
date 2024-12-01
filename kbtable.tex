@@ -18,6 +18,7 @@
 \setmathfont{XITS Math}
 \newfontfamily\JP{ipag.ttf}
 \newfontfamily\COND[BoldFont=texgyreheroscn-bold.otf]{texgyreheroscn-regular.otf}
+\newfontfamily\TTX[FakeStretch=0.8]{lmmonolt10-bold}
 \ifdefined\BACKCOLOR
   \def\FORECOLOR{white}
   \def\LINECOLOR{black!33!white}
@@ -97,6 +98,8 @@
   \raisebox{-.35\DX}{\rlap{#2}}%
 }}
 
+\def\CXA{\smash{\TTX\char92xa}}
+
 \hbox to29.83\dimexpr\DX+\fboxsep+\fboxrule\relax{%
 \ifnum\ROW=6
 \XF[2.5](\raisebox{0.9\height}{\font\m=manfnt at7pt\m\char127}){Esc}%
@@ -121,7 +124,7 @@
 \XF(①){F1}\XF(②){F2}\XF(③){F3}\XF(④){F4}\hfill
 \XF(⑤){F5}\XF(⑥){F6}\XF(⑦){F7}\XF(⑧){F8}\hfill
 \XDS{PrtSc}(⑨){F9}\XDS{\AX{Pause}{\COND\textcolor{\FORECOLOR}{NumLk}}}(⑩){F10}%
-\XDS{\AX{Break}{\textcolor{\FORECOLOR}{ScrLk}}}(\char"2603){F11}\XDS{Insert}{F12}\hfill
+\XDS{\AX{Break}{\textcolor{\FORECOLOR}{ScrLk}}}(\char"2603){F11}\XDS{Insert}(\CXA){F12}\hfill
 \XD[1.8]{Delete}%
 \XDS{Home}{End}\XDS{PgUp}{PgDn}
 \fi\fi}
@@ -246,17 +249,12 @@
 \directlua{ os.execute("\luaescapestring{%
   lualatex -jobname=kbtable-blk %
   '\string\def\string\BACKCOLOR{black}\string\input\space kbtable.tex' &>/dev/null
-  && convert -bordercolor black -geometry 1600x900 -resize 1600 -density 300  -border 0x104 kbtable-blk.pdf kbd.png
+  && magick convert -bordercolor black -geometry 1600x900 -resize 1600 -density 300  -border 0x104 kbtable-blk.pdf kbd.png
 }")}
 \directlua{ os.execute("\luaescapestring{%
   lualatex -jobname=kbtable-blk6 %
   '\string\def\string\ROW{6}\string\def\string\BACKCOLOR{black}\string\input\space kbtable.tex' &>/dev/null
-  && convert -bordercolor black -geometry 1920x1080 -resize 1920 -density 300  -border 0x104 kbtable-blk6.pdf kbd6.png
-}")}
-\directlua{ os.execute("\luaescapestring{%
-  lualatex -jobname=kbtable-blk7o %
-  '\string\def\string\ROW{17}\string\def\string\BACKCOLOR{black}\string\input\space kbtable.tex' &>/dev/null
-  && convert -bordercolor black -geometry 1280x800 -resize 1280 -density 300  -border 0x104 kbtable-blk7o.pdf kbd7o.png
+  && magick convert -bordercolor black -geometry 1920x1080 -resize 1920 -density 300  -border 0x104 kbtable-blk6.pdf kbd6.png
 }")}
 \fi
 \end{document}

@@ -1061,7 +1061,8 @@ xkb_symbols "us+math+us(altgr-intl)" {
     };
     key <FK12> {
         type= "CTRL+ALT",
-        symbols[Group1]= [             F12,             F12,             F12,             F12, XF86Switch_VT_12 ]
+        symbols[Group1]= [             F12,             F12,             F12,             F12, XF86Switch_VT_12 ],
+        symbols[Group2]= [           UE000,           UE000 ]
     };
     key <KPEN> {         [        KP_Enter ] };
     key <RCTL> {         [       Control_R ] };
