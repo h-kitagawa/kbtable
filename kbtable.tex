@@ -2,6 +2,7 @@
 \RequirePackage{luatex85}
 \documentclass[landscape]{article}
 \usepackage{fontspec,unicode-math,xcolor,graphicx}
+\usepackage{scsnowman}
 \usepackage{fontawesome}
 \pagestyle{empty}
 \newdimen\DX
@@ -16,22 +17,24 @@
 \setsansfont[RawFeature=-tlig]{DejaVu Sans}
 \setmonofont{lmmonoltcond10-regular}
 \setmathfont{XITS Math}
+\newfontfamily\BAninety[FakeBold=1,Scale=1.1]{GL-NovantiquaMinamoto.ttf}
 \newfontfamily\JP{ipag.ttf}
 \newfontfamily\COND[BoldFont=texgyreheroscn-bold.otf]{texgyreheroscn-regular.otf}
 \newfontfamily\TTX[FakeStretch=0.8]{lmmonolt10-bold}
-\ifdefined\BACKCOLOR
+%\ifdefined\BACKCOLOR
+  \def\BACKCOLOR{black}
   \def\FORECOLOR{white}
   \def\LINECOLOR{black!33!white}
   \definecolor{cyan}{rgb}{0,0.75,0.75}
   \definecolor{green}{rgb}{0,0.75,0}
-\else
-  \def\FORECOLOR{black}
-  \def\BACKCOLOR{white}
-  \def\LINECOLOR{black!66!white}
-  \definecolor{cyan}{rgb}{0.25,0.25,1}
-  \definecolor{green}{rgb}{0.25,0.75,0.25}
-  \advance\paperheight3\DX
-\fi
+%\else
+%  \def\FORECOLOR{black}
+%  \def\BACKCOLOR{white}
+%  \def\LINECOLOR{black!66!white}
+%  \definecolor{cyan}{rgb}{0.25,0.25,1}
+%  \definecolor{green}{rgb}{0.25,0.75,0.25}
+%  \advance\paperheight3\DX
+%\fi
 \ifdefined\ROW\else\def\ROW{7}\fi
 \definecolor{enter}{HTML}{466BB0}
   
@@ -99,6 +102,7 @@
 }}
 
 \def\CXA{\smash{\TTX\char92xa}}
+\def\snowman{\raisebox{-.3ex}{\scsnowman[hat=green,arms=brown,muffler=red,scale=1.3,buttons=cyan,snow]}}
 
 \hbox to29.83\dimexpr\DX+\fboxsep+\fboxrule\relax{%
 \ifnum\ROW=6
@@ -106,7 +110,7 @@
 \XF[1.6](①){F1}\XF[1.6](②){F2}\XF[1.6](③){F3}\XF[1.6](④){F4}\hfill
 \XF[1.6](⑤){F5}\XF[1.6](⑥){F6}\XF[1.6](⑦){F7}\XF[1.6](⑧){F8}\hfill
 \XF[1.6](⑨){F9}\XF[1.6](\scalebox{0.9}[1]{⑩}){\scalebox{0.9}[1]{F10}}%
-\XF[1.6](\char"2603){F11}\XF[1.6]{F12}\hfill
+\XF[1.6](\snowman){F11}\XF[1.6]{F12}\hfill
 \XF[1.6]{\small \AX{Pause}{Home}}
 \XF[1.6]{\small \AX{Break}{End}}
 \XF[1.6]{\small \AX{NumLk}{Insert}}
@@ -116,7 +120,7 @@
 \XF(②){F2}\XF(③){F3}\XF(④){F4}\hfill
 \XF(⑤){F5}\XF(⑥){F6}\XF(⑦){F7}\XF(⑧){F8}\hfill
 \XF(⑨){F9}\XDS{PrtSc}(⑩){F10}%
-\XDS{\AX{Pause}{\COND\textcolor{\FORECOLOR}{NumLk}}}(\char"2603){F11}%
+\XDS{\AX{Pause}{\COND\textcolor{\FORECOLOR}{NumLk}}}(\snowman){F11}%
 \XDS{\AX{Break}{\textcolor{\FORECOLOR}{ScrLk}}}{F12}\hfill
 \XDS{Insert}{Delete}\XDS{Home}{End}\XDS{PgUp}{PgDn}
 \else
@@ -124,7 +128,7 @@
 \XF(①){F1}\XF(②){F2}\XF(③){F3}\XF(④){F4}\hfill
 \XF(⑤){F5}\XF(⑥){F6}\XF(⑦){F7}\XF(⑧){F8}\hfill
 \XDS{PrtSc}(⑨){F9}\XDS{\AX{Pause}{\COND\textcolor{\FORECOLOR}{NumLk}}}(⑩){F10}%
-\XDS{\AX{Break}{\textcolor{\FORECOLOR}{ScrLk}}}(\char"2603){F11}\XDS{Insert}(\CXA){F12}\hfill
+\XDS{\AX{Break}{\textcolor{\FORECOLOR}{ScrLk}}}(\snowman){F11}\XDS{Insert}(\CXA){F12}\hfill
 \XD[1.8]{Delete}%
 \XDS{Home}{End}\XDS{PgUp}{PgDn}
 \fi\fi}
@@ -213,7 +217,7 @@
   \hss\JP\textcolor{red}{\large$\vcenter{\hbox{●}}$}\hss}}%
 \kern\dimexpr\DX+\fboxsep+\fboxrule
 \K{}{N}{ν}{ℕ}{}{Ñ}
-\K{}{M}{μ}{⊧}{µ}{}
+\K{}{M}{μ}{⊧}{µ}{\BAninety\char"1F31D}
 \K{,}{<}{≤}{≦}{}{Ç}
 \K{.}{>}{≥}{≧}{}{\AC{00B8}}
 \K{/}{?}{↔}{⇔}{¿}{\AC{002F}}

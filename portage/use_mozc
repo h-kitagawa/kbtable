@@ -1,0 +1,18 @@
+app-i18n/mozc -ibus qt5 -gui emacs
+dev-build/gyp python_single_target_python3_12
+dev-python/six python_targets_python3_12
+dev-python/gpep517 python_targets_python3_12
+dev-python/setuptools python_targets_python3_12
+dev-python/jaraco-collections python_targets_python3_12
+dev-python/jaraco-functools python_targets_python3_12
+dev-python/jaraco-text python_targets_python3_12
+dev-python/jaraco-context python_targets_python3_12
+dev-python/more-itertools python_targets_python3_12
+dev-python/packaging python_targets_python3_12
+dev-python/platformdirs python_targets_python3_12
+dev-python/wheel python_targets_python3_12
+dev-python/setuptools-scm python_targets_python3_12
+dev-python/trove-classifiers python_targets_python3_12
+dev-python/flit-core python_targets_python3_12
+dev-python/installer python_targets_python3_12
+

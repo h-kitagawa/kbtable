@@ -962,7 +962,7 @@ xkb_symbols "us+math+us(altgr-intl)" {
         type[group1]= "ALPHABETIC",
         symbols[Group1]= [               m,               M ],
         symbols[Group2]= [        Greek_mu,           U22A7 ],
-        symbols[Group3]= [              mu,              mu ]
+        symbols[Group3]= [              mu,           U1F31D ]
     };
     key <AB08> {
         type[group3]= "ALPHABETIC",

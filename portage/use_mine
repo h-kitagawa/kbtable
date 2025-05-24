@@ -1,0 +1,113 @@
+app-accessibility/at-spi2-core introspection
+app-admin/ryzen_smu modules-compress modules-sign
+app-arch/brotli python
+app-arch/bzip2 static-libs
+app-arch/unzip natspec
+app-arch/xz-utils static-libs
+app-arch/zstd static-libs
+app-crypt/mit-krb5 -keyutils
+app-crypt/pinentry gnome-keyring
+app-dicts/myspell-en l10n_en-US
+app-editors/emacs -acl -athena gtk -gconf gui -inotify -jpeg -png -ssl toolkit-scroll-bars xft -xpm -cairo -harfbuzz
+app-editors/jed gpm
+app-emacs/emacs-common gui
+app-emulation/qemu -vnc usb ssh virtfs -sdl gtk vhost-net pipewire -pulseaudio -oss numa bpf io-uring
+app-i18n/anthy emacs
+app-i18n/fcitx -enchant X
+app-i18n/fcitx-configtool config-qt -kcm
+app-i18n/fcitx-qt qt6 X
+app-office/libreoffice dbus gtk3 -gtk4 pdfimport
+app-text/mupdf javascript opengl
+app-text/poppler cairo
+app-text/xmlto text
+app-text/zathura -seccomp
+dev-db/sqlite secure-delete
+dev-libs/apr-util -sqlite
+dev-libs/boehm-gc threads
+dev-libs/elfutils static-libs
+dev-libs/glib static-libs introspection
+dev-libs/libpcre pcre16 static-libs
+dev-libs/libpcre2 static-libs pcre16
+dev-libs/libxml2 python
+dev-libs/xmlsec nss
+dev-python/pycairo X
+dev-qt/qtbase dbus opengl X
+dev-qt/qtcore glib
+dev-qt/qtgui X dbus egl glib
+dev-qt/qttools opengl
+dev-qt/qtwidgets dbus gtk
+dev-vcs/git perl subversion tk
+dev-vcs/subversion -dso -nls perl
+games-simulation/simutrans zstd -midi
+gui-apps/foot -grapheme-clustering
+gui-libs/gtk X
+gui-libs/wlroots X
+gui-wm/sway -swayidle tray X
+llvm-core/clang-common default-lld
+llvm-core/clang-runtime default-lld
+media-fonts/corefonts X tahoma
+media-fonts/iosevka X iosevka-slab
+media-fonts/liberation-fonts X
+media-fonts/libertine X
+media-fonts/noto-emoji-svg X
+media-fonts/noto-fonts X FONT_TYPES: otf
+media-fonts/urw-fonts X
+media-gfx/fontforge gtk -cairo extras python X
+media-gfx/gimp exif mng pdf postscript tiff X
+media-gfx/imagemagick -corefonts -openmp tiff X
+media-libs/babl introspection lcms
+media-libs/fcft -libutf8proc
+media-libs/freetype X -cleartype_hinting -harfbuzz -svg -brotli
+media-libs/gd fontconfig
+media-libs/gegl -sdl cairo introspection lcms
+media-libs/harfbuzz glib introspection
+media-libs/libbdplus aacs
+media-libs/libbluray aacs java bdplus utils
+media-libs/libepoxy X
+media-libs/libglvnd X
+media-libs/libmpeg2 -sdl
+media-libs/libmypaint gegl
+media-libs/libpng apng
+media-libs/libsdl2 opengl dbus gles2 -pulseaudio pipewire
+media-libs/libva X
+media-libs/mesa X -d3d9 gallium gles2 llvm
+media-libs/sdl2-mixer midi timidity vorbis
+media-libs/sdl2-ttf -harfbuzz
+media-libs/vulkan-loader X
+media-sound/timidity++ alsa
+media-video/ffmpeg cdio x264 v4l
+media-video/pipewire sound-server abi_x86_32
+media-video/vlc -encode flac gnutls live -lua matroska mpeg ogg qt6 rtsp theora -truetype vcdx X -vaapi bluray
+net-dns/avahi dbus
+net-im/zoom bundled-libjpeg-turbo
+net-libs/glib-networking gnutls
+net-libs/libpsl -idn
+net-misc/curl http2
+net-misc/wget debug
+net-print/cups X usb zeroconf
+net-print/cups-filters pdf
+net-wireless/wpa_supplicant dbus tkip
+sci-mathematics/maxima sbcl
+sci-mathematics/pari gmp
+sci-visualization/gnuplot X -cairo
+sys-apps/attr static-libs
+sys-apps/dbus X
+sys-apps/fwupd gnutls nvme uefi flashrom lzma tpm amdgpu
+sys-apps/kmod zstd
+sys-apps/smartmontools update_drivedb
+sys-apps/systemd policykit
+sys-boot/grub -sdl multislot mount
+sys-devel/binutils pgo zstd
+sys-devel/gcc gcj graphite pgo zstd fortran
+sys-fs/dosfstools compat
+sys-fs/squashfs-tools lz4 lzma lzo zstd
+sys-kernel/installkernel -systemd grub
+sys-kernel/linux-firmware initramfs
+sys-libs/zlib minizip static-libs
+x11-libs/cairo svg xcb X glib
+x11-libs/gdk-pixbuf introspection
+x11-libs/gtk+ introspection
+x11-libs/libdrm libkms video_cards_radeon
+x11-libs/libxcb xkb
+x11-libs/libxkbcommon X
+x11-libs/pango introspection
