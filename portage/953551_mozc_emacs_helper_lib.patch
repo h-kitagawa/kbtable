@@ -1,0 +1,51 @@
+From c66515902e1f2ec35c6a1f1adf756e1dfd52f5a6 Mon Sep 17 00:00:00 2001
+From: Mozc team <noreply@google.com>
+Date: Tue, 7 Jan 2025 01:58:07 +0000
+Subject: [PATCH] Make code forward-compatible with returning string_view in
+ protobuf descriptor API.
+
+An upcoming change in Protobuf will change the return types of various
+methods like `Descriptor::name()` and `Message::GetTypeName()` from
+`const std::string&` or `std::string` to `absl::string_view`. This CL fixes
+users of those methods to work both before and after the change.
+
+PiperOrigin-RevId: 712709155
+---
+ src/unix/emacs/mozc_emacs_helper_lib.cc | 9 +++++----
+ src/unix/emacs/mozc_emacs_helper_lib.h  | 2 +-
+ 2 files changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/src/unix/emacs/mozc_emacs_helper_lib.cc b/src/unix/emacs/mozc_emacs_helper_lib.cc
+index 2ce4385c2..eb9f28c6d 100644
+--- a/src/unix/emacs/mozc_emacs_helper_lib.cc
++++ b/src/unix/emacs/mozc_emacs_helper_lib.cc
+@@ -200,11 +200,11 @@ void PrintMessage(const protobuf::Message &message,
+ // Normalizes a symbol with the following rules:
+ // - all alphabets are converted to lowercase
+ // - underscore('_') is converted to dash('-')
+-std::string NormalizeSymbol(const std::string &symbol) {
+-  std::string s = symbol;
+-  mozc::Util::LowerString(&s);
+-  std::replace(s.begin(), s.end(), '_', '-');
+-  return s;
++std::string NormalizeSymbol(absl::string_view symbol) {
++  std::string normalized(symbol);
++  mozc::Util::LowerString(&normalized);
++  std::replace(normalized.begin(), normalized.end(), '_', '-');
++  return normalized;
+ }
+ 
+ // Returns a quoted string as a string literal in S-expression.
+diff --git a/src/unix/emacs/mozc_emacs_helper_lib.h b/src/unix/emacs/mozc_emacs_helper_lib.h
+index 2b13741be..b3f068026 100644
+--- a/src/unix/emacs/mozc_emacs_helper_lib.h
++++ b/src/unix/emacs/mozc_emacs_helper_lib.h
+@@ -82,7 +82,7 @@ void PrintMessage(const mozc::protobuf::Message &message,
+ // Normalizes a symbol with the following rule:
+ // - all alphabets are converted to lowercase
+ // - underscore('_') is converted to dash('-')
+-std::string NormalizeSymbol(const std::string &symbol);
++std::string NormalizeSymbol(absl::string_view symbol);
+ 
+ // Returns a quoted string as a string literal in S-expression.
+ // - double-quote is converted to backslash + double-quote
